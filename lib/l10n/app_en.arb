@@ -1,0 +1,11 @@
+{
+    "loginScreenTitle": "Welcome to Looping Diary!",
+    "loginScreenSubtitle": "Login to access your insights.",
+    "loginScreenNoAccountLabel": "Don't have an account?",
+    "loginScreenRegisterButtonText": "Register",
+    "loginScreenEmailInputLabel": "Email",
+    "loginScreenPasswordInputLabel": "Password",
+    "loginScreenForgotPasswordLabel": "Forgot password?",
+    "loginScreenLoginButtonText": "Login",
+    "loginScreenSignInWithGoogleLabel": "Sign in with Google"
+}
