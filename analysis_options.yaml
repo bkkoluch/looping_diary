@@ -125,9 +125,10 @@ linter:
     avoid_returning_null_for_future: true
     avoid_type_to_string: true
     cascade_invocations: true
-    join_return_with_assignment: true
+    depend_on_referenced_packages: false
     directives_ordering: true
     deprecated_consistency: true
+    join_return_with_assignment: true
     prefer_expression_function_bodies: true
     prefer_final_in_for_each: true
     prefer_final_locals: true

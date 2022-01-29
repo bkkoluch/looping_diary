@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:looping_diary/core/localizer.dart';
+import 'package:looping_diary/core/localizer/localizer.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
 import 'package:looping_diary/features/common/widgets/faded_backgroud.dart';
