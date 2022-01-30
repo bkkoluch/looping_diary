@@ -20,7 +20,7 @@ class LoopingDiaryApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Looping Diary',
         theme: ThemedData.lightThemeData,
-        localizationsDelegates: localizationDelegates,
+        localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
         home: const AuthGate(),
       );

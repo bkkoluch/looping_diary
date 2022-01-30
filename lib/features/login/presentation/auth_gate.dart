@@ -20,7 +20,7 @@ class _AuthGateState extends State<AuthGate> {
   void initState() {
     super.initState();
     final FlutterFireUICustomDelegate delegate = FlutterFireUICustomDelegate(context);
-    localizationDelegates.add(delegate);
+    localizationsDelegates.add(delegate);
 
     //TODO: figure out a better way to wait implicitly for the localization delegates to load
     //TODO: instead of waiting explicitly 2 seconds
