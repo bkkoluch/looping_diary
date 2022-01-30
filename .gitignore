@@ -47,7 +47,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# Project related tests that cannot run on CI
-/test/features/login/presentation/auth_gate_test.dart
-/test/features/login/presentation/pages/login_page_test.dart
