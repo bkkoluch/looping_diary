@@ -119,7 +119,7 @@ linter:
     always_put_required_named_parameters_first: true
     always_use_package_imports: true
     avoid_classes_with_only_static_members: false
-    avoid_dynamic_calls: true
+    avoid_dynamic_calls: false
     avoid_positional_boolean_parameters: true
     avoid_redundant_argument_values: true
     avoid_returning_null_for_future: true

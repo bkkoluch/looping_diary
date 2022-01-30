@@ -4,7 +4,7 @@ import 'package:looping_diary/core/localizer/localizer.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
 import 'package:looping_diary/features/common/widgets/faded_backgroud.dart';
-import 'package:looping_diary/secrets/keys.dart';
+import 'package:looping_diary/utils/public_keys.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
           ),
           providerConfigs: const [
             EmailProviderConfiguration(),
-            GoogleProviderConfiguration(clientId: Keys.googleProviderClientId)
+            GoogleProviderConfiguration(clientId: PublicKeys.googleProviderClientId)
           ],
         ),
       );
