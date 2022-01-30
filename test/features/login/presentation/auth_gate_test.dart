@@ -30,6 +30,5 @@ void main() {
       expect(find.byType(LoginPage), findsOneWidget);
     },
     // skipping the test to not run on CI as it fails due to not having secrets Keys file
-    skip: true,
   );
 }
