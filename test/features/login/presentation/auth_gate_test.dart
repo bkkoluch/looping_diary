@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:looping_diary/features/login/presentation/auth_gate.dart';
 import 'package:looping_diary/features/login/presentation/pages/loading_page.dart';
-import 'package:looping_diary/features/login/presentation/pages/login_page.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../firebase_test_setup.dart';
@@ -22,13 +22,14 @@ void main() {
   });
 
   testWidgets(
-    'should display LoadingPage at first at then LoginPage as the user is not registered',
+    'should display LoadingPage at first and then LoginPage as the user is not registered',
     (WidgetTester tester) async {
       final Widget widget = prepareTestableWidget(const AuthGate());
       await tester.pumpWidget(widget);
       expect(find.byType(LoadingPage), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(LoginPage), findsOneWidget);
+      expect(find.byType(LoadingPage), findsNothing);
+      expect(find.byType(SignInScreen), findsOneWidget);
     },
   );
 }
