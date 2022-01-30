@@ -1,10 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 typedef Callback = void Function(MethodCall call);
 
-void setupFirebaseAuthMocks([Callback? customHandlers]) {
+Future<void> setupFirebaseAuthMocks([Callback? customHandlers]) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   MethodChannelFirebase.channel.setMockMethodCallHandler((call) async {
@@ -37,6 +38,8 @@ void setupFirebaseAuthMocks([Callback? customHandlers]) {
 
     return null;
   });
+
+  await Firebase.initializeApp();
 }
 
 Future<T> neverEndingFuture<T>() async {

@@ -9,12 +9,10 @@ class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const Scaffold(
         backgroundColor: ColorTokens.main,
-        body: Center(
-          child: SpinKitPouringHourGlass(
-            color: ColorTokens.white,
-            size: CoreDimensions.mainLoadingIndicatorSize,
-            duration: Duration(milliseconds: 1500),
-          ),
+        body: SpinKitPouringHourGlass(
+          color: ColorTokens.white,
+          size: CoreDimensions.mainLoadingIndicatorSize,
+          duration: Duration(milliseconds: 1500),
         ),
       );
 }
