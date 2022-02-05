@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
           ),
           providerConfigs: const [
             EmailProviderConfiguration(),
-            GoogleProviderConfiguration(clientId: Keys.googleProviderClientId)
+            GoogleProviderConfiguration(clientId: Keys.googleClientId)
           ],
         ),
       );
