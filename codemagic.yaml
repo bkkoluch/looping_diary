@@ -1,4 +1,4 @@
-# Automatically generated on 2022-01-30 UTC from https://codemagic.io/app/61f5d70bdd2148c3ff88c82c/settings
+# Automatically generated on 2022-02-05 UTC from https://codemagic.io/app/61f5d70bdd2148c3ff88c82c/settings
 # Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
 
 workflows:
@@ -6,11 +6,11 @@ workflows:
     name: Flutter build & test
     max_build_duration: 30
     environment:
+      vars:
+        KEYS: Encrypted(Z0FBQUFBQmhfdkhrcnlLR19VWDRYeGlSTUxpNGlrVndQT29JYW14Z09BQ2FJUTdzLTRaZUR1VTFGd1RQTUJjZGpENll6eGxVLXZqNVRGZ2FRSGxXRnA5UkJySFFzSm05RjE2MmFsa283cnVKeWN0eGhCTnhCTVItSVhheGU0VGZiXzBaVWw1N19DbkgxZk9UaDgyaklTVHhZbXd2V1gwWlczRjVnS0ticXRtOTF0MHY3dXNEQzA1U2Y2RWpXSFdvdEliWFlCbENFekdYZGE2eV9TMDR5MjVHMWZjV2xDR214WHR6a2RoTTdoNm1uOVRvVnVmTHhWTTFCWEV5c2N6YTNVNHdKOEJSQ2ZMdlpxb3BpS2R2S2syVkcyM1A3cDRiYkdqSWltV0pTVkQxa1lwb3ZZM1g1LTdpdlBEdTl3UkJSeGNlNy1qSkRCbjg=)
       flutter: stable
       xcode: latest
       cocoapods: default
-      groups:
-        - secrets
     triggering:
       events:
         - push
@@ -39,6 +39,10 @@ workflows:
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
+      - |
+        #!/bin/sh
+        mkdir -p $FCI_BUILD_DIR/lib/secrets
+        echo $KEYS | base64 --decode > $FCI_BUILD_DIR/lib/secrets/keys.dart
       - flutter analyze
       - flutter test
       - flutter build appbundle --release
