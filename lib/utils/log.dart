@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 class Log {
   Log._();
 
-  static final bool isLoggingOn = kDebugMode; // add || production mode
+  static const bool isLoggingOn = kDebugMode; // add || production mode
 
   static final Logger _logger = Logger(
     filter: _LogFilter(),
