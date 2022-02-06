@@ -19,11 +19,10 @@ class _AuthGateState extends State<AuthGate> {
   @override
   void initState() {
     super.initState();
-    final FlutterFireUICustomDelegate delegate = FlutterFireUICustomDelegate(context);
+    final FlutterFireUICustomDelegate delegate = customFlutterFireUIDelegate(context);
     localizationsDelegates.add(delegate);
 
-    //TODO: figure out a better way to wait implicitly for the localization delegates to load
-    //TODO: instead of waiting explicitly 2 seconds
+    //TODO: Fix FlutterFireUI localization, they don't load on app build, however they rebuild and work when i save any file again
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
