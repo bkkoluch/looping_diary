@@ -1,255 +1,253 @@
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutterfire_ui/i10n.dart';
-import 'package:looping_diary/core/localizer/localizer.dart';
+import 'package:looping_diary/res/strings.dart' as strings;
 
 class FlutterFireUICustomLocalizationLabels extends DefaultLocalizations {
-  FlutterFireUICustomLocalizationLabels(this.context);
+  const FlutterFireUICustomLocalizationLabels();
 
-  final BuildContext context;
-
   @override
-  String get arrayLabel => localize(context).arrayLabel;
+  String get arrayLabel => strings.arrayLabel.tr();
 
   @override
-  String get booleanLabel => localize(context).booleanLabel;
+  String get booleanLabel => strings.booleanLabel.tr();
 
   @override
-  String get cancelLabel => localize(context).cancelLabel;
+  String get cancelLabel => strings.cancelLabel.tr();
 
   @override
-  String get chooseACountry => localize(context).chooseACountry;
+  String get chooseACountry => strings.chooseACountry.tr();
 
   @override
-  String get codeRequiredErrorText => localize(context).codeRequiredErrorText;
+  String get codeRequiredErrorText => strings.codeRequiredErrorText.tr();
 
   @override
-  String get confirmPasswordDoesNotMatchErrorText => localize(context).confirmPasswordDoesNotMatchErrorText;
+  String get confirmPasswordDoesNotMatchErrorText => strings.confirmPasswordDoesNotMatchErrorText.tr();
 
   @override
-  String get confirmPasswordInputLabel => localize(context).confirmPasswordInputLabel;
+  String get confirmPasswordInputLabel => strings.confirmPasswordInputLabel.tr();
 
   @override
-  String get confirmPasswordIsRequiredErrorText => localize(context).confirmPasswordIsRequiredErrorText;
+  String get confirmPasswordIsRequiredErrorText => strings.confirmPasswordIsRequiredErrorText.tr();
 
   @override
-  String get continueText => localize(context).continueText;
+  String get continueText => strings.continueText.tr();
 
   @override
-  String get countryCode => localize(context).countryCode;
+  String get countryCode => strings.countryCode.tr();
 
   @override
-  String get deleteAccount => localize(context).deleteAccount;
+  String get deleteAccount => strings.deleteAccount.tr();
 
   @override
-  String get differentMethodsSignInTitleText => localize(context).differentMethodsSignInTitleText;
+  String get differentMethodsSignInTitleText => strings.differentMethodsSignInTitleText.tr();
 
   @override
-  String get eastInitialLabel => localize(context).eastInitialLabel;
+  String get eastInitialLabel => strings.eastInitialLabel.tr();
 
   @override
-  String get emailInputLabel => localize(context).emailInputLabel;
+  String get emailInputLabel => strings.emailInputLabel.tr();
 
   @override
-  String get emailIsRequiredErrorText => localize(context).emailIsRequiredErrorText;
+  String get emailIsRequiredErrorText => strings.emailIsRequiredErrorText.tr();
 
   @override
-  String get emailLinkSignInButtonLabel => localize(context).emailLinkSignInButtonLabel;
+  String get emailLinkSignInButtonLabel => strings.emailLinkSignInButtonLabel.tr();
 
   @override
-  String get emailTakenErrorText => localize(context).emailTakenErrorText;
+  String get emailTakenErrorText => strings.emailTakenErrorText.tr();
 
   @override
-  String get enableMoreSignInMethods => localize(context).enableMoreSignInMethods;
+  String get enableMoreSignInMethods => strings.enableMoreSignInMethods.tr();
 
   @override
-  String get enterSMSCodeText => localize(context).enterSMSCodeText;
+  String get enterSMSCodeText => strings.enterSMSCodeText.tr();
 
   @override
-  String get findProviderForEmailTitleText => localize(context).findProviderForEmailTitleText;
+  String get findProviderForEmailTitleText => strings.findProviderForEmailTitleText.tr();
 
   @override
-  String get forgotPasswordButtonLabel => localize(context).forgotPasswordButtonLabel;
+  String get forgotPasswordButtonLabel => strings.forgotPasswordButtonLabel.tr();
 
   @override
-  String get forgotPasswordHintText => localize(context).forgotPasswordHintText;
+  String get forgotPasswordHintText => strings.forgotPasswordHintText.tr();
 
   @override
-  String get forgotPasswordViewTitle => localize(context).forgotPasswordViewTitle;
+  String get forgotPasswordViewTitle => strings.forgotPasswordViewTitle.tr();
 
   @override
-  String get geopointLabel => localize(context).geopointLabel;
+  String get geopointLabel => strings.geopointLabel.tr();
 
   @override
-  String get goBackButtonLabel => localize(context).goBackButtonLabel;
+  String get goBackButtonLabel => strings.goBackButtonLabel.tr();
 
   @override
-  String get invalidCountryCode => localize(context).invalidCountryCode;
+  String get invalidCountryCode => strings.invalidCountryCode.tr();
 
   @override
-  String get isNotAValidEmailErrorText => localize(context).isNotAValidEmailErrorText;
+  String get isNotAValidEmailErrorText => strings.isNotAValidEmailErrorText.tr();
 
   @override
-  String get latitudeLabel => localize(context).latitudeLabel;
+  String get latitudeLabel => strings.latitudeLabel.tr();
 
   @override
-  String get linkEmailButtonText => localize(context).linkEmailButtonText;
+  String get linkEmailButtonText => strings.linkEmailButtonText.tr();
 
   @override
-  String get longitudeLabel => localize(context).longitudeLabel;
+  String get longitudeLabel => strings.longitudeLabel.tr();
 
   @override
-  String get mapLabel => localize(context).mapLabel;
+  String get mapLabel => strings.mapLabel.tr();
 
   @override
-  String get name => localize(context).name;
+  String get name => strings.name.tr();
 
   @override
-  String get northInitialLabel => localize(context).northInitialLabel;
+  String get northInitialLabel => strings.northInitialLabel.tr();
 
   @override
-  String get nullLabel => localize(context).nullLabel;
+  String get nullLabel => strings.nullLabel.tr();
 
   @override
-  String get numberLabel => localize(context).numberLabel;
+  String get numberLabel => strings.numberLabel.tr();
 
   @override
-  String get passwordInputLabel => localize(context).passwordInputLabel;
+  String get passwordInputLabel => strings.passwordInputLabel.tr();
 
   @override
-  String get passwordIsRequiredErrorText => localize(context).passwordIsRequiredErrorText;
+  String get passwordIsRequiredErrorText => strings.passwordIsRequiredErrorText.tr();
 
   @override
-  String get passwordResetEmailSentText => localize(context).passwordResetEmailSentText;
+  String get passwordResetEmailSentText => strings.passwordResetEmailSentText.tr();
 
   @override
-  String get phoneInputLabel => localize(context).phoneInputLabel;
+  String get phoneInputLabel => strings.phoneInputLabel.tr();
 
   @override
-  String get phoneNumberInvalidErrorText => localize(context).phoneNumberInvalidErrorText;
+  String get phoneNumberInvalidErrorText => strings.phoneNumberInvalidErrorText.tr();
 
   @override
-  String get phoneNumberIsRequiredErrorText => localize(context).phoneNumberIsRequiredErrorText;
+  String get phoneNumberIsRequiredErrorText => strings.phoneNumberIsRequiredErrorText.tr();
 
   @override
-  String get phoneVerificationViewTitleText => localize(context).phoneVerificationViewTitleText;
+  String get phoneVerificationViewTitleText => strings.phoneVerificationViewTitleText.tr();
 
   @override
-  String get profile => localize(context).profile;
+  String get profile => strings.profile.tr();
 
   @override
-  String get provideEmail => localize(context).provideEmail;
+  String get provideEmail => strings.provideEmail.tr();
 
   @override
-  String get referenceLabel => localize(context).referenceLabel;
+  String get referenceLabel => strings.referenceLabel.tr();
 
   @override
-  String get registerActionText => localize(context).registerActionText;
+  String get registerActionText => strings.registerActionText.tr();
 
   @override
-  String get registerButtonText => localize(context).registerButtonText;
+  String get registerButtonText => strings.registerButtonText.tr();
 
   @override
-  String get registerHintText => localize(context).registerHintText;
+  String get registerHintText => strings.registerHintText.tr();
 
   @override
-  String get registerText => localize(context).registerText;
+  String get registerText => strings.registerText.tr();
 
   @override
-  String get resetPasswordButtonLabel => localize(context).resetPasswordButtonLabel;
+  String get resetPasswordButtonLabel => strings.resetPasswordButtonLabel.tr();
 
   @override
-  String get sendLinkButtonLabel => localize(context).sendLinkButtonLabel;
+  String get sendLinkButtonLabel => strings.sendLinkButtonLabel.tr();
 
   @override
-  String get sendingSMSCodeText => localize(context).sendingSMSCodeText;
+  String get sendingSMSCodeText => strings.sendingSMSCodeText.tr();
 
   @override
-  String get signInActionText => localize(context).signInActionText;
+  String get signInActionText => strings.signInActionText.tr();
 
   @override
-  String get signInButtonText => localize(context).signInButtonText;
+  String get signInButtonText => strings.signInButtonText.tr();
 
   @override
-  String get signInHintText => localize(context).signInHintText;
+  String get signInHintText => strings.signInHintText.tr();
 
   @override
-  String get signInMethods => localize(context).signInMethods;
+  String get signInMethods => strings.signInMethods.tr();
 
   @override
-  String get signInText => localize(context).signInText;
+  String get signInText => strings.signInText.tr();
 
   @override
-  String get signInWithAppleButtonText => localize(context).signInWithAppleButtonText;
+  String get signInWithAppleButtonText => strings.signInWithAppleButtonText.tr();
 
   @override
-  String get signInWithEmailLinkSentText => localize(context).signInWithEmailLinkSentText;
+  String get signInWithEmailLinkSentText => strings.signInWithEmailLinkSentText.tr();
 
   @override
-  String get signInWithEmailLinkViewTitleText => localize(context).signInWithEmailLinkViewTitleText;
+  String get signInWithEmailLinkViewTitleText => strings.signInWithEmailLinkViewTitleText.tr();
 
   @override
-  String get signInWithFacebookButtonText => localize(context).signInWithFacebookButtonText;
+  String get signInWithFacebookButtonText => strings.signInWithFacebookButtonText.tr();
 
   @override
-  String get signInWithGoogleButtonText => localize(context).signInWithGoogleButtonText;
+  String get signInWithGoogleButtonText => strings.signInWithGoogleButtonText.tr();
 
   @override
-  String get signInWithPhoneButtonText => localize(context).signInWithPhoneButtonText;
+  String get signInWithPhoneButtonText => strings.signInWithPhoneButtonText.tr();
 
   @override
-  String get signInWithTwitterButtonText => localize(context).signInWithTwitterButtonText;
+  String get signInWithTwitterButtonText => strings.signInWithTwitterButtonText.tr();
 
   @override
-  String get signOutButtonText => localize(context).signOutButtonText;
+  String get signOutButtonText => strings.signOutButtonText.tr();
 
   @override
-  String get smsAutoresolutionFailedError => localize(context).smsAutoresolutionFailedError;
+  String get smsAutoresolutionFailedError => strings.smsAutoresolutionFailedError.tr();
 
   @override
-  String get smsCodeSentText => localize(context).smsCodeSentText;
+  String get smsCodeSentText => strings.smsCodeSentText.tr();
 
   @override
-  String get southInitialLabel => localize(context).southInitialLabel;
+  String get southInitialLabel => strings.southInitialLabel.tr();
 
   @override
-  String get stringLabel => localize(context).stringLabel;
+  String get stringLabel => strings.stringLabel.tr();
 
   @override
-  String get timestampLabel => localize(context).timestampLabel;
+  String get timestampLabel => strings.timestampLabel.tr();
 
   @override
-  String get typeLabel => localize(context).typeLabel;
+  String get typeLabel => strings.typeLabel.tr();
 
   @override
-  String get unknownError => localize(context).unknownError;
+  String get unknownError => strings.unknownError.tr();
 
   @override
-  String get updateLabel => localize(context).updateLabel;
+  String get updateLabel => strings.updateLabel.tr();
 
   @override
-  String get userNotFoundErrorText => localize(context).userNotFoundErrorText;
+  String get userNotFoundErrorText => strings.userNotFoundErrorText.tr();
 
   @override
-  String get valueLabel => localize(context).valueLabel;
+  String get valueLabel => strings.valueLabel.tr();
 
   @override
-  String get verifyCodeButtonText => localize(context).verifyCodeButtonText;
+  String get verifyCodeButtonText => strings.verifyCodeButtonText.tr();
 
   @override
-  String get verifyItsYouText => localize(context).verifyItsYouText;
+  String get verifyItsYouText => strings.verifyItsYouText.tr();
 
   @override
-  String get verifyPhoneNumberButtonText => localize(context).verifyPhoneNumberButtonText;
+  String get verifyPhoneNumberButtonText => strings.verifyPhoneNumberButtonText.tr();
 
   @override
-  String get verifyingPhoneNumberViewTitle => localize(context).verifyingPhoneNumberViewTitle;
+  String get verifyingPhoneNumberViewTitle => strings.verifyingPhoneNumberViewTitle.tr();
 
   @override
-  String get verifyingSMSCodeText => localize(context).verifyingSMSCodeText;
+  String get verifyingSMSCodeText => strings.verifyingSMSCodeText.tr();
 
   @override
-  String get westInitialLabel => localize(context).westInitialLabel;
+  String get westInitialLabel => strings.westInitialLabel.tr();
 
   @override
-  String get wrongOrNoPasswordErrorText => localize(context).wrongOrNoPasswordErrorText;
+  String get wrongOrNoPasswordErrorText => strings.wrongOrNoPasswordErrorText.tr();
 }

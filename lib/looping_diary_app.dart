@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/localizer/localizer.dart';
 import 'package:looping_diary/core/style/themed_data.dart';
@@ -10,8 +11,8 @@ class LoopingDiaryApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Looping Diary',
         theme: ThemedData.lightThemeData,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
+        localizationsDelegates: localizationsDelegates(context),
+        supportedLocales: context.supportedLocales,
         home: const AuthGate(),
       );
 }

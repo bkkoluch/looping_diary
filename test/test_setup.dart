@@ -6,7 +6,7 @@ import 'firebase_test_setup.dart';
 Widget prepareTestableWidget(Widget child) => MaterialApp(
       locale: const Locale('en'),
       supportedLocales: supportedLocales,
-      localizationsDelegates: localizationsDelegates,
+      localizationsDelegates: const [],
       home: child,
     );
 
