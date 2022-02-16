@@ -56,6 +56,7 @@ workflows:
           --key-pass android
     artifacts:
       - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
       - build/**/outputs/**/mapping.txt
       - '*.snap'
       - build/windows/**/*.msix
