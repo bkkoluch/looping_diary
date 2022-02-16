@@ -1,7 +1,9 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:looping_diary/utils/log.dart';
 
+@injectable
 class CrashReportingService {
   CrashReportingService(this._firebaseCrashlytics) {
     _setCrashlyticsCollectionEnabled();
