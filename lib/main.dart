@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/injector.dart';
+import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/localizer/localizer.dart';
 import 'package:looping_diary/firebase_options.dart';
 import 'package:looping_diary/looping_diary_app.dart';
@@ -16,7 +16,7 @@ Future<void> main() async {
     EasyLocalization(
       path: translationFolderPath,
       supportedLocales: supportedLocales,
-      child: const LoopingDiaryApp(),
+      child: LoopingDiaryApp(),
     ),
   );
 }

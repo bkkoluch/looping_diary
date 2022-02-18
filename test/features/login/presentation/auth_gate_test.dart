@@ -5,7 +5,6 @@ import 'package:looping_diary/features/login/presentation/auth_gate.dart';
 import 'package:looping_diary/features/login/presentation/pages/login_page.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../firebase_test_setup.dart';
 import '../../../test_setup.dart';
 
 class MockFirebaseInstance extends Mock implements FirebaseAuth {}
@@ -13,8 +12,8 @@ class MockFirebaseInstance extends Mock implements FirebaseAuth {}
 void main() {
   final MockFirebaseInstance mockFirebaseInstance = MockFirebaseInstance();
 
-  setUp(() async {
-    await setupFirebaseAuthMocks();
+  setUp(() {
+    baseSetup();
     when(mockFirebaseInstance.authStateChanges).thenAnswer((_) => Stream.value(null));
   });
 
