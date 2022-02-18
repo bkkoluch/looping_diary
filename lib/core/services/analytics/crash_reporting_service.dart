@@ -1,23 +1,17 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
 import 'package:looping_diary/utils/log.dart';
 
-@injectable
 class CrashReportingService {
   CrashReportingService(this._firebaseCrashlytics) {
     _setCrashlyticsCollectionEnabled();
   }
 
-  static CrashReportingService? _instance;
-
   final FirebaseCrashlytics _firebaseCrashlytics;
 
-  static CrashReportingService getInstance() => _instance ??= CrashReportingService(FirebaseCrashlytics.instance);
-
   Future<void> _setCrashlyticsCollectionEnabled() async {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    await _firebaseCrashlytics.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = _firebaseCrashlytics.recordFlutterError;
   }
 
   // TODO: Hook it up when Dio errors and other places I want to track will be ready

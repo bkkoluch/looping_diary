@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 typedef Callback = void Function(MethodCall call);
 
-Future<void> setupFirebaseAuthMocks([Callback? customHandlers]) async {
+Future<void> setupFirebaseMocks([Callback? customHandlers]) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   MethodChannelFirebase.channel.setMockMethodCallHandler((call) async {
@@ -40,11 +40,4 @@ Future<void> setupFirebaseAuthMocks([Callback? customHandlers]) async {
   });
 
   await Firebase.initializeApp();
-}
-
-Future<T> neverEndingFuture<T>() async {
-  // ignore: literal_only_boolean_expressions
-  while (true) {
-    await Future.delayed(const Duration(minutes: 5));
-  }
 }
