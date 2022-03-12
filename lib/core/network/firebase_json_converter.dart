@@ -97,10 +97,10 @@ class FirebaseJsonConverter {
         (element) {
           if (value is List) {
             return element == FirebaseJsonValue.arrayValue;
-          } else if (value.runtimeType.toLowercaseString.contains(mapString)) {
+          } else if (value.runtimeType.toLowerCaseString.contains(mapString)) {
             return element == FirebaseJsonValue.mapValue;
           } else {
-            return element.name.contains(value.runtimeType.toLowercaseString);
+            return element.name.contains(value.runtimeType.toLowerCaseString);
           }
         },
       );

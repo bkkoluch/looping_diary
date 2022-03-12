@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase/firebase_io.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:injectable/injectable.dart';
@@ -12,8 +11,6 @@ abstract class RegistrationService {
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
 
   AppRouter get router => AppRouter();
-
-  Dio get dio => Dio();
 
   FirebaseClient get firebaseClient => FirebaseClient.anonymous();
 }

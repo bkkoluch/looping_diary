@@ -1,3 +1,3 @@
 extension DynamicExtensions on dynamic {
-  String get toLowercaseString => toString().toLowerCase();
+  String get toLowerCaseString => toString().toLowerCase();
 }
