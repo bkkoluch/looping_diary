@@ -8,7 +8,7 @@ import 'package:looping_diary/looping_diary_app.dart';
 import 'package:looping_diary/utils/constants.dart';
 
 Future<void> main() async {
-  configureInjector();
+  await configureInjector();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

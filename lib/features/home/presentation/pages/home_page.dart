@@ -15,5 +15,6 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
           ),
         ),
+        body: Center(child: Column(mainAxisAlignment: MainAxisAlignment.center)),
       );
 }
