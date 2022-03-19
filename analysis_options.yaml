@@ -3,7 +3,9 @@ analyzer:
     - "packages"
     - lib/.dart_tool
     - lib/generated/**
-    - lib/core/injector.config.dart
+    - lib/core/injector/injector.config.dart
+    - lib/**.g.dart
+    - lib/**.freezed.dart
 
   errors:
     missing_required_param: error
@@ -134,7 +136,6 @@ linter:
     prefer_interpolation_to_compose_strings: true
     prefer_int_literals: true
     sort_constructors_first: true
-    type_annotate_public_apis: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
     use_named_constants: true

@@ -6,6 +6,7 @@ import 'package:looping_diary/core/services/analytics/crash_reporting_service.da
 import 'package:mocktail/mocktail.dart';
 
 import 'firebase_test_setup.dart';
+import 'test_data.dart';
 
 Widget prepareTestableWidget(Widget child) => MaterialApp(
       locale: const Locale('en'),
@@ -15,6 +16,7 @@ Widget prepareTestableWidget(Widget child) => MaterialApp(
     );
 
 Future<void> baseSetup() async {
+  registerFallbackValues();
   await setupFirebaseMocks();
 
   getIt.registerSingleton<CrashReportingService>(MockCrashReportingService());
@@ -28,3 +30,8 @@ void baseTearDown() => getIt.reset();
 class MockCrashReportingService extends Mock implements CrashReportingService {}
 
 class MockFirebaseCrashlytics extends Mock implements FirebaseCrashlytics {}
+
+void registerFallbackValues() {
+  registerFallbackValue(tNoteDto);
+  registerFallbackValue(tNoteDateDto);
+}

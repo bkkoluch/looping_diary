@@ -9,6 +9,6 @@ class ThemedData {
         borderRadius: BorderRadius.circular(CoreDimensions.paddingS),
       ),
     ),
-    primarySwatch: ColorTokens.mainMaterial,
+    primaryColor: ColorTokens.brandPrimary,
   );
 }
