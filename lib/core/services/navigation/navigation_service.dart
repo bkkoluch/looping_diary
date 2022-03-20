@@ -1,14 +1,24 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:looping_diary/features/home/presentation/pages/home_page.dart';
 import 'package:looping_diary/features/login/presentation/auth_gate.dart';
 import 'package:looping_diary/features/login/presentation/pages/forgot_password_page.dart';
+
+typedef CustomRouteBuilder = Route<T> Function<T>(BuildContext context, Widget child, CustomPage page);
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(page: AuthGate, initial: true),
     AutoRoute(page: HomePage),
-    AutoRoute(page: ForgotPasswordPage),
+    CustomRoute(page: ForgotPasswordPage, customRouteBuilder: fadeInRouteBuilder),
   ],
 )
 class $AppRouter {}
+
+Route<T> fadeInRouteBuilder<T>(BuildContext context, Widget child, CustomPage<T> page) => PageRouteBuilder(
+      settings: page,
+      pageBuilder: (_, __, ___) => child,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500),
+    );

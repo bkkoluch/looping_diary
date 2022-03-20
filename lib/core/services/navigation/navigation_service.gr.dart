@@ -15,26 +15,27 @@ import 'package:flutter/material.dart' as _i5;
 
 import '../../../features/home/presentation/pages/home_page.dart' as _i2;
 import '../../../features/login/presentation/auth_gate.dart' as _i1;
-import '../../../features/login/presentation/pages/forgot_password_page.dart'
-    as _i3;
+import '../../../features/login/presentation/pages/forgot_password_page.dart' as _i3;
+import 'navigation_service.dart' as _i6;
 
 class AppRouter extends _i4.RootStackRouter {
-  AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     AuthGate.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.AuthGate());
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i1.AuthGate());
     },
     HomeRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.HomePage());
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.HomePage());
     },
     ForgotPasswordRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.ForgotPasswordPage());
+      return _i4.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i3.ForgotPasswordPage(),
+          customRouteBuilder: _i6.fadeInRouteBuilder,
+          opaque: true,
+          barrierDismissible: false);
     }
   };
 
@@ -65,8 +66,7 @@ class HomeRoute extends _i4.PageRouteInfo<void> {
 /// generated route for
 /// [_i3.ForgotPasswordPage]
 class ForgotPasswordRoute extends _i4.PageRouteInfo<void> {
-  const ForgotPasswordRoute()
-      : super(ForgotPasswordRoute.name, path: '/forgot-password-page');
+  const ForgotPasswordRoute() : super(ForgotPasswordRoute.name, path: '/forgot-password-page');
 
   static const String name = 'ForgotPasswordRoute';
 }
