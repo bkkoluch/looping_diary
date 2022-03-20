@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:looping_diary/core/extensions/context_extensions.dart';
 
 class FadedBackground extends StatelessWidget {
   const FadedBackground({
@@ -12,8 +13,8 @@ class FadedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: context.screenWidth,
+        height: context.screenHeight,
         decoration: BoxDecoration(image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover)),
         child: Opacity(opacity: 0.8, child: child),
       );

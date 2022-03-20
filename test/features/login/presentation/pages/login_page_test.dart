@@ -8,7 +8,7 @@ import 'package:looping_diary/features/login/presentation/pages/login_page.dart'
 import '../../../../test_setup.dart';
 
 void main() {
-  setUp(baseSetup);
+  setUpAll(baseSetup);
 
   testWidgets(
     'should display LoginPage correctly',
