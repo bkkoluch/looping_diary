@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/color_tokens.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
@@ -10,12 +11,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: get note's date
     final DateTime now = DateTime.now();
     return Scaffold(
       backgroundColor: ColorTokens.brandSecondaryVeryLight,
       appBar: AppBar(
         backgroundColor: ColorTokens.brandPrimary,
-        title: Text('${now.day}/${now.month}'),
+        title: Center(child: Text(now.toReadableFormat)),
         elevation: CoreDimensions.defaultAppBarElevation,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.only(
