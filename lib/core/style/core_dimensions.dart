@@ -1,15 +1,22 @@
 class CoreDimensions {
-  // paddings
+  // Paddings
   static const double paddingS = 8;
   static const double paddingM = 16;
   static const double paddingL = 24;
 
-  // spacings
+  // Spacings
   static const double spacingOne = 1;
+  static const double spacingXL = 48;
 
-  // radius
+  // Radius
   static const double defaultAppBarBorderRadius = 20;
 
-  // various
+  // Various
   static const double bottomNavigationBarHeight = 60;
+
+  // Images
+  static const double defaultIconSize = 24;
+
+  // Elevations
+  static const double defaultAppBarElevation = 5;
 }
