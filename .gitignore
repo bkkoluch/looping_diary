@@ -40,6 +40,12 @@ lib/generated_plugin_registrant.dart
 # Secrets related
 lib/secrets
 
+# Tests related
+# Ignore non-CI golden files and failures
+test/**/goldens/**/*.*
+test/**/failures/**/*.*
+!test/**/goldens/ci/*.*
+
 # Symbolication related
 app.*.symbols
 

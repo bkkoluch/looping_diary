@@ -10,12 +10,15 @@ import '../../../test_setup.dart';
 class MockFirebaseInstance extends Mock implements FirebaseAuth {}
 
 void main() {
-  final MockFirebaseInstance mockFirebaseInstance = MockFirebaseInstance();
+  late MockFirebaseInstance _mockedFirebaseInstance;
 
   setUp(() {
-    baseSetup();
-    when(mockFirebaseInstance.authStateChanges).thenAnswer((_) => Stream.value(null));
+    _mockedFirebaseInstance = MockFirebaseInstance();
+
+    when(_mockedFirebaseInstance.authStateChanges).thenAnswer((_) => Stream.value(null));
   });
+
+  setUpAll(baseSetup);
 
   testWidgets(
     'should display LoginPage when user is not registered',
@@ -25,6 +28,5 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(LoginPage), findsOneWidget);
     },
-    // skipping the test to not run on CI as it fails due to not having secrets Keys file
   );
 }
