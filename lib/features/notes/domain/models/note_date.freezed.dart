@@ -120,9 +120,10 @@ class __$NoteDateCopyWithImpl<$Res> extends _$NoteDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NoteDate implements _NoteDate {
+class _$_NoteDate extends _NoteDate {
   const _$_NoteDate(
-      {required this.day, required this.month, required this.year});
+      {required this.day, required this.month, required this.year})
+      : super._();
 
   @override
   final int day;
@@ -159,9 +160,10 @@ class _$_NoteDate implements _NoteDate {
       __$NoteDateCopyWithImpl<_NoteDate>(this, _$identity);
 }
 
-abstract class _NoteDate implements NoteDate {
+abstract class _NoteDate extends NoteDate {
   const factory _NoteDate(
       {required int day, required int month, required int year}) = _$_NoteDate;
+  const _NoteDate._() : super._();
 
   @override
   int get day;

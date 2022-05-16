@@ -3,6 +3,7 @@ import 'package:firebase/firebase_io.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class RegistrationService {
@@ -13,4 +14,6 @@ abstract class RegistrationService {
   FirebaseClient get firebaseClient => FirebaseClient.anonymous();
 
   FirebaseAuth get auth => FirebaseAuth.instance;
+
+  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 }

@@ -21,11 +21,14 @@ class FirebaseRestClient extends FirebaseClient {
   String? get _userId => getIt<UserRepository>().getUserId();
 
   @override
-  Future patch(uri, json) => super.patch('$_baseUrl$_userId/$uri}', json);
+  Future patch(uri, json) => super.patch(Uri.parse('$_baseUrl$_userId$uri'), json);
+
+  Future patchWithQueryParameters(uri, json, Map<String, dynamic> queryParameters) =>
+      super.patch(Uri.parse('$_baseUrl$_userId$uri').replace(queryParameters: queryParameters), json);
 
   @override
-  Future get(uri) => super.get('$_baseUrl$_userId/$uri}');
+  Future get(uri) => super.get('$_baseUrl$_userId$uri');
 
   @override
-  Future<void> delete(uri) => super.delete('$_baseUrl$_userId/$uri}');
+  Future<void> delete(uri) => super.delete('$_baseUrl$_userId$uri');
 }

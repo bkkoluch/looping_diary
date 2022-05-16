@@ -5,17 +5,20 @@ import 'package:looping_diary/core/style/color_tokens.dart';
 class SafeAreaScrollableScaffold extends StatelessWidget {
   const SafeAreaScrollableScaffold({
     required this.child,
+    required this.appBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     Key? key,
   }) : super(key: key);
 
   final Widget child;
+  final PreferredSizeWidget appBar;
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: appBar,
         backgroundColor: ColorTokens.brandSecondaryVeryLight,
         body: SafeArea(
           child: ConstrainedBox(

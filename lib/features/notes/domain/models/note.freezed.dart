@@ -17,12 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$NoteTearOff {
   const _$NoteTearOff();
 
-  _Note call(
-      {required String id, required String entry, required NoteDate noteDate}) {
+  _Note call({required String id, required NoteDate noteDate, String? entry}) {
     return _Note(
       id: id,
-      entry: entry,
       noteDate: noteDate,
+      entry: entry,
     );
   }
 }
@@ -33,8 +32,8 @@ const $Note = _$NoteTearOff();
 /// @nodoc
 mixin _$Note {
   String get id => throw _privateConstructorUsedError;
-  String get entry => throw _privateConstructorUsedError;
   NoteDate get noteDate => throw _privateConstructorUsedError;
+  String? get entry => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteCopyWith<Note> get copyWith => throw _privateConstructorUsedError;
@@ -44,7 +43,7 @@ mixin _$Note {
 abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res>;
-  $Res call({String id, String entry, NoteDate noteDate});
+  $Res call({String id, NoteDate noteDate, String? entry});
 
   $NoteDateCopyWith<$Res> get noteDate;
 }
@@ -60,22 +59,22 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? entry = freezed,
     Object? noteDate = freezed,
+    Object? entry = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      entry: entry == freezed
-          ? _value.entry
-          : entry // ignore: cast_nullable_to_non_nullable
-              as String,
       noteDate: noteDate == freezed
           ? _value.noteDate
           : noteDate // ignore: cast_nullable_to_non_nullable
               as NoteDate,
+      entry: entry == freezed
+          ? _value.entry
+          : entry // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -92,7 +91,7 @@ abstract class _$NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
   factory _$NoteCopyWith(_Note value, $Res Function(_Note) then) =
       __$NoteCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String entry, NoteDate noteDate});
+  $Res call({String id, NoteDate noteDate, String? entry});
 
   @override
   $NoteDateCopyWith<$Res> get noteDate;
@@ -110,22 +109,22 @@ class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? entry = freezed,
     Object? noteDate = freezed,
+    Object? entry = freezed,
   }) {
     return _then(_Note(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      entry: entry == freezed
-          ? _value.entry
-          : entry // ignore: cast_nullable_to_non_nullable
-              as String,
       noteDate: noteDate == freezed
           ? _value.noteDate
           : noteDate // ignore: cast_nullable_to_non_nullable
               as NoteDate,
+      entry: entry == freezed
+          ? _value.entry
+          : entry // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -133,19 +132,18 @@ class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Note implements _Note {
-  const _$_Note(
-      {required this.id, required this.entry, required this.noteDate});
+  const _$_Note({required this.id, required this.noteDate, this.entry});
 
   @override
   final String id;
   @override
-  final String entry;
-  @override
   final NoteDate noteDate;
+  @override
+  final String? entry;
 
   @override
   String toString() {
-    return 'Note(id: $id, entry: $entry, noteDate: $noteDate)';
+    return 'Note(id: $id, noteDate: $noteDate, entry: $entry)';
   }
 
   @override
@@ -154,16 +152,16 @@ class _$_Note implements _Note {
         (other.runtimeType == runtimeType &&
             other is _Note &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.entry, entry) &&
-            const DeepCollectionEquality().equals(other.noteDate, noteDate));
+            const DeepCollectionEquality().equals(other.noteDate, noteDate) &&
+            const DeepCollectionEquality().equals(other.entry, entry));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(entry),
-      const DeepCollectionEquality().hash(noteDate));
+      const DeepCollectionEquality().hash(noteDate),
+      const DeepCollectionEquality().hash(entry));
 
   @JsonKey(ignore: true)
   @override
@@ -174,15 +172,15 @@ class _$_Note implements _Note {
 abstract class _Note implements Note {
   const factory _Note(
       {required String id,
-      required String entry,
-      required NoteDate noteDate}) = _$_Note;
+      required NoteDate noteDate,
+      String? entry}) = _$_Note;
 
   @override
   String get id;
   @override
-  String get entry;
-  @override
   NoteDate get noteDate;
+  @override
+  String? get entry;
   @override
   @JsonKey(ignore: true)
   _$NoteCopyWith<_Note> get copyWith => throw _privateConstructorUsedError;

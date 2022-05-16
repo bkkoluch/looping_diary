@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:looping_diary/features/user/data/datasources/user_local_data_source.dart';
 import 'package:looping_diary/features/user/domain/repositories/user_repository.dart';
 
+@Injectable(as: UserRepository)
 class UserRepositoryImpl implements UserRepository {
   const UserRepositoryImpl(this._userLocalDataSource);
 

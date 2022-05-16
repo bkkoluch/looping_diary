@@ -17,6 +17,7 @@ linter:
 
     # CORE
     avoid_empty_else: true
+    require_trailing_commas: true
     avoid_relative_lib_imports: true
     avoid_shadowing_type_parameters: true
     avoid_types_as_parameter_names: true

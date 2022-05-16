@@ -17,6 +17,7 @@ import '../../../features/home/presentation/pages/home_page.dart' as _i2;
 import '../../../features/login/presentation/auth_gate.dart' as _i1;
 import '../../../features/login/presentation/pages/forgot_password_page.dart'
     as _i3;
+import '../../../features/notes/domain/models/note.dart' as _i8;
 import '../../../features/notes/presentation/pages/add_note_page.dart' as _i4;
 import 'navigation_service.dart' as _i7;
 
@@ -43,9 +44,12 @@ class AppRouter extends _i5.RootStackRouter {
           barrierDismissible: false);
     },
     AddNoteRoute.name: (routeData) {
+      final args = routeData.argsAs<AddNoteRouteArgs>(
+          orElse: () => const AddNoteRouteArgs());
       return _i5.CustomPage<dynamic>(
           routeData: routeData,
-          child: const _i4.AddNotePage(),
+          child: _i4.AddNotePage(
+              noteToAddOrEdit: args.noteToAddOrEdit, key: args.key),
           customRouteBuilder: _i7.fadeInRouteBuilder,
           opaque: true,
           barrierDismissible: false);
@@ -89,8 +93,24 @@ class ForgotPasswordRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.AddNotePage]
-class AddNoteRoute extends _i5.PageRouteInfo<void> {
-  const AddNoteRoute() : super(AddNoteRoute.name, path: '/add-note-page');
+class AddNoteRoute extends _i5.PageRouteInfo<AddNoteRouteArgs> {
+  AddNoteRoute({_i8.Note? noteToAddOrEdit, _i6.Key? key})
+      : super(AddNoteRoute.name,
+            path: '/add-note-page',
+            args: AddNoteRouteArgs(noteToAddOrEdit: noteToAddOrEdit, key: key));
 
   static const String name = 'AddNoteRoute';
+}
+
+class AddNoteRouteArgs {
+  const AddNoteRouteArgs({this.noteToAddOrEdit, this.key});
+
+  final _i8.Note? noteToAddOrEdit;
+
+  final _i6.Key? key;
+
+  @override
+  String toString() {
+    return 'AddNoteRouteArgs{noteToAddOrEdit: $noteToAddOrEdit, key: $key}';
+  }
 }
