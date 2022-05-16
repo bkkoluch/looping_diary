@@ -36,7 +36,10 @@ class NotesLocalDataSourceImpl implements NotesLocalDataSource {
   List<NoteDto> getAllNotes() {
     final String? allNotesString = _sharedPreferences.getString(SharedPrefsKeys.allNotes());
     if (allNotesString != null) {
-      final List<NoteDto> allNotes = (jsonDecode(allNotesString) as List).map((e) => NoteDto.fromJson(e)).toList();
+      // Using [e as Map<String, dynamic>] casting which is unnecessary, but it let's me avoid
+      // 'Don't create a lambda when a tear-off will do' bug for dynamic types
+      final List<NoteDto> allNotes =
+          (jsonDecode(allNotesString) as List).map((e) => NoteDto.fromJson(e as Map<String, dynamic>)).toList();
       return allNotes;
     } else {
       return [];
