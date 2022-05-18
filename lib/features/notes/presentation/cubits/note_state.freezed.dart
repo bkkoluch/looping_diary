@@ -17,9 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NoteState {
   List<Note> get allNotes => throw _privateConstructorUsedError;
-
   Note get currentNote => throw _privateConstructorUsedError;
-
   NoteStateStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,6 +27,7 @@ mixin _$NoteState {
 /// @nodoc
 abstract class $NoteStateCopyWith<$Res> {
   factory $NoteStateCopyWith(NoteState value, $Res Function(NoteState) then) = _$NoteStateCopyWithImpl<$Res>;
+
   $Res call({List<Note> allNotes, Note currentNote, NoteStateStatus status});
 
   $NoteCopyWith<$Res> get currentNote;
@@ -164,12 +163,10 @@ abstract class _NoteState extends NoteState {
       {required final List<Note> allNotes,
       required final Note currentNote,
       required final NoteStateStatus status}) = _$_NoteState;
-
   const _NoteState._() : super._();
 
   @override
   List<Note> get allNotes => throw _privateConstructorUsedError;
-
   @override
   Note get currentNote => throw _privateConstructorUsedError;
 

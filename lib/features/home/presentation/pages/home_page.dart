@@ -6,6 +6,7 @@ import 'package:looping_diary/core/services/navigation/navigation_service.gr.dar
 import 'package:looping_diary/core/style/color_tokens.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
+import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
 import 'package:looping_diary/features/home/presentation/widgets/core_app_bar.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
@@ -29,23 +30,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: ColorTokens.brandSecondaryVeryLight,
-        appBar: const CoreAppBar(),
-        body: BlocProvider.value(
-          value: cubit,
-          child: BlocBuilder<NoteCubit, NoteState>(
-            builder: (context, state) {
-              if (state.status == NoteStateStatus.loading) {
-                return _buildLoadingIndicator();
-              }
-              return _buildNotesList();
-            },
+  Widget build(BuildContext context) => DeviceSizeBox(
+        child: Scaffold(
+          backgroundColor: ColorTokens.brandSecondaryVeryLight,
+          appBar: const CoreAppBar(),
+          body: BlocProvider.value(
+            value: cubit,
+            child: BlocBuilder<NoteCubit, NoteState>(
+              builder: (context, state) {
+                if (state.status == NoteStateStatus.loading) {
+                  return _buildLoadingIndicator();
+                }
+                return _buildNotesList();
+              },
+            ),
           ),
+          floatingActionButton: cubit.state.status == NoteStateStatus.loading || cubit.wasNoteCreatedToday
+              ? const SizedBox.shrink()
+              : _buildFloatingAddNoteButton(context),
         ),
-        floatingActionButton: cubit.isTodaysNoteCreated || cubit.state.status == NoteStateStatus.loading
-            ? const SizedBox.shrink()
-            : _buildFloatingAddNoteButton(context),
       );
 
   FloatingActionButton _buildFloatingAddNoteButton(BuildContext context) => FloatingActionButton(

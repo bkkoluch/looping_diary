@@ -45,6 +45,6 @@ class NoteCubit extends Cubit<NoteState> {
     }
   }
 
-  bool get isTodaysNoteCreated =>
+  bool get wasNoteCreatedToday =>
       state.allNotes.firstWhereOrNull((note) => note.noteDate == Note.today.noteDate) != null;
 }
