@@ -25,11 +25,9 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
     try {
       await _firebaseRestClient.patchWithQueryParameters(
         Endpoints.notes,
-        json.encode(
-          getIt<FirebaseJsonConverter>().convertToFirebaseJson(
-            notesField,
-            {noteDto.noteDate.withAppendedChars: noteDto.toJson()},
-          ),
+        getIt<FirebaseJsonConverter>().convertToFirebaseJson(
+          notesField,
+          {noteDto.noteDate.withAppendedChars: noteDto.toJson()},
         ),
         {
           updateMaskFieldPathsString: [noteDto.noteDate.withAppendedChars]

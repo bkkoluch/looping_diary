@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/data/endpoints.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
@@ -48,11 +46,9 @@ void main() {
         verify(
           () => _mockFirebaseRestClient.patchWithQueryParameters(
             Endpoints.notes,
-            json.encode(
-              getIt<FirebaseJsonConverter>().convertToFirebaseJson(
-                'notes',
-                {tNoteDto.noteDate.withAppendedChars: tNoteDto.toJson()},
-              ),
+            getIt<FirebaseJsonConverter>().convertToFirebaseJson(
+              'notes',
+              {tNoteDto.noteDate.withAppendedChars: tNoteDto.toJson()},
             ),
             {
               'updateMask.fieldPaths': [tNoteDto.noteDate.withAppendedChars]
