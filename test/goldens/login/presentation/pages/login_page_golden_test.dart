@@ -1,4 +1,5 @@
 import 'package:alchemist/alchemist.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/features/login/presentation/pages/login_page.dart';
 
@@ -11,6 +12,7 @@ void main() {
     goldenTest(
       'renders correctly',
       fileName: 'login_page',
+      constraints: const BoxConstraints(maxWidth: 600),
       builder: () => GoldenTestGroup(
         children: [
           GoldenTestScenario(
