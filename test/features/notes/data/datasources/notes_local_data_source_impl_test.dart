@@ -33,8 +33,8 @@ void main() {
         await _notesLocalDataSource.saveNote(tNoteDto);
 
         // assert
-        verify(() => _mockedSharedPreferences.setString(SharedPrefsKeys.note(tNoteDto.noteDate), tNoteDto.toString()))
-            .called(1);
+        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.allNotes()));
+        verify(() => _mockedSharedPreferences.setString(SharedPrefsKeys.allNotes(), jsonEncode([tNoteDto]))).called(1);
         verifyNoMoreInteractions(_mockedSharedPreferences);
       },
     );

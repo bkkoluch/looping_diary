@@ -20,14 +20,16 @@ void main() {
     when(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(captureAny())).thenAnswer((_) async => null);
     crashReportingService = CrashReportingService(firebaseCrashlytics);
 
-    when(() => firebaseCrashlytics.recordError(
-          captureAny(),
-          captureAny(),
-          reason: any(named: 'reason'),
-          information: any(named: 'information'),
-          printDetails: any(named: 'printDetails'),
-          fatal: any(named: 'fatal'),
-        )).thenAnswer((_) async => null);
+    when(
+      () => firebaseCrashlytics.recordError(
+        captureAny(),
+        captureAny(),
+        reason: any(named: 'reason'),
+        information: any(named: 'information'),
+        printDetails: any(named: 'printDetails'),
+        fatal: any(named: 'fatal'),
+      ),
+    ).thenAnswer((_) async => null);
   });
 
   tearDown(baseTearDown);
@@ -42,12 +44,14 @@ void main() {
 
       // assert
       verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)).called(1);
-      verify(() => firebaseCrashlytics.recordError(
-            '<<< No exception provided for crash logs >>>',
-            tStackTrace,
-            reason: '\n<<< No error description provided for crash logs >>>',
-            printDetails: true,
-          )).called(1);
+      verify(
+        () => firebaseCrashlytics.recordError(
+          '<<< No exception provided for crash logs >>>',
+          tStackTrace,
+          reason: '\n<<< No error description provided for crash logs >>>',
+          printDetails: true,
+        ),
+      ).called(1);
     },
   );
 
@@ -65,12 +69,14 @@ void main() {
 
       // assert
       verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)).called(1);
-      verify(() => firebaseCrashlytics.recordError(
-            tException,
-            tStackTrace,
-            reason: '\n<<< $tMessage >>>',
-            printDetails: true,
-          )).called(1);
+      verify(
+        () => firebaseCrashlytics.recordError(
+          tException,
+          tStackTrace,
+          reason: '\n<<< $tMessage >>>',
+          printDetails: true,
+        ),
+      ).called(1);
     },
   );
 }

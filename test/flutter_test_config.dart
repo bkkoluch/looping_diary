@@ -1,5 +1,3 @@
-// flutter_test_config.dart
-
 import 'dart:async';
 
 import 'package:alchemist/alchemist.dart';

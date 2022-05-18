@@ -5,4 +5,6 @@ abstract class NotesRemoteDataSource {
   Future<void> saveNote(NoteDto noteDto);
 
   Future<NoteDto> getNote(NoteDateDto noteDate);
+
+  Future<List<NoteDto>> getAllNotes();
 }

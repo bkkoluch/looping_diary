@@ -5,4 +5,8 @@ abstract class NotesLocalDataSource {
   Future<void> saveNote(NoteDto note);
 
   NoteDto? getNote(NoteDateDto noteDate);
+
+  Future<void> saveAllNotes(List<NoteDto> allNotes);
+
+  List<NoteDto> getAllNotes();
 }

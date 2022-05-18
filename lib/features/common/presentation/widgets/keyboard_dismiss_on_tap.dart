@@ -12,7 +12,7 @@ class KeyboardDismissOnTapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: FocusScope.of(context).requestFocus,
+        onTap: FocusScope.of(context).unfocus,
         child: child,
       );
 }

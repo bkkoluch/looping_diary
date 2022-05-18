@@ -1,5 +1,6 @@
-import 'package:firebase/firebase_io.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/user/domain/repositories/user_repository.dart';
@@ -7,25 +8,20 @@ import 'package:looping_diary/features/user/domain/repositories/user_repository.
 const String _baseUrl = 'https://firestore.googleapis.com/v1/projects/looping-diary/databases/(default)/documents/';
 
 @injectable
-class FirebaseRestClient extends FirebaseClient {
-  FirebaseRestClient(this.userCredential) : super(userCredential);
-
-  final String? userCredential;
+class FirebaseRestClient {
+  const FirebaseRestClient();
 
   @factoryMethod
-  static Future<FirebaseRestClient> create() async => FirebaseRestClient(await _credential);
-
-  @preResolve
-  static Future<String?> get _credential async => await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  static Future<FirebaseRestClient> create() async => const FirebaseRestClient();
 
   String? get _userId => getIt<UserRepository>().getUserId();
 
-  @override
-  Future patch(uri, json) => super.patch('$_baseUrl$_userId/$uri}', json);
+  Future patch(String uri, Map<String, dynamic> json) => http.patch(Uri.parse('$_baseUrl$_userId$uri'), body: json);
 
-  @override
-  Future get(uri) => super.get('$_baseUrl$_userId/$uri}');
+  Future patchWithQueryParameters(String uri, Map<String, dynamic> json, Map<String, dynamic> queryParameters) =>
+      http.patch(Uri.parse('$_baseUrl$_userId$uri').replace(queryParameters: queryParameters), body: jsonEncode(json));
 
-  @override
-  Future<void> delete(uri) => super.delete('$_baseUrl$_userId/$uri}');
+  Future get(String uri) => http.get(Uri.parse('$_baseUrl$_userId$uri'));
+
+  Future<void> delete(String uri) => http.delete(Uri.parse('$_baseUrl$_userId$uri'));
 }

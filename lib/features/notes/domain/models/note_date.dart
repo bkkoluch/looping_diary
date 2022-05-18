@@ -5,6 +5,8 @@ part 'note_date.freezed.dart';
 
 @freezed
 class NoteDate with _$NoteDate {
+  const NoteDate._();
+
   const factory NoteDate({
     required int day,
     required int month,
@@ -16,4 +18,11 @@ class NoteDate with _$NoteDate {
         month: dto.month,
         year: dto.year,
       );
+
+  static NoteDate get today {
+    final DateTime now = DateTime.now();
+    return NoteDate(day: now.day, month: now.month, year: now.year);
+  }
+
+  String get toReadableDate => '$day/$month/$year';
 }

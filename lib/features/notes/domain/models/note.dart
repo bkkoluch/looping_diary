@@ -8,8 +8,8 @@ part 'note.freezed.dart';
 class Note with _$Note {
   const factory Note({
     required String id,
-    required String entry,
     required NoteDate noteDate,
+    String? entry,
   }) = _Note;
 
   factory Note.fromDto(NoteDto dto) => Note(
@@ -17,4 +17,9 @@ class Note with _$Note {
         entry: dto.entry,
         noteDate: NoteDate.fromDto(dto.noteDate),
       );
+
+  static Note get today {
+    final DateTime now = DateTime.now();
+    return Note(id: now.toIso8601String(), noteDate: NoteDate.today);
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/data/endpoints.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
+import 'package:looping_diary/core/injector/injector.dart';
+import 'package:looping_diary/core/network/firebase_json_converter.dart';
 import 'package:looping_diary/core/network/firebase_rest_client.dart';
 import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source_impl.dart';
 import 'package:mocktail/mocktail.dart';
@@ -14,7 +16,10 @@ void main() {
   late FirebaseRestClient _mockFirebaseRestClient;
   late NotesRemoteDataSourceImpl _notesRemoteDataSource;
 
-  setUpAll(baseSetup);
+  setUpAll(() {
+    baseSetup();
+    getIt.registerFactory<FirebaseJsonConverter>(FirebaseJsonConverter.new);
+  });
 
   setUp(() {
     _mockFirebaseRestClient = MockFirebaseRestClient();
@@ -26,16 +31,28 @@ void main() {
       'should make a call to firebaseRestClient.patch on a successful saveNote call',
       () async {
         // arrange
-        when(() => _mockFirebaseRestClient.patch(captureAny(), captureAny())).thenAnswer((_) async => null);
+        when(
+          () => _mockFirebaseRestClient.patchWithQueryParameters(
+            captureAny(),
+            captureAny(),
+            captureAny(),
+          ),
+        ).thenAnswer((_) async => null);
 
         // act
         await _notesRemoteDataSource.saveNote(tNoteDto);
 
         // assert
         verify(
-          () => _mockFirebaseRestClient.patch(
-            '${Endpoints.notes}/${tNoteDto.noteDate.toReadableDate}',
-            tNoteDto.toJson(),
+          () => _mockFirebaseRestClient.patchWithQueryParameters(
+            Endpoints.notes,
+            getIt<FirebaseJsonConverter>().convertToFirebaseJson(
+              'notes',
+              {tNoteDto.noteDate.withAppendedChars: tNoteDto.toJson()},
+            ),
+            {
+              'updateMask.fieldPaths': [tNoteDto.noteDate.withAppendedChars]
+            },
           ),
         ).called(1);
         verifyNoMoreInteractions(_mockFirebaseRestClient);
@@ -72,7 +89,7 @@ void main() {
 
           // assert
           expect(result, tNoteDto);
-          verify(() => _mockFirebaseRestClient.get('${Endpoints.notes}/${tNoteDateDto.toReadableDate}'));
+          verify(() => _mockFirebaseRestClient.get('${Endpoints.notes}/${tNoteDateDto.withAppendedChars}'));
           verifyNoMoreInteractions(_mockFirebaseRestClient);
         },
       );

@@ -11,10 +11,11 @@ class LoopingDiaryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-      title: 'Looping Diary',
-      theme: ThemedData.lightThemeData,
-      localizationsDelegates: localizationsDelegates(context),
-      supportedLocales: context.supportedLocales,
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser());
+        title: 'Looping Diary',
+        theme: ThemedData.lightThemeData,
+        localizationsDelegates: localizationsDelegates(context),
+        supportedLocales: context.supportedLocales,
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+      );
 }

@@ -28,7 +28,7 @@ void main() {
       when(() => _mockedNotesRepository.saveNote(captureAny())).thenAnswer((_) async => const Right(null));
 
       // act
-      final result = await _saveNoteUseCase(tNoteDto);
+      final result = await _saveNoteUseCase(tNote);
 
       // assert
       expect(result, const Right(null));
@@ -46,7 +46,7 @@ void main() {
       );
 
       // act
-      final result = await _saveNoteUseCase(tNoteDto);
+      final result = await _saveNoteUseCase(tNote);
 
       // assert
       expect(result, const Left(tServerFailure));
