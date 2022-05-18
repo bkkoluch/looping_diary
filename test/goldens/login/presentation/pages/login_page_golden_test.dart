@@ -12,6 +12,7 @@ void main() {
     goldenTest(
       'renders correctly',
       fileName: 'login_page',
+      skip: true,
       constraints: const BoxConstraints(maxWidth: 600),
       builder: () => GoldenTestGroup(
         children: [
