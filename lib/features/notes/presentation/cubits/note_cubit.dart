@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:collection/collection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/errors/failures.dart';
 import 'package:looping_diary/core/extensions/either_extensions.dart';
@@ -45,6 +45,6 @@ class NoteCubit extends Cubit<NoteState> {
     }
   }
 
-  bool get isTodayNoteCreated =>
+  bool get isTodaysNoteCreated =>
       state.allNotes.firstWhereOrNull((note) => note.noteDate == Note.today.noteDate) != null;
 }

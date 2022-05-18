@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/data/endpoints.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
@@ -22,9 +25,11 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
     try {
       await _firebaseRestClient.patchWithQueryParameters(
         Endpoints.notes,
-        getIt<FirebaseJsonConverter>().convertToFirebaseJson(
-          notesField,
-          {noteDto.noteDate.withAppendedChars: noteDto.toJson()},
+        json.encode(
+          getIt<FirebaseJsonConverter>().convertToFirebaseJson(
+            notesField,
+            {noteDto.noteDate.withAppendedChars: noteDto.toJson()},
+          ),
         ),
         {
           updateMaskFieldPathsString: [noteDto.noteDate.withAppendedChars]
@@ -47,12 +52,15 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
   @override
   Future<List<NoteDto>> getAllNotes() async {
     try {
-      final result = await _firebaseRestClient.get(Endpoints.notes);
+      final Response result = await _firebaseRestClient.get(Endpoints.notes);
 
-      final resultAfterConversion =
-          getIt<FirebaseJsonConverter>().convertFirebaseJsonToUnderstandableOne(result['fields']);
+      final Map<String, dynamic> firebaseJson = json.decode(result.body)['fields'];
 
-      final List<NoteDto> notes = resultAfterConversion.entries.map((e) => NoteDto.fromJson(e.value)).toList();
+      final Map<String, dynamic> resultAfterConversion =
+          getIt<FirebaseJsonConverter>().convertFirebaseJsonToUnderstandableOne(firebaseJson);
+
+      final List<NoteDto> notes = resultAfterConversion.entries.map((e) => NoteDto.fromJson(e.value)).toList()
+        ..sort((a, b) => a.noteDate.toDateTime.compareTo(b.noteDate.toDateTime));
 
       return notes;
     } catch (e) {

@@ -31,7 +31,7 @@ class NoteState with _$NoteState {
           year: now.year,
         ),
       ),
-      allNotes: [],
+      allNotes: List.empty(growable: true),
       status: NoteStateStatus.loading,
     );
   }

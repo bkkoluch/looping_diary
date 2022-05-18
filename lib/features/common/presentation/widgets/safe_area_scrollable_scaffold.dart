@@ -17,19 +17,23 @@ class SafeAreaScrollableScaffold extends StatelessWidget {
   final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: appBar,
-        backgroundColor: ColorTokens.brandSecondaryVeryLight,
-        body: SafeArea(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: context.screenHeight,
-              maxWidth: context.screenHeight,
+  Widget build(BuildContext context) => SizedBox(
+        height: context.screenHeight,
+        width: context.screenHeight,
+        child: Scaffold(
+          appBar: appBar,
+          backgroundColor: ColorTokens.brandSecondaryVeryLight,
+          body: SafeArea(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: context.screenHeight,
+                maxWidth: context.screenHeight,
+              ),
+              child: SingleChildScrollView(child: child),
             ),
-            child: SingleChildScrollView(child: child),
           ),
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
         ),
-        floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: floatingActionButtonLocation,
       );
 }

@@ -22,6 +22,8 @@ class NoteDateDto with _$NoteDateDto {
         year: noteDate.year,
       );
 
+  DateTime get toDateTime => DateTime(year, month, day);
+
   String get toReadableDate => '$day/$month/$year';
 
   /// Used along with FirebaseRestAPI as regular [toReadableDate] does not work with it

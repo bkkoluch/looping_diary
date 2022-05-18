@@ -17,7 +17,11 @@ class NotesLocalDataSourceImpl implements NotesLocalDataSource {
   @override
   Future<void> saveNote(NoteDto note) async {
     final List<NoteDto> allNotes = getAllNotes();
-    allNotes.addOrUpdateIfExists(allNotes, note);
+    allNotes.addOrUpdateIfExists(
+      allNotes,
+      () => allNotes.indexWhere((n) => n.noteDate == note.noteDate),
+      note,
+    );
     await saveAllNotes(allNotes);
   }
 
@@ -38,8 +42,11 @@ class NotesLocalDataSourceImpl implements NotesLocalDataSource {
     if (allNotesString != null) {
       // Using [e as Map<String, dynamic>] casting which is unnecessary, but it let's me avoid
       // 'Don't create a lambda when a tear-off will do' bug for dynamic types
-      final List<NoteDto> allNotes =
-          (jsonDecode(allNotesString) as List).map((e) => NoteDto.fromJson(e as Map<String, dynamic>)).toList();
+      final List<NoteDto> allNotes = (jsonDecode(allNotesString) as List)
+          .map((e) => NoteDto.fromJson(e as Map<String, dynamic>))
+          .toList()
+        ..sort((a, b) => a.noteDate.toDateTime.compareTo(b.noteDate.toDateTime));
+
       return allNotes;
     } else {
       return [];

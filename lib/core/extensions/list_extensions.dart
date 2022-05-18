@@ -1,6 +1,6 @@
 extension ListExtensions<T> on List<T> {
-  void addOrUpdateIfExists(List<T> list, T object) {
-    final int index = list.indexOf(object);
+  void addOrUpdateIfExists(List<T> list, int Function() indexLocator, T object) {
+    final int index = indexLocator();
 
     if (index >= 0) {
       list[index] = object;
