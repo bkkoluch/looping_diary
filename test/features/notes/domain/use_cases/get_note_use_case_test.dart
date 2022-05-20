@@ -5,36 +5,35 @@ import 'package:looping_diary/features/notes/domain/use_cases/get_note_use_case.
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../test_data.dart';
+import '../../../../test_mocks.dart';
 import '../../../../test_setup.dart';
 
-class MockNotesRepository extends Mock implements NotesRepository {}
-
 void main() {
-  late NotesRepository _mockedNotesRepository;
-  late GetNoteUseCase _getNoteUseCase;
+  late NotesRepository mockedNotesRepository;
+  late GetNoteUseCase getNoteUseCase;
 
   setUpAll(baseSetup);
 
   setUp(() {
-    _mockedNotesRepository = MockNotesRepository();
-    _getNoteUseCase = GetNoteUseCase(_mockedNotesRepository);
+    mockedNotesRepository = MockNotesRepository();
+    getNoteUseCase = GetNoteUseCase(mockedNotesRepository);
   });
 
   tearDownAll(baseTearDown);
 
   test(
-    'should return Right(Note) from NoteDto and delegate call to NotesRepository.getNote successful call',
+    'should return Right(Note) from NoteDTO and delegate call to NotesRepository.getNote successful call',
     () async {
       // arrange
-      when(() => _mockedNotesRepository.getNote(captureAny())).thenAnswer((_) async => Right(tNoteDto));
+      when(() => mockedNotesRepository.getNote(captureAny())).thenAnswer((_) async => const Right(tNoteDTO));
 
       // act
-      final result = await _getNoteUseCase(tNoteDateDto);
+      final result = await getNoteUseCase(tNoteDateDTO);
 
       // assert
       expect(result, const Right(tNote));
-      verify(() => _mockedNotesRepository.getNote(tNoteDateDto)).called(1);
-      verifyNoMoreInteractions(_mockedNotesRepository);
+      verify(() => mockedNotesRepository.getNote(tNoteDateDTO)).called(1);
+      verifyNoMoreInteractions(mockedNotesRepository);
     },
   );
 
@@ -42,15 +41,15 @@ void main() {
     'should return Left(ServerFailure) on an unsuccessful call',
     () async {
       // arrange
-      when(() => _mockedNotesRepository.getNote(captureAny())).thenAnswer((_) async => const Left(tServerFailure));
+      when(() => mockedNotesRepository.getNote(captureAny())).thenAnswer((_) async => const Left(tServerFailure));
 
       // act
-      final result = await _getNoteUseCase(tNoteDateDto);
+      final result = await getNoteUseCase(tNoteDateDTO);
 
       // assert
       expect(result, const Left(tServerFailure));
-      verify(() => _mockedNotesRepository.getNote(tNoteDateDto)).called(1);
-      verifyNoMoreInteractions(_mockedNotesRepository);
+      verify(() => mockedNotesRepository.getNote(tNoteDateDTO)).called(1);
+      verifyNoMoreInteractions(mockedNotesRepository);
     },
   );
 }

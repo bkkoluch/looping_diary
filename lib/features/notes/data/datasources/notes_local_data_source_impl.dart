@@ -15,8 +15,8 @@ class NotesLocalDataSourceImpl implements NotesLocalDataSource {
   final SharedPreferences _sharedPreferences;
 
   @override
-  Future<void> saveNote(NoteDto note) async {
-    final List<NoteDto> allNotes = getAllNotes();
+  Future<void> saveNote(NoteDTO note) async {
+    final List<NoteDTO> allNotes = getAllNotes();
     allNotes.addOrUpdateIfExists(
       allNotes,
       () => allNotes.indexWhere((n) => n.noteDate == note.noteDate),
@@ -26,24 +26,24 @@ class NotesLocalDataSourceImpl implements NotesLocalDataSource {
   }
 
   @override
-  NoteDto? getNote(NoteDateDto noteDate) {
+  NoteDTO? getNote(NoteDateDTO noteDate) {
     final String? noteString = _sharedPreferences.getString(SharedPrefsKeys.note(noteDate));
-    return noteString == null ? null : NoteDto.fromJson(json.decode(noteString));
+    return noteString == null ? null : NoteDTO.fromJson(json.decode(noteString));
   }
 
   @override
-  Future<void> saveAllNotes(List<NoteDto> allNotes) async {
+  Future<void> saveAllNotes(List<NoteDTO> allNotes) async {
     await _sharedPreferences.setString(SharedPrefsKeys.allNotes(), jsonEncode(allNotes));
   }
 
   @override
-  List<NoteDto> getAllNotes() {
+  List<NoteDTO> getAllNotes() {
     final String? allNotesString = _sharedPreferences.getString(SharedPrefsKeys.allNotes());
     if (allNotesString != null) {
       // Using [e as Map<String, dynamic>] casting which is unnecessary, but it let's me avoid
       // 'Don't create a lambda when a tear-off will do' bug for dynamic types
-      final List<NoteDto> allNotes = (jsonDecode(allNotesString) as List)
-          .map((e) => NoteDto.fromJson(e as Map<String, dynamic>))
+      final List<NoteDTO> allNotes = (jsonDecode(allNotesString) as List)
+          .map((e) => NoteDTO.fromJson(e as Map<String, dynamic>))
           .toList()
         ..sort((a, b) => a.noteDate.toDateTime.compareTo(b.noteDate.toDateTime));
 

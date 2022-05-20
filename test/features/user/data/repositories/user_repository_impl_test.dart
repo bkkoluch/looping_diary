@@ -5,19 +5,18 @@ import 'package:looping_diary/features/user/domain/repositories/user_repository.
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../test_data.dart';
+import '../../../../test_mocks.dart';
 import '../../../../test_setup.dart';
 
-class MockUserLocalDataSource extends Mock implements UserLocalDataSource {}
-
 void main() {
-  late UserLocalDataSource _mockedUserLocalDataSource;
-  late UserRepository _userRepository;
+  late UserLocalDataSource mockedUserLocalDataSource;
+  late UserRepository userRepository;
 
   setUpAll(baseSetup);
 
   setUp(() {
-    _mockedUserLocalDataSource = MockUserLocalDataSource();
-    _userRepository = UserRepositoryImpl(_mockedUserLocalDataSource);
+    mockedUserLocalDataSource = MockUserLocalDataSource();
+    userRepository = UserRepositoryImpl(mockedUserLocalDataSource);
   });
 
   tearDownAll(baseTearDown);
@@ -27,15 +26,15 @@ void main() {
       'should return user id when UserLocalDataSource.getUserId is not null',
       () async {
         // arrange
-        when(() => _mockedUserLocalDataSource.getUserId()).thenAnswer((_) => tId);
+        when(() => mockedUserLocalDataSource.getUserId()).thenAnswer((_) => tId);
 
         // act
-        final result = _userRepository.getUserId();
+        final result = userRepository.getUserId();
 
         // assert
         expect(result, tId);
-        verify(() => _mockedUserLocalDataSource.getUserId()).called(1);
-        verifyNoMoreInteractions(_mockedUserLocalDataSource);
+        verify(() => mockedUserLocalDataSource.getUserId()).called(1);
+        verifyNoMoreInteractions(mockedUserLocalDataSource);
       },
     );
 
@@ -43,15 +42,15 @@ void main() {
       'should return null when UserLocalDataSource.getUserId is null',
       () async {
         // arrange
-        when(() => _mockedUserLocalDataSource.getUserId()).thenAnswer((_) => null);
+        when(() => mockedUserLocalDataSource.getUserId()).thenAnswer((_) => null);
 
         // act
-        final result = _userRepository.getUserId();
+        final result = userRepository.getUserId();
 
         // assert
         expect(result, null);
-        verify(() => _mockedUserLocalDataSource.getUserId()).called(1);
-        verifyNoMoreInteractions(_mockedUserLocalDataSource);
+        verify(() => mockedUserLocalDataSource.getUserId()).called(1);
+        verifyNoMoreInteractions(mockedUserLocalDataSource);
       },
     );
   });

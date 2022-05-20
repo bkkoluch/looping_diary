@@ -8,23 +8,20 @@ import 'package:looping_diary/features/notes/data/repositories/notes_repository_
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../test_data.dart';
+import '../../../../test_mocks.dart';
 import '../../../../test_setup.dart';
 
-class MockNotesLocalDataSource extends Mock implements NotesLocalDataSource {}
-
-class MockNotesRemoteDataSource extends Mock implements NotesRemoteDataSource {}
-
 void main() {
-  late NotesLocalDataSource _notesLocalDataSource;
-  late NotesRemoteDataSource _notesRemoteDataSource;
-  late NotesRepositoryImpl _notesRepositoryImpl;
+  late NotesLocalDataSource notesLocalDataSource;
+  late NotesRemoteDataSource notesRemoteDataSource;
+  late NotesRepositoryImpl notesRepositoryImpl;
 
   setUpAll(baseSetup);
 
   setUp(() {
-    _notesLocalDataSource = MockNotesLocalDataSource();
-    _notesRemoteDataSource = MockNotesRemoteDataSource();
-    _notesRepositoryImpl = NotesRepositoryImpl(_notesLocalDataSource, _notesRemoteDataSource);
+    notesLocalDataSource = MockNotesLocalDataSource();
+    notesRemoteDataSource = MockNotesRemoteDataSource();
+    notesRepositoryImpl = NotesRepositoryImpl(notesLocalDataSource, notesRemoteDataSource);
   });
 
   group('saveNote', () {
@@ -32,18 +29,18 @@ void main() {
       'should make a call to both data sources on successful saveNote call',
       () async {
         // arrange
-        when(() => _notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
-        when(() => _notesRemoteDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
+        when(() => notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
+        when(() => notesRemoteDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
 
         // act
-        final result = await _notesRepositoryImpl.saveNote(tNoteDto);
+        final result = await notesRepositoryImpl.saveNote(tNoteDTO);
 
         // assert
         expect(result, const Right(null));
-        verify(() => _notesLocalDataSource.saveNote(tNoteDto)).called(1);
-        verify(() => _notesRemoteDataSource.saveNote(tNoteDto)).called(1);
-        verifyNoMoreInteractions(_notesLocalDataSource);
-        verifyNoMoreInteractions(_notesRemoteDataSource);
+        verify(() => notesLocalDataSource.saveNote(tNoteDTO)).called(1);
+        verify(() => notesRemoteDataSource.saveNote(tNoteDTO)).called(1);
+        verifyNoMoreInteractions(notesLocalDataSource);
+        verifyNoMoreInteractions(notesRemoteDataSource);
       },
     );
 
@@ -51,18 +48,18 @@ void main() {
       'should return ServerFailure on an unsuccessful call to any datasource',
       () async {
         // arrange
-        when(() => _notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
-        when(() => _notesRemoteDataSource.saveNote(captureAny())).thenThrow(ServerException('Error'));
+        when(() => notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
+        when(() => notesRemoteDataSource.saveNote(captureAny())).thenThrow(ServerException('Error'));
 
         // act
-        final result = await _notesRepositoryImpl.saveNote(tNoteDto);
+        final result = await notesRepositoryImpl.saveNote(tNoteDTO);
 
         // assert
         result.fold((failure) => expect(failure, isInstanceOf<ServerFailure>()), (_) {});
-        verify(() => _notesLocalDataSource.saveNote(tNoteDto)).called(1);
-        verify(() => _notesRemoteDataSource.saveNote(tNoteDto)).called(1);
-        verifyNoMoreInteractions(_notesLocalDataSource);
-        verifyNoMoreInteractions(_notesRemoteDataSource);
+        verify(() => notesLocalDataSource.saveNote(tNoteDTO)).called(1);
+        verify(() => notesRemoteDataSource.saveNote(tNoteDTO)).called(1);
+        verifyNoMoreInteractions(notesLocalDataSource);
+        verifyNoMoreInteractions(notesRemoteDataSource);
       },
     );
   });

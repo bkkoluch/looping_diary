@@ -30,14 +30,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => DeviceSizeBox(
+  Widget build(_) => DeviceSizeBox(
         child: Scaffold(
           backgroundColor: ColorTokens.brandSecondaryVeryLight,
           appBar: const CoreAppBar(),
           body: BlocProvider.value(
             value: cubit,
             child: BlocBuilder<NoteCubit, NoteState>(
-              builder: (context, state) {
+              builder: (_, state) {
                 if (state.status == NoteStateStatus.loading) {
                   return _buildLoadingIndicator();
                 }
@@ -47,11 +47,11 @@ class _HomePageState extends State<HomePage> {
           ),
           floatingActionButton: cubit.state.status == NoteStateStatus.loading || cubit.wasNoteCreatedToday
               ? const SizedBox.shrink()
-              : _buildFloatingAddNoteButton(context),
+              : _buildFloatingAddNoteButton(),
         ),
       );
 
-  FloatingActionButton _buildFloatingAddNoteButton(BuildContext context) => FloatingActionButton(
+  FloatingActionButton _buildFloatingAddNoteButton() => FloatingActionButton(
         backgroundColor: ColorTokens.brandPrimary,
         onPressed: _pushAddNotePageAndRebuildWhenPopped,
         child: SizedBox(
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: CoreDimensions.paddingL),
       itemCount: notes.length,
-      itemBuilder: (BuildContext context, int index) => InkWell(
+      itemBuilder: (_, int index) => InkWell(
         onTap: () => _pushAddNotePageAndRebuildWhenPopped(notes[index]),
         child: NoteCard(note: notes[index]),
       ),

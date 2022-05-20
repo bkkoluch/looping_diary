@@ -25,10 +25,7 @@ class SafeAreaScrollableScaffold extends StatelessWidget {
           backgroundColor: ColorTokens.brandSecondaryVeryLight,
           body: SafeArea(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: context.screenHeight,
-                maxWidth: context.screenHeight,
-              ),
+              constraints: BoxConstraints(maxHeight: context.screenHeight, maxWidth: context.screenHeight),
               child: SingleChildScrollView(child: child),
             ),
           ),

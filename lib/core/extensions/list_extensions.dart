@@ -8,4 +8,6 @@ extension ListExtensions<T> on List<T> {
       list.add(object);
     }
   }
+
+  List<T> clone() => [...this];
 }

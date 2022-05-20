@@ -20,15 +20,14 @@ class NoteState with _$NoteState {
   }) = _NoteState;
 
   factory NoteState.initial() {
-    final DateTime now = DateTime.now();
+    final DateTime today = NoteDate.today.toDateTime;
     return NoteState(
       currentNote: Note(
-        id: now.toIso8601String(),
-        entry: '',
+        id: today.toIso8601String(),
         noteDate: NoteDate(
-          day: now.day,
-          month: now.month,
-          year: now.year,
+          day: today.day,
+          month: today.month,
+          year: today.year,
         ),
       ),
       allNotes: List.empty(growable: true),

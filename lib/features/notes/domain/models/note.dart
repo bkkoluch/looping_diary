@@ -12,14 +12,14 @@ class Note with _$Note {
     String? entry,
   }) = _Note;
 
-  factory Note.fromDto(NoteDto dto) => Note(
+  factory Note.fromDTO(NoteDTO dto) => Note(
         id: dto.id,
         entry: dto.entry,
-        noteDate: NoteDate.fromDto(dto.noteDate),
+        noteDate: NoteDate.fromDTO(dto.noteDate),
       );
 
   static Note get today {
-    final DateTime now = DateTime.now();
-    return Note(id: now.toIso8601String(), noteDate: NoteDate.today);
+    final DateTime today = NoteDate.today.toDateTime;
+    return Note(id: today.toIso8601String(), noteDate: NoteDate.today);
   }
 }

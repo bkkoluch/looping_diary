@@ -13,11 +13,11 @@ class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => FadedBackground(
+  Widget build(_) => FadedBackground(
         imagePath: Illustrations.morningCoffeeWithDiary,
         child: SignInScreen(
           actions: [_forgotPasswordAction],
-          subtitleBuilder: (context, action) => Padding(
+          subtitleBuilder: (_, __) => Padding(
             padding: const EdgeInsets.only(bottom: CoreDimensions.paddingM),
             child: Text(loginScreenTitle.tr()),
           ),
@@ -28,9 +28,6 @@ class LoginPage extends StatelessWidget {
         ),
       );
 
-  ForgotPasswordAction get _forgotPasswordAction => ForgotPasswordAction(
-        (context, __) {
-          context.router.push(const ForgotPasswordRoute());
-        },
-      );
+  ForgotPasswordAction get _forgotPasswordAction =>
+      ForgotPasswordAction((context, __) => context.router.push(const ForgotPasswordRoute()));
 }

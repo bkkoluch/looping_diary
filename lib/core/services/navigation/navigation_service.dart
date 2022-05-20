@@ -18,7 +18,7 @@ typedef CustomRouteBuilder = Route<T> Function<T>(BuildContext context, Widget c
 )
 class $AppRouter {}
 
-Route<T> fadeInRouteBuilder<T>(BuildContext context, Widget child, CustomPage<T> page) => PageRouteBuilder(
+Route<T> fadeInRouteBuilder<T>(_, Widget child, CustomPage<T> page) => PageRouteBuilder(
       settings: page,
       pageBuilder: (_, __, ___) => child,
       transitionsBuilder: TransitionsBuilders.fadeIn,

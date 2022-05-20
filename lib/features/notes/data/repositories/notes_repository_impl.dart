@@ -16,10 +16,10 @@ class NotesRepositoryImpl implements NotesRepository {
   final NotesRemoteDataSource _notesRemoteDataSource;
 
   @override
-  Future<Either<Failure, void>> saveNote(NoteDto noteDto) async {
+  Future<Either<Failure, void>> saveNote(NoteDTO noteDTO) async {
     try {
-      await _notesLocalDataSource.saveNote(noteDto);
-      await _notesRemoteDataSource.saveNote(noteDto);
+      await _notesLocalDataSource.saveNote(noteDTO);
+      await _notesRemoteDataSource.saveNote(noteDTO);
       return const Right(null);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
@@ -27,15 +27,15 @@ class NotesRepositoryImpl implements NotesRepository {
   }
 
   @override
-  Future<Either<Failure, NoteDto>> getNote(NoteDateDto noteDate) async {
+  Future<Either<Failure, NoteDTO>> getNote(NoteDateDTO noteDate) async {
     try {
-      NoteDto? noteDto = _notesLocalDataSource.getNote(noteDate);
-      if (noteDto != null) {
-        return Right(noteDto);
+      NoteDTO? noteDTO = _notesLocalDataSource.getNote(noteDate);
+      if (noteDTO != null) {
+        return Right(noteDTO);
       } else {
-        noteDto = await _notesRemoteDataSource.getNote(noteDate);
-        await _notesLocalDataSource.saveNote(noteDto);
-        return Right(noteDto);
+        noteDTO = await _notesRemoteDataSource.getNote(noteDate);
+        await _notesLocalDataSource.saveNote(noteDTO);
+        return Right(noteDTO);
       }
     } on LocalException catch (e) {
       return Left(LocalFailure(e.description));
@@ -45,9 +45,9 @@ class NotesRepositoryImpl implements NotesRepository {
   }
 
   @override
-  Future<Either<Failure, List<NoteDto>>> getAllNotes() async {
+  Future<Either<Failure, List<NoteDTO>>> getAllNotes() async {
     try {
-      List<NoteDto> notes;
+      List<NoteDTO> notes;
       notes = _notesLocalDataSource.getAllNotes();
 
       if (notes.isEmpty) {

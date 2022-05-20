@@ -14,38 +14,41 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NoteDto _$NoteDtoFromJson(Map<String, dynamic> json) {
-  return _NoteDto.fromJson(json);
+NoteDTO _$NoteDTOFromJson(Map<String, dynamic> json) {
+  return _NoteDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NoteDto {
+mixin _$NoteDTO {
   String get id => throw _privateConstructorUsedError;
 
   String get entry => throw _privateConstructorUsedError;
 
-  NoteDateDto get noteDate => throw _privateConstructorUsedError;
+  NoteDateDTO get noteDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $NoteDtoCopyWith<NoteDto> get copyWith => throw _privateConstructorUsedError;
+  $NoteDTOCopyWith<NoteDTO> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NoteDtoCopyWith<$Res> {
-  factory $NoteDtoCopyWith(NoteDto value, $Res Function(NoteDto) then) = _$NoteDtoCopyWithImpl<$Res>;
-  $Res call({String id, String entry, NoteDateDto noteDate});
+abstract class $NoteDTOCopyWith<$Res> {
+  factory $NoteDTOCopyWith(NoteDTO value, $Res Function(NoteDTO) then) = _$NoteDTOCopyWithImpl<$Res>;
 
-  $NoteDateDtoCopyWith<$Res> get noteDate;
+  $Res call({String id, String entry, NoteDateDTO noteDate});
+
+  $NoteDateDTOCopyWith<$Res> get noteDate;
 }
 
 /// @nodoc
-class _$NoteDtoCopyWithImpl<$Res> implements $NoteDtoCopyWith<$Res> {
-  _$NoteDtoCopyWithImpl(this._value, this._then);
+class _$NoteDTOCopyWithImpl<$Res> implements $NoteDTOCopyWith<$Res> {
+  _$NoteDTOCopyWithImpl(this._value, this._then);
 
-  final NoteDto _value;
+  final NoteDTO _value;
+
   // ignore: unused_field
-  final $Res Function(NoteDto) _then;
+  final $Res Function(NoteDTO) _then;
 
   @override
   $Res call({
@@ -65,36 +68,36 @@ class _$NoteDtoCopyWithImpl<$Res> implements $NoteDtoCopyWith<$Res> {
       noteDate: noteDate == freezed
           ? _value.noteDate
           : noteDate // ignore: cast_nullable_to_non_nullable
-              as NoteDateDto,
+              as NoteDateDTO,
     ));
   }
 
   @override
-  $NoteDateDtoCopyWith<$Res> get noteDate {
-    return $NoteDateDtoCopyWith<$Res>(_value.noteDate, (value) {
+  $NoteDateDTOCopyWith<$Res> get noteDate {
+    return $NoteDateDTOCopyWith<$Res>(_value.noteDate, (value) {
       return _then(_value.copyWith(noteDate: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_NoteDtoCopyWith<$Res> implements $NoteDtoCopyWith<$Res> {
-  factory _$$_NoteDtoCopyWith(_$_NoteDto value, $Res Function(_$_NoteDto) then) = __$$_NoteDtoCopyWithImpl<$Res>;
+abstract class _$$_NoteDTOCopyWith<$Res> implements $NoteDTOCopyWith<$Res> {
+  factory _$$_NoteDTOCopyWith(_$_NoteDTO value, $Res Function(_$_NoteDTO) then) = __$$_NoteDTOCopyWithImpl<$Res>;
 
   @override
-  $Res call({String id, String entry, NoteDateDto noteDate});
+  $Res call({String id, String entry, NoteDateDTO noteDate});
 
   @override
-  $NoteDateDtoCopyWith<$Res> get noteDate;
+  $NoteDateDTOCopyWith<$Res> get noteDate;
 }
 
 /// @nodoc
-class __$$_NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res> implements _$$_NoteDtoCopyWith<$Res> {
-  __$$_NoteDtoCopyWithImpl(_$_NoteDto _value, $Res Function(_$_NoteDto) _then)
-      : super(_value, (v) => _then(v as _$_NoteDto));
+class __$$_NoteDTOCopyWithImpl<$Res> extends _$NoteDTOCopyWithImpl<$Res> implements _$$_NoteDTOCopyWith<$Res> {
+  __$$_NoteDTOCopyWithImpl(_$_NoteDTO _value, $Res Function(_$_NoteDTO) _then)
+      : super(_value, (v) => _then(v as _$_NoteDTO));
 
   @override
-  _$_NoteDto get _value => super._value as _$_NoteDto;
+  _$_NoteDTO get _value => super._value as _$_NoteDTO;
 
   @override
   $Res call({
@@ -102,7 +105,7 @@ class __$$_NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res> impleme
     Object? entry = freezed,
     Object? noteDate = freezed,
   }) {
-    return _then(_$_NoteDto(
+    return _then(_$_NoteDTO(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -114,35 +117,35 @@ class __$$_NoteDtoCopyWithImpl<$Res> extends _$NoteDtoCopyWithImpl<$Res> impleme
       noteDate: noteDate == freezed
           ? _value.noteDate
           : noteDate // ignore: cast_nullable_to_non_nullable
-              as NoteDateDto,
+              as NoteDateDTO,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_NoteDto extends _NoteDto {
-  _$_NoteDto({required this.id, required this.entry, required this.noteDate}) : super._();
+class _$_NoteDTO extends _NoteDTO {
+  const _$_NoteDTO({required this.id, required this.entry, required this.noteDate}) : super._();
 
-  factory _$_NoteDto.fromJson(Map<String, dynamic> json) => _$$_NoteDtoFromJson(json);
+  factory _$_NoteDTO.fromJson(Map<String, dynamic> json) => _$$_NoteDTOFromJson(json);
 
   @override
   final String id;
   @override
   final String entry;
   @override
-  final NoteDateDto noteDate;
+  final NoteDateDTO noteDate;
 
   @override
   String toString() {
-    return 'NoteDto(id: $id, entry: $entry, noteDate: $noteDate)';
+    return 'NoteDTO(id: $id, entry: $entry, noteDate: $noteDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NoteDto &&
+            other is _$_NoteDTO &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.entry, entry) &&
             const DeepCollectionEquality().equals(other.noteDate, noteDate));
@@ -155,21 +158,21 @@ class _$_NoteDto extends _NoteDto {
 
   @JsonKey(ignore: true)
   @override
-  _$$_NoteDtoCopyWith<_$_NoteDto> get copyWith => __$$_NoteDtoCopyWithImpl<_$_NoteDto>(this, _$identity);
+  _$$_NoteDTOCopyWith<_$_NoteDTO> get copyWith => __$$_NoteDTOCopyWithImpl<_$_NoteDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NoteDtoToJson(this);
+    return _$$_NoteDTOToJson(this);
   }
 }
 
-abstract class _NoteDto extends NoteDto {
-  factory _NoteDto({required final String id, required final String entry, required final NoteDateDto noteDate}) =
-      _$_NoteDto;
+abstract class _NoteDTO extends NoteDTO {
+  const factory _NoteDTO({required final String id, required final String entry, required final NoteDateDTO noteDate}) =
+      _$_NoteDTO;
 
-  _NoteDto._() : super._();
+  const _NoteDTO._() : super._();
 
-  factory _NoteDto.fromJson(Map<String, dynamic> json) = _$_NoteDto.fromJson;
+  factory _NoteDTO.fromJson(Map<String, dynamic> json) = _$_NoteDTO.fromJson;
 
   @override
   String get id => throw _privateConstructorUsedError;
@@ -178,9 +181,9 @@ abstract class _NoteDto extends NoteDto {
   String get entry => throw _privateConstructorUsedError;
 
   @override
-  NoteDateDto get noteDate => throw _privateConstructorUsedError;
+  NoteDateDTO get noteDate => throw _privateConstructorUsedError;
 
   @override
   @JsonKey(ignore: true)
-  _$$_NoteDtoCopyWith<_$_NoteDto> get copyWith => throw _privateConstructorUsedError;
+  _$$_NoteDTOCopyWith<_$_NoteDTO> get copyWith => throw _privateConstructorUsedError;
 }

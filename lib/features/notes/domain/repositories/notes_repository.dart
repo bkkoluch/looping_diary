@@ -4,9 +4,9 @@ import 'package:looping_diary/features/notes/data/dtos/note_date_dto.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
 
 abstract class NotesRepository {
-  Future<Either<Failure, void>> saveNote(NoteDto noteDto);
+  Future<Either<Failure, void>> saveNote(NoteDTO noteDTO);
 
-  Future<Either<Failure, NoteDto>> getNote(NoteDateDto noteDate);
+  Future<Either<Failure, NoteDTO>> getNote(NoteDateDTO noteDate);
 
-  Future<Either<Failure, List<NoteDto>>> getAllNotes();
+  Future<Either<Failure, List<NoteDTO>>> getAllNotes();
 }

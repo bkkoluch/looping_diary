@@ -21,16 +21,16 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
   final String updateMaskFieldPathsString = 'updateMask.fieldPaths';
 
   @override
-  Future<void> saveNote(NoteDto noteDto) async {
+  Future<void> saveNote(NoteDTO noteDTO) async {
     try {
       await _firebaseRestClient.patchWithQueryParameters(
         Endpoints.notes,
         getIt<FirebaseJsonConverter>().convertToFirebaseJson(
           notesField,
-          {noteDto.noteDate.withAppendedChars: noteDto.toJson()},
+          {noteDTO.noteDate.withAppendedChars: noteDTO.toJson()},
         ),
         {
-          updateMaskFieldPathsString: [noteDto.noteDate.withAppendedChars]
+          updateMaskFieldPathsString: [noteDTO.noteDate.withAppendedChars]
         },
       );
     } catch (e) {
@@ -39,7 +39,7 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
   }
 
   @override
-  Future<NoteDto> getNote(NoteDateDto noteDate) async {
+  Future<NoteDTO> getNote(NoteDateDTO noteDate) async {
     try {
       return await _firebaseRestClient.get('${Endpoints.notes}/${noteDate.withAppendedChars}');
     } catch (e) {
@@ -48,7 +48,7 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
   }
 
   @override
-  Future<List<NoteDto>> getAllNotes() async {
+  Future<List<NoteDTO>> getAllNotes() async {
     try {
       final Response result = await _firebaseRestClient.get(Endpoints.notes);
 
@@ -57,7 +57,7 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
       final Map<String, dynamic> resultAfterConversion =
           getIt<FirebaseJsonConverter>().convertFirebaseJsonToUnderstandableOne(firebaseJson);
 
-      final List<NoteDto> notes = resultAfterConversion.entries.map((e) => NoteDto.fromJson(e.value)).toList()
+      final List<NoteDTO> notes = resultAfterConversion.entries.map((e) => NoteDTO.fromJson(e.value)).toList()
         ..sort((a, b) => a.noteDate.toDateTime.compareTo(b.noteDate.toDateTime));
 
       return notes;

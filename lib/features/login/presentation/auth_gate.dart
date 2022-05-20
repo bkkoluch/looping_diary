@@ -7,9 +7,9 @@ class AuthGate extends StatelessWidget {
   const AuthGate({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => StreamBuilder<User?>(
+  Widget build(_) => StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
+        builder: (_, snapshot) {
           if (!snapshot.hasData) {
             return const LoginPage();
           } else {

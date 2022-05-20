@@ -13,7 +13,7 @@ class NoteDate with _$NoteDate {
     required int year,
   }) = _NoteDate;
 
-  factory NoteDate.fromDto(NoteDateDto dto) => NoteDate(
+  factory NoteDate.fromDTO(NoteDateDTO dto) => NoteDate(
         day: dto.day,
         month: dto.month,
         year: dto.year,
@@ -23,6 +23,8 @@ class NoteDate with _$NoteDate {
     final DateTime now = DateTime.now();
     return NoteDate(day: now.day, month: now.month, year: now.year);
   }
+
+  DateTime get toDateTime => DateTime(year, month, day);
 
   String get toReadableDate => '$day/$month/$year';
 }

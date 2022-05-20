@@ -17,9 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NoteDate {
   int get day => throw _privateConstructorUsedError;
-
   int get month => throw _privateConstructorUsedError;
-
   int get year => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,6 +27,7 @@ mixin _$NoteDate {
 /// @nodoc
 abstract class $NoteDateCopyWith<$Res> {
   factory $NoteDateCopyWith(NoteDate value, $Res Function(NoteDate) then) = _$NoteDateCopyWithImpl<$Res>;
+
   $Res call({int day, int month, int year});
 }
 
