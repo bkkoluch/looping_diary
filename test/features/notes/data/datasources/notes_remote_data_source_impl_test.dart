@@ -104,7 +104,7 @@ void main() {
 
           // assert
           expect(
-                () async => await result(tNoteDateDTO),
+            () async => await result(tNoteDateDTO),
             throwsA(isA<ServerException>()),
           );
         },

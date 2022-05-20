@@ -12,11 +12,11 @@ import 'firebase_test_setup.dart';
 import 'test_data.dart';
 
 Widget prepareTestableWidget(Widget child) => MaterialApp(
-  locale: const Locale('en'),
-  supportedLocales: supportedLocales,
-  localizationsDelegates: const [],
-  home: child,
-);
+      locale: const Locale('en'),
+      supportedLocales: supportedLocales,
+      localizationsDelegates: const [],
+      home: child,
+    );
 
 Future<void> baseSetup() async {
   registerFallbackValues();
