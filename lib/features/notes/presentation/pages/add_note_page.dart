@@ -60,7 +60,7 @@ class _AddNotePageState extends State<AddNotePage> {
                         focusNode: FocusNode(),
                         controller: noteTextFieldController,
                         maxLines: 28,
-                        onChanged: (text) {
+                        onChanged: (_) {
                           setState(() {});
                         },
                       ),

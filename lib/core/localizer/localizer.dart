@@ -10,5 +10,3 @@ List<LocalizationsDelegate> localizationsDelegates(BuildContext context) => [
     ];
 
 const List<Locale> supportedLocales = [Locale('en'), Locale('pl')];
-
-// AppLocalizations localize(BuildContext context) => AppLocalizations.of(context);

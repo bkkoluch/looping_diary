@@ -8,7 +8,7 @@ class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const FadedBackground(
+  Widget build(_) => const FadedBackground(
         imagePath: Illustrations.morningCoffeeWithDiary,
         child: Scaffold(
           body: Padding(

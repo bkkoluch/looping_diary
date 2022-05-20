@@ -105,7 +105,7 @@ class FirebaseJsonConverter {
           firebaseJson[key] = _convertToFirebaseValue(value)!;
         }
 
-        // Conversion of not basic types, any custom classes, example: NoteDateDto
+        // Conversion of not basic types, any custom classes, example: NoteDateDTO
       } else if (_isNotOfBasicType(value.runtimeType)) {
         if (value.toJson() is Map) {
           firebaseJson[key] = {

@@ -2,9 +2,9 @@ import 'package:looping_diary/features/notes/data/dtos/note_date_dto.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
 
 abstract class NotesRemoteDataSource {
-  Future<void> saveNote(NoteDto noteDto);
+  Future<void> saveNote(NoteDTO noteDTO);
 
-  Future<NoteDto> getNote(NoteDateDto noteDate);
+  Future<NoteDTO> getNote(NoteDateDTO noteDate);
 
-  Future<List<NoteDto>> getAllNotes();
+  Future<List<NoteDTO>> getAllNotes();
 }

@@ -15,7 +15,7 @@ class CoreTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
 
   @override
-  Widget build(BuildContext context) => TextField(
+  Widget build(_) => TextField(
         focusNode: focusNode,
         controller: controller,
         maxLines: maxLines,

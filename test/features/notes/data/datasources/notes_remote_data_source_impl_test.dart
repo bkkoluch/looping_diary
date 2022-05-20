@@ -10,8 +10,6 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../test_data.dart';
 import '../../../../test_setup.dart';
 
-class MockFirebaseRestClient extends Mock implements FirebaseRestClient {}
-
 void main() {
   late FirebaseRestClient _mockFirebaseRestClient;
   late NotesRemoteDataSourceImpl _notesRemoteDataSource;
@@ -40,7 +38,7 @@ void main() {
         ).thenAnswer((_) async => null);
 
         // act
-        await _notesRemoteDataSource.saveNote(tNoteDto);
+        await _notesRemoteDataSource.saveNote(tNoteDTO);
 
         // assert
         verify(
@@ -48,10 +46,10 @@ void main() {
             Endpoints.notes,
             getIt<FirebaseJsonConverter>().convertToFirebaseJson(
               'notes',
-              {tNoteDto.noteDate.withAppendedChars: tNoteDto.toJson()},
+              {tNoteDTO.noteDate.withAppendedChars: tNoteDTO.toJson()},
             ),
             {
-              'updateMask.fieldPaths': [tNoteDto.noteDate.withAppendedChars]
+              'updateMask.fieldPaths': [tNoteDTO.noteDate.withAppendedChars]
             },
           ),
         ).called(1);
@@ -70,7 +68,7 @@ void main() {
         final result = _notesRemoteDataSource.saveNote;
 
         // assert
-        expect(() async => await result(tNoteDto), throwsA(isA<ServerException>()));
+        expect(() async => await result(tNoteDTO), throwsA(isA<ServerException>()));
       },
     );
   });
@@ -79,17 +77,17 @@ void main() {
     'getNote',
     () {
       test(
-        'should return NoteDto on a successful getNote call',
+        'should return NoteDTO on a successful getNote call',
         () async {
           // arrange
-          when(() => _mockFirebaseRestClient.get(captureAny())).thenAnswer((_) async => tNoteDto);
+          when(() => _mockFirebaseRestClient.get(captureAny())).thenAnswer((_) async => tNoteDTO);
 
           // act
-          final result = await _notesRemoteDataSource.getNote(tNoteDateDto);
+          final result = await _notesRemoteDataSource.getNote(tNoteDateDTO);
 
           // assert
-          expect(result, tNoteDto);
-          verify(() => _mockFirebaseRestClient.get('${Endpoints.notes}/${tNoteDateDto.withAppendedChars}'));
+          expect(result, tNoteDTO);
+          verify(() => _mockFirebaseRestClient.get('${Endpoints.notes}/${tNoteDateDTO.withAppendedChars}'));
           verifyNoMoreInteractions(_mockFirebaseRestClient);
         },
       );
@@ -106,7 +104,7 @@ void main() {
 
           // assert
           expect(
-            () async => await result(tNoteDateDto),
+                () async => await result(tNoteDateDTO),
             throwsA(isA<ServerException>()),
           );
         },

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/features/login/presentation/auth_gate.dart';
@@ -6,8 +5,6 @@ import 'package:looping_diary/features/login/presentation/pages/login_page.dart'
 import 'package:mocktail/mocktail.dart';
 
 import '../../../test_setup.dart';
-
-class MockFirebaseInstance extends Mock implements FirebaseAuth {}
 
 void main() {
   late MockFirebaseInstance _mockedFirebaseInstance;

@@ -15,8 +15,9 @@ const ServerFailure tServerFailure = ServerFailure('Error');
 
 // Notes
 const NoteDate tNoteDate = NoteDate(day: 1, month: 12, year: 2020);
-const NoteDateDto tNoteDateDto = NoteDateDto(day: 1, month: 12, year: 2020);
+const NoteDateDTO tNoteDateDTO = NoteDateDTO(day: 1, month: 12, year: 2020);
 
 const Note tNote = Note(id: tId, entry: tEntry, noteDate: tNoteDate);
 const Note tLongEntryNote = Note(id: tId, entry: tLongEntry, noteDate: tNoteDate);
-final NoteDto tNoteDto = NoteDto(id: tId, entry: tEntry, noteDate: tNoteDateDto);
+
+const NoteDTO tNoteDTO = NoteDTO(id: tId, entry: tEntry, noteDate: tNoteDateDTO);

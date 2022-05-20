@@ -8,7 +8,7 @@ class NoteCard extends StatelessWidget {
   final Note note;
 
   @override
-  Widget build(BuildContext context) => Card(
+  Widget build(_) => Card(
         elevation: CoreDimensions.noteCardElevation,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(CoreDimensions.noteCardBorderRadius)),
         margin: const EdgeInsets.all(CoreDimensions.paddingM),

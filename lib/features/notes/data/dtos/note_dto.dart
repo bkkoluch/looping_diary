@@ -6,20 +6,20 @@ part 'note_dto.freezed.dart';
 part 'note_dto.g.dart';
 
 @freezed
-class NoteDto with _$NoteDto {
-  const NoteDto._();
+class NoteDTO with _$NoteDTO {
+  const NoteDTO._();
 
-  factory NoteDto({
+  const factory NoteDTO({
     required String id,
     required String entry,
-    required NoteDateDto noteDate,
-  }) = _NoteDto;
+    required NoteDateDTO noteDate,
+  }) = _NoteDTO;
 
-  factory NoteDto.fromJson(Map<String, dynamic> json) => _$NoteDtoFromJson(json);
+  factory NoteDTO.fromJson(Map<String, dynamic> json) => _$NoteDTOFromJson(json);
 
-  factory NoteDto.fromNote(Note note) => NoteDto(
+  factory NoteDTO.fromNote(Note note) => NoteDTO(
         id: note.id,
         entry: note.entry!,
-        noteDate: NoteDateDto.fromNoteDate(note.noteDate),
+        noteDate: NoteDateDTO.fromNoteDate(note.noteDate),
       );
 }

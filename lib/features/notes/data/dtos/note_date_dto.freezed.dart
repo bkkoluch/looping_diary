@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NoteDateDto _$NoteDateDtoFromJson(Map<String, dynamic> json) {
-  return _NoteDateDto.fromJson(json);
+NoteDateDTO _$NoteDateDTOFromJson(Map<String, dynamic> json) {
+  return _NoteDateDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NoteDateDto {
+mixin _$NoteDateDTO {
   int get day => throw _privateConstructorUsedError;
 
   int get month => throw _privateConstructorUsedError;
@@ -29,22 +29,24 @@ mixin _$NoteDateDto {
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $NoteDateDtoCopyWith<NoteDateDto> get copyWith => throw _privateConstructorUsedError;
+  $NoteDateDTOCopyWith<NoteDateDTO> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NoteDateDtoCopyWith<$Res> {
-  factory $NoteDateDtoCopyWith(NoteDateDto value, $Res Function(NoteDateDto) then) = _$NoteDateDtoCopyWithImpl<$Res>;
+abstract class $NoteDateDTOCopyWith<$Res> {
+  factory $NoteDateDTOCopyWith(NoteDateDTO value, $Res Function(NoteDateDTO) then) = _$NoteDateDTOCopyWithImpl<$Res>;
+
   $Res call({int day, int month, int year});
 }
 
 /// @nodoc
-class _$NoteDateDtoCopyWithImpl<$Res> implements $NoteDateDtoCopyWith<$Res> {
-  _$NoteDateDtoCopyWithImpl(this._value, this._then);
+class _$NoteDateDTOCopyWithImpl<$Res> implements $NoteDateDTOCopyWith<$Res> {
+  _$NoteDateDTOCopyWithImpl(this._value, this._then);
 
-  final NoteDateDto _value;
+  final NoteDateDTO _value;
+
   // ignore: unused_field
-  final $Res Function(NoteDateDto) _then;
+  final $Res Function(NoteDateDTO) _then;
 
   @override
   $Res call({
@@ -70,22 +72,22 @@ class _$NoteDateDtoCopyWithImpl<$Res> implements $NoteDateDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_NoteDateDtoCopyWith<$Res> implements $NoteDateDtoCopyWith<$Res> {
-  factory _$$_NoteDateDtoCopyWith(_$_NoteDateDto value, $Res Function(_$_NoteDateDto) then) =
-      __$$_NoteDateDtoCopyWithImpl<$Res>;
+abstract class _$$_NoteDateDTOCopyWith<$Res> implements $NoteDateDTOCopyWith<$Res> {
+  factory _$$_NoteDateDTOCopyWith(_$_NoteDateDTO value, $Res Function(_$_NoteDateDTO) then) =
+      __$$_NoteDateDTOCopyWithImpl<$Res>;
 
   @override
   $Res call({int day, int month, int year});
 }
 
 /// @nodoc
-class __$$_NoteDateDtoCopyWithImpl<$Res> extends _$NoteDateDtoCopyWithImpl<$Res>
-    implements _$$_NoteDateDtoCopyWith<$Res> {
-  __$$_NoteDateDtoCopyWithImpl(_$_NoteDateDto _value, $Res Function(_$_NoteDateDto) _then)
-      : super(_value, (v) => _then(v as _$_NoteDateDto));
+class __$$_NoteDateDTOCopyWithImpl<$Res> extends _$NoteDateDTOCopyWithImpl<$Res>
+    implements _$$_NoteDateDTOCopyWith<$Res> {
+  __$$_NoteDateDTOCopyWithImpl(_$_NoteDateDTO _value, $Res Function(_$_NoteDateDTO) _then)
+      : super(_value, (v) => _then(v as _$_NoteDateDTO));
 
   @override
-  _$_NoteDateDto get _value => super._value as _$_NoteDateDto;
+  _$_NoteDateDTO get _value => super._value as _$_NoteDateDTO;
 
   @override
   $Res call({
@@ -93,7 +95,7 @@ class __$$_NoteDateDtoCopyWithImpl<$Res> extends _$NoteDateDtoCopyWithImpl<$Res>
     Object? month = freezed,
     Object? year = freezed,
   }) {
-    return _then(_$_NoteDateDto(
+    return _then(_$_NoteDateDTO(
       day: day == freezed
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -112,10 +114,10 @@ class __$$_NoteDateDtoCopyWithImpl<$Res> extends _$NoteDateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NoteDateDto extends _NoteDateDto {
-  const _$_NoteDateDto({required this.day, required this.month, required this.year}) : super._();
+class _$_NoteDateDTO extends _NoteDateDTO {
+  const _$_NoteDateDTO({required this.day, required this.month, required this.year}) : super._();
 
-  factory _$_NoteDateDto.fromJson(Map<String, dynamic> json) => _$$_NoteDateDtoFromJson(json);
+  factory _$_NoteDateDTO.fromJson(Map<String, dynamic> json) => _$$_NoteDateDTOFromJson(json);
 
   @override
   final int day;
@@ -126,14 +128,14 @@ class _$_NoteDateDto extends _NoteDateDto {
 
   @override
   String toString() {
-    return 'NoteDateDto(day: $day, month: $month, year: $year)';
+    return 'NoteDateDTO(day: $day, month: $month, year: $year)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NoteDateDto &&
+            other is _$_NoteDateDTO &&
             const DeepCollectionEquality().equals(other.day, day) &&
             const DeepCollectionEquality().equals(other.month, month) &&
             const DeepCollectionEquality().equals(other.year, year));
@@ -146,22 +148,22 @@ class _$_NoteDateDto extends _NoteDateDto {
 
   @JsonKey(ignore: true)
   @override
-  _$$_NoteDateDtoCopyWith<_$_NoteDateDto> get copyWith =>
-      __$$_NoteDateDtoCopyWithImpl<_$_NoteDateDto>(this, _$identity);
+  _$$_NoteDateDTOCopyWith<_$_NoteDateDTO> get copyWith =>
+      __$$_NoteDateDTOCopyWithImpl<_$_NoteDateDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NoteDateDtoToJson(this);
+    return _$$_NoteDateDTOToJson(this);
   }
 }
 
-abstract class _NoteDateDto extends NoteDateDto {
-  const factory _NoteDateDto({required final int day, required final int month, required final int year}) =
-      _$_NoteDateDto;
+abstract class _NoteDateDTO extends NoteDateDTO {
+  const factory _NoteDateDTO({required final int day, required final int month, required final int year}) =
+      _$_NoteDateDTO;
 
-  const _NoteDateDto._() : super._();
+  const _NoteDateDTO._() : super._();
 
-  factory _NoteDateDto.fromJson(Map<String, dynamic> json) = _$_NoteDateDto.fromJson;
+  factory _NoteDateDTO.fromJson(Map<String, dynamic> json) = _$_NoteDateDTO.fromJson;
 
   @override
   int get day => throw _privateConstructorUsedError;
@@ -174,5 +176,5 @@ abstract class _NoteDateDto extends NoteDateDto {
 
   @override
   @JsonKey(ignore: true)
-  _$$_NoteDateDtoCopyWith<_$_NoteDateDto> get copyWith => throw _privateConstructorUsedError;
+  _$$_NoteDateDTOCopyWith<_$_NoteDateDTO> get copyWith => throw _privateConstructorUsedError;
 }

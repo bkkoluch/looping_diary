@@ -6,14 +6,13 @@ part of 'note_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NoteDto _$$_NoteDtoFromJson(Map<String, dynamic> json) => _$_NoteDto(
+_$_NoteDTO _$$_NoteDTOFromJson(Map<String, dynamic> json) => _$_NoteDTO(
       id: json['id'] as String,
       entry: json['entry'] as String,
-      noteDate: NoteDateDto.fromJson(json['noteDate'] as Map<String, dynamic>),
+      noteDate: NoteDateDTO.fromJson(json['noteDate'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_NoteDtoToJson(_$_NoteDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_NoteDTOToJson(_$_NoteDTO instance) => <String, dynamic>{
       'id': instance.id,
       'entry': instance.entry,
       'noteDate': instance.noteDate,

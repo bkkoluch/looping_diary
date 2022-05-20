@@ -9,8 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../test_data.dart';
 import '../../../../test_setup.dart';
 
-class MockedSharedPreferences extends Mock implements SharedPreferences {}
-
 void main() {
   late SharedPreferences _mockedSharedPreferences;
   late NotesLocalDataSourceImpl _notesLocalDataSource;
@@ -30,11 +28,11 @@ void main() {
         when(() => _mockedSharedPreferences.setString(captureAny(), captureAny())).thenAnswer((_) async => true);
 
         // act
-        await _notesLocalDataSource.saveNote(tNoteDto);
+        await _notesLocalDataSource.saveNote(tNoteDTO);
 
         // assert
         verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.allNotes()));
-        verify(() => _mockedSharedPreferences.setString(SharedPrefsKeys.allNotes(), jsonEncode([tNoteDto]))).called(1);
+        verify(() => _mockedSharedPreferences.setString(SharedPrefsKeys.allNotes(), jsonEncode([tNoteDTO]))).called(1);
         verifyNoMoreInteractions(_mockedSharedPreferences);
       },
     );
@@ -42,17 +40,17 @@ void main() {
 
   group('getNote', () {
     test(
-      'should return NoteDto and make a call to sharedPreferences.getString if a value was saved in prefs',
+      'should return NoteDTO and make a call to sharedPreferences.getString if a value was saved in prefs',
       () {
         // arrange
-        when(() => _mockedSharedPreferences.getString(captureAny())).thenAnswer((_) => json.encode(tNoteDto));
+        when(() => _mockedSharedPreferences.getString(captureAny())).thenAnswer((_) => json.encode(tNoteDTO));
 
         // act
-        final result = _notesLocalDataSource.getNote(tNoteDto.noteDate);
+        final result = _notesLocalDataSource.getNote(tNoteDTO.noteDate);
 
         // assert
-        expect(result, tNoteDto);
-        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.note(tNoteDto.noteDate))).called(1);
+        expect(result, tNoteDTO);
+        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.note(tNoteDTO.noteDate))).called(1);
         verifyNoMoreInteractions(_mockedSharedPreferences);
       },
     );
@@ -64,11 +62,11 @@ void main() {
         when(() => _mockedSharedPreferences.getString(captureAny())).thenAnswer((_) => null);
 
         // act
-        final result = _notesLocalDataSource.getNote(tNoteDto.noteDate);
+        final result = _notesLocalDataSource.getNote(tNoteDTO.noteDate);
 
         // assert
         expect(result, null);
-        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.note(tNoteDto.noteDate))).called(1);
+        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.note(tNoteDTO.noteDate))).called(1);
         verifyNoMoreInteractions(_mockedSharedPreferences);
       },
     );

@@ -5,35 +5,34 @@ import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../test_data.dart';
+import '../../../../test_mocks.dart';
 import '../../../../test_setup.dart';
 
-class MockNotesRepository extends Mock implements NotesRepository {}
-
 void main() {
-  late NotesRepository _mockedNotesRepository;
-  late SaveNoteUseCase _saveNoteUseCase;
+  late NotesRepository mockedNotesRepository;
+  late SaveNoteUseCase saveNoteUseCase;
 
   setUpAll(baseSetup);
   tearDownAll(baseTearDown);
 
   setUp(() {
-    _mockedNotesRepository = MockNotesRepository();
-    _saveNoteUseCase = SaveNoteUseCase(_mockedNotesRepository);
+    mockedNotesRepository = MockNotesRepository();
+    saveNoteUseCase = SaveNoteUseCase(mockedNotesRepository);
   });
 
   test(
     'should return Right(null) and correctly delegate call to NotesRepository on a successful call',
     () async {
       // arrange
-      when(() => _mockedNotesRepository.saveNote(captureAny())).thenAnswer((_) async => const Right(null));
+      when(() => mockedNotesRepository.saveNote(captureAny())).thenAnswer((_) async => const Right(null));
 
       // act
-      final result = await _saveNoteUseCase(tNote);
+      final result = await saveNoteUseCase(tNote);
 
       // assert
       expect(result, const Right(null));
-      verify(() => _mockedNotesRepository.saveNote(tNoteDto)).called(1);
-      verifyNoMoreInteractions(_mockedNotesRepository);
+      verify(() => mockedNotesRepository.saveNote(tNoteDTO)).called(1);
+      verifyNoMoreInteractions(mockedNotesRepository);
     },
   );
 
@@ -41,17 +40,17 @@ void main() {
     'should return Left(ServerFailure) on an unsuccessful call',
     () async {
       // arrange
-      when(() => _mockedNotesRepository.saveNote(captureAny())).thenAnswer(
+      when(() => mockedNotesRepository.saveNote(captureAny())).thenAnswer(
         (_) async => const Left(tServerFailure),
       );
 
       // act
-      final result = await _saveNoteUseCase(tNote);
+      final result = await saveNoteUseCase(tNote);
 
       // assert
       expect(result, const Left(tServerFailure));
-      verify(() => _mockedNotesRepository.saveNote(tNoteDto)).called(1);
-      verifyNoMoreInteractions(_mockedNotesRepository);
+      verify(() => mockedNotesRepository.saveNote(tNoteDTO)).called(1);
+      verifyNoMoreInteractions(mockedNotesRepository);
     },
   );
 }

@@ -16,7 +16,7 @@ class CoreAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
 
   @override
-  Widget build(BuildContext context) => AppBar(
+  Widget build(_) => AppBar(
         toolbarHeight: toolbarHeight,
         centerTitle: true,
         title: Text((noteDate ?? NoteDate.today).toReadableDate),
