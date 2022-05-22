@@ -40,7 +40,7 @@ void main() {
         );
 
         await tester.pumpWidget(widget);
-        await tester.pumpAndSettle();
+        await tester.pump();
         expect(find.byType(Lottie), findsOneWidget);
       },
     );
