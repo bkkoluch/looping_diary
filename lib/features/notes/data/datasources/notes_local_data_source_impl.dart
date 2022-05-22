@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/extensions/list_extensions.dart';
 import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart';
-import 'package:looping_diary/features/notes/data/dtos/note_date_dto.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
 import 'package:looping_diary/utils/shared_prefs_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,12 +22,6 @@ class NotesLocalDataSourceImpl implements NotesLocalDataSource {
       note,
     );
     await saveAllNotes(allNotes);
-  }
-
-  @override
-  NoteDTO? getNote(NoteDateDTO noteDate) {
-    final String? noteString = _sharedPreferences.getString(SharedPrefsKeys.note(noteDate));
-    return noteString == null ? null : NoteDTO.fromJson(json.decode(noteString));
   }
 
   @override

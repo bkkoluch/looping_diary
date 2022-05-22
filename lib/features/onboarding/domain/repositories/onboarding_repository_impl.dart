@@ -13,10 +13,10 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   @override
   Future<void> markOnboardingAsSeen() async {
     await onboardingLocalDataSource.markOnboardingAsSeenLocally();
-    return await onboardingRemoteDataSource.markOnboardingAsSeenRemotely();
+    await onboardingRemoteDataSource.markOnboardingAsSeenRemotely();
   }
 
   @override
-  Future<bool> getMarkOnboardingSeen() async =>
+  Future<bool> getOnboardingSeen() async =>
       await onboardingRemoteDataSource.getOnboardingSeen() ?? onboardingLocalDataSource.getOnboardingSeen();
 }

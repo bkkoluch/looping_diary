@@ -38,8 +38,12 @@ class FirebaseJsonConverter {
   /// Example correct data:
   /// input: {'date': {stringValue: '22.22.2222'}, 'entry': {stringValue: 'Some cool text'}}
   /// output: {'date' : '22.22.2222', 'entry' : 'Some cool text'}
-  Map<String, dynamic> convertFirebaseJsonToUnderstandableOne(Map<String, dynamic> firebaseJson) {
+  Map<String, dynamic>? convertFirebaseJsonToUnderstandableOne(Map<String, dynamic>? firebaseJson) {
     final Map<String, dynamic> regularJson = {};
+
+    if (firebaseJson == null) {
+      return null;
+    }
 
     firebaseJson.forEach((key, value) {
       final FirebaseJsonValue? jsonValueType = _getFirebaseJsonValueTypeFromBasicType(key);

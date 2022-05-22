@@ -3,7 +3,7 @@ import 'package:looping_diary/features/onboarding/data/repositories/onboarding_r
 import 'package:looping_diary/features/onboarding/domain/use_cases/mark_onboarding_as_seen_use_case.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../test_mocks.dart';
+import '../../../../test_mocks.dart';
 
 void main() {
   late OnboardingRepository onboardingRepository;

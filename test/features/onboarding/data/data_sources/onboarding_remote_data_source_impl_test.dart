@@ -8,8 +8,8 @@ import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_r
 import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_remote_data_source_impl.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../test_data.dart';
-import '../../../test_setup.dart';
+import '../../../../test_data.dart';
+import '../../../../test_setup.dart';
 
 void main() {
   late FirebaseRestClient firebaseRestClient;
@@ -83,13 +83,13 @@ void main() {
       'should return onboardingSeen value on a successful call',
       () async {
         // arrange
-        when(() => firebaseRestClient.get(captureAny())).thenAnswer((_) async => true);
+        when(() => firebaseRestClient.get(captureAny())).thenAnswer((_) async => {onboardingSeenField: true});
 
         // act
         final result = await onboardingRemoteDataSource.getOnboardingSeen();
 
         // assert
-        verify(() => firebaseRestClient.get('${Endpoints.userMilestones}/$onboardingSeenField')).called(1);
+        verify(() => firebaseRestClient.get(Endpoints.userMilestones)).called(1);
         expect(result, isTrue);
       },
     );
@@ -105,7 +105,7 @@ void main() {
 
         // assert
         expect(() async => await result(), throwsA(isA<ServerException>()));
-        verify(() => firebaseRestClient.get('${Endpoints.userMilestones}/$onboardingSeenField')).called(1);
+        verify(() => firebaseRestClient.get(Endpoints.userMilestones)).called(1);
       },
     );
   });

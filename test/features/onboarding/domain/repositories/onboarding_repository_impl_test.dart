@@ -5,7 +5,7 @@ import 'package:looping_diary/features/onboarding/data/repositories/onboarding_r
 import 'package:looping_diary/features/onboarding/domain/repositories/onboarding_repository_impl.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../test_mocks.dart';
+import '../../../../test_mocks.dart';
 
 void main() {
   late OnboardingRemoteDataSource onboardingRemoteDataSource;

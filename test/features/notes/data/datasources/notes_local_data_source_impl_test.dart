@@ -37,38 +37,4 @@ void main() {
       },
     );
   });
-
-  group('getNote', () {
-    test(
-      'should return NoteDTO and make a call to sharedPreferences.getString if a value was saved in prefs',
-      () {
-        // arrange
-        when(() => _mockedSharedPreferences.getString(captureAny())).thenAnswer((_) => json.encode(tNoteDTO));
-
-        // act
-        final result = _notesLocalDataSource.getNote(tNoteDTO.noteDate);
-
-        // assert
-        expect(result, tNoteDTO);
-        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.note(tNoteDTO.noteDate))).called(1);
-        verifyNoMoreInteractions(_mockedSharedPreferences);
-      },
-    );
-
-    test(
-      'should return null if value was not saved in prefs',
-      () {
-        // arrange
-        when(() => _mockedSharedPreferences.getString(captureAny())).thenAnswer((_) => null);
-
-        // act
-        final result = _notesLocalDataSource.getNote(tNoteDTO.noteDate);
-
-        // assert
-        expect(result, null);
-        verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.note(tNoteDTO.noteDate))).called(1);
-        verifyNoMoreInteractions(_mockedSharedPreferences);
-      },
-    );
-  });
 }

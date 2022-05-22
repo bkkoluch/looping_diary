@@ -5,7 +5,7 @@ import 'package:looping_diary/utils/shared_prefs_keys.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../test_setup.dart';
+import '../../../../test_setup.dart';
 
 void main() {
   late SharedPreferences sharedPreferences;

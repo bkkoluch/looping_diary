@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/errors/failures.dart';
-import 'package:looping_diary/core/errors/local_exceptions.dart';
 import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart';
 import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source.dart';
-import 'package:looping_diary/features/notes/data/dtos/note_date_dto.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
 import 'package:looping_diary/features/notes/domain/repositories/notes_repository.dart';
 
@@ -21,24 +19,6 @@ class NotesRepositoryImpl implements NotesRepository {
       await _notesLocalDataSource.saveNote(noteDTO);
       await _notesRemoteDataSource.saveNote(noteDTO);
       return const Right(null);
-    } catch (e) {
-      return Left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, NoteDTO>> getNote(NoteDateDTO noteDate) async {
-    try {
-      NoteDTO? noteDTO = _notesLocalDataSource.getNote(noteDate);
-      if (noteDTO != null) {
-        return Right(noteDTO);
-      } else {
-        noteDTO = await _notesRemoteDataSource.getNote(noteDate);
-        await _notesLocalDataSource.saveNote(noteDTO);
-        return Right(noteDTO);
-      }
-    } on LocalException catch (e) {
-      return Left(LocalFailure(e.description));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }

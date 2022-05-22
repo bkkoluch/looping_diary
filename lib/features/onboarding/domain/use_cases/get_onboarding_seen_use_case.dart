@@ -7,5 +7,5 @@ class GetOnboardingSeenUseCase implements UseCase<Future<bool>, NoParams> {
   final OnboardingRepository onboardingRepository;
 
   @override
-  Future<bool> call([NoParams? params]) async => await onboardingRepository.getMarkOnboardingSeen();
+  Future<bool> call([NoParams? params]) async => await onboardingRepository.getOnboardingSeen();
 }

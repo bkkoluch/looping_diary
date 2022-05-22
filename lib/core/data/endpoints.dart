@@ -3,5 +3,5 @@ class Endpoints {
   static const String notes = '/notes';
 
   // User milestones
-  static const String userMilestones = 'user_milestones';
+  static const String userMilestones = '/user_milestones';
 }
