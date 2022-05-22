@@ -20,7 +20,7 @@ void main() {
     (WidgetTester tester) async {
       final Widget widget = prepareTestableWidget(const OnboardingCarrouselPage());
       await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byType(Scaffold), findsOneWidget);
       expect(find.byType(PageView), findsOneWidget);
       expect(find.byType(OnboardingPagePageIndicator), findsOneWidget);
