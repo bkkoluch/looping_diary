@@ -54,7 +54,7 @@ class OnboardingPageIllustration extends StatelessWidget {
   Widget build(BuildContext context) => SizedBox(
         width: CoreDimensions.onboardingImageWidth,
         height: CoreDimensions.onboardingImageHeight,
-        child: pageIndex == 2 ? Lottie.asset(asset) : SvgPicture.asset(asset),
+        child: Lottie.asset(asset),
       );
 }
 
@@ -98,14 +98,13 @@ class OnboardingPageTextContentColumn extends StatelessWidget {
               title.tr(),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                color: ColorTokens.brandAccent,
                 fontSize: 24,
               ),
             ),
             const SizedBox(height: CoreDimensions.spacingXL),
             Text(
               subtitle.tr(),
-              style: const TextStyle(fontWeight: FontWeight.bold, color: ColorTokens.white),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -129,7 +128,7 @@ class OnboardingPagePageIndicator extends StatelessWidget {
             dotHeight: CoreDimensions.pageIndicatorDotHeight,
             paintStyle: PaintingStyle.stroke,
             strokeWidth: CoreDimensions.pageIndicatorStrokeWidth,
-            dotColor: ColorTokens.beige,
+            dotColor: ColorTokens.white,
             activeDotColor: ColorTokens.brandAccent,
           ),
         ),

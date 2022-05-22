@@ -10,6 +10,6 @@ class ColorTokens {
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color beige = Color(0xFFFEFAE0);
-  static const Color brown = Color(0xFFD4A373);
+  static const Color brown = Color(0xFFefd09e);
   static const Color black = Color(0xFF000000);
 }

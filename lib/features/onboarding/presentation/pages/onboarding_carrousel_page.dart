@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/color_tokens.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/illustrations.dart';
 import 'package:looping_diary/core/style/lotties.dart';
 import 'package:looping_diary/features/onboarding/presentation/cubits/onboarding_cubit.dart';
 import 'package:looping_diary/res/strings.dart';
@@ -36,13 +34,13 @@ class _OnboardingCarrouselState extends State<OnboardingCarrouselPage> {
               children: [
                 OnboardingPage(
                   onPressed: _goToNextPage,
-                  asset: Illustrations.addNotes,
+                  asset: Lotties.makingNotesFemale,
                   pageIndex: 0,
                   pageController: pageController,
                 ),
                 OnboardingPage(
                   onPressed: _goToNextPage,
-                  asset: Illustrations.takingNotes,
+                  asset: Lotties.test,
                   pageIndex: 1,
                   pageController: pageController,
                 ),
