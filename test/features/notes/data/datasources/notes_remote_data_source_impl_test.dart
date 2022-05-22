@@ -68,40 +68,4 @@ void main() {
       },
     );
   });
-
-  group(
-    'getNote',
-    () {
-      test(
-        'should return NoteDTO on a successful getNote call',
-        () async {
-          // arrange
-          when(() => _mockFirebaseRestClient.get(captureAny())).thenAnswer((_) async => tNoteDTO);
-
-          // act
-          final result = await _notesRemoteDataSource.getNote(tNoteDateDTO);
-
-          // assert
-          expect(result, tNoteDTO);
-          verify(() => _mockFirebaseRestClient.get('${Endpoints.notes}/${tNoteDateDTO.withAppendedChars}'));
-          verifyNoMoreInteractions(_mockFirebaseRestClient);
-        },
-      );
-
-      test(
-        'should throw ServerException on an unsuccessful call',
-        () async {
-          // arrange
-          when(() => _mockFirebaseRestClient.get(captureAny()))
-              .thenThrow(ServerException('An error occurred in getNote'));
-
-          // act
-          final result = _notesRemoteDataSource.getNote;
-
-          // assert
-          expect(() async => await result(tNoteDateDTO), throwsA(isA<ServerException>()));
-        },
-      );
-    },
-  );
 }

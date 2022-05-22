@@ -4,14 +4,16 @@ import 'package:looping_diary/features/home/presentation/pages/home_page.dart';
 import 'package:looping_diary/features/login/presentation/auth_gate_page.dart';
 import 'package:looping_diary/features/login/presentation/pages/forgot_password_page.dart';
 import 'package:looping_diary/features/notes/presentation/pages/add_note_page.dart';
-import 'package:looping_diary/features/onboarding/presentation/pages/onboarding_carrousel.dart';
+import 'package:looping_diary/features/onboarding/presentation/pages/onboarding_carrousel_page.dart';
+import 'package:looping_diary/features/startup/presentation/pages/startup_page.dart';
 
 typedef CustomRouteBuilder = Route<T> Function<T>(BuildContext context, Widget child, CustomPage page);
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: OnboardingCarrousel, initial: true),
+    AutoRoute(page: StartupPage, initial: true),
+    CustomRoute(page: OnboardingCarrouselPage, customRouteBuilder: fadeInRouteBuilder),
     CustomRoute(page: AuthGatePage, customRouteBuilder: fadeInRouteBuilder),
     CustomRoute(page: HomePage, customRouteBuilder: fadeInRouteBuilder),
     CustomRoute(page: ForgotPasswordPage, customRouteBuilder: fadeInRouteBuilder),

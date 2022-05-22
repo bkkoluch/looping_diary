@@ -35,7 +35,8 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
   @override
   Future<bool?> getOnboardingSeen() async {
     try {
-      return await firebaseRestClient.get('${Endpoints.userMilestones}/$onboardingSeenField');
+      final Map<String, dynamic> result = (await firebaseRestClient.get(Endpoints.userMilestones)) ?? {};
+      return Future.value(result[onboardingSeenField]);
     } catch (e) {
       throw ServerException('An error occurred in $getOnboardingSeen: $e');
     }
