@@ -21,13 +21,10 @@ NoteDateDTO _$NoteDateDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NoteDateDTO {
   int get day => throw _privateConstructorUsedError;
-
   int get month => throw _privateConstructorUsedError;
-
   int get year => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $NoteDateDTOCopyWith<NoteDateDTO> get copyWith => throw _privateConstructorUsedError;
 }
@@ -44,7 +41,6 @@ class _$NoteDateDTOCopyWithImpl<$Res> implements $NoteDateDTOCopyWith<$Res> {
   _$NoteDateDTOCopyWithImpl(this._value, this._then);
 
   final NoteDateDTO _value;
-
   // ignore: unused_field
   final $Res Function(NoteDateDTO) _then;
 

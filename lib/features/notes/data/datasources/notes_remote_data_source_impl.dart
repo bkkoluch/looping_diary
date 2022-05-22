@@ -18,7 +18,6 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
   final FirebaseRestClient _firebaseRestClient;
 
   final String notesField = 'notes';
-  final String updateMaskFieldPathsString = 'updateMask.fieldPaths';
 
   @override
   Future<void> saveNote(NoteDTO noteDTO) async {

@@ -3,6 +3,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/localizer/localizer.dart';
+import 'package:looping_diary/core/network/firebase_json_converter.dart';
 import 'package:looping_diary/core/network/firebase_rest_client.dart';
 import 'package:looping_diary/core/services/analytics/crash_reporting_service.dart';
 import 'package:mocktail/mocktail.dart';
@@ -23,10 +24,11 @@ Future<void> baseSetup() async {
   await setupFirebaseMocks();
 
   getIt
-    ..registerSingleton<CrashReportingService>(MockCrashReportingService())
-    ..registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics())
-    ..registerSingleton<FirebaseRestClient>(MockFirebaseRestClient())
-    ..registerSingleton<SharedPreferences>(MockedSharedPreferences());
+    ..registerFactory<CrashReportingService>(MockCrashReportingService.new)
+    ..registerFactory<FirebaseCrashlytics>(MockFirebaseCrashlytics.new)
+    ..registerFactoryAsync<FirebaseRestClient>(() async => MockFirebaseRestClient())
+    ..registerFactoryAsync<SharedPreferences>(() async => MockSharedPreferences())
+    ..registerFactory<FirebaseJsonConverter>(FirebaseJsonConverter.new);
 }
 
 void baseTearDown() => getIt.reset();
@@ -38,9 +40,11 @@ class MockFirebaseCrashlytics extends Mock implements FirebaseCrashlytics {}
 
 class MockFirebaseRestClient extends Mock implements FirebaseRestClient {}
 
-class MockedSharedPreferences extends Mock implements SharedPreferences {}
+class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 class MockFirebaseInstance extends Mock implements FirebaseAuth {}
+
+class MockFirebaseJsonConverter extends Mock implements FirebaseJsonConverter {}
 
 void registerFallbackValues() {
   registerFallbackValue(tNote);

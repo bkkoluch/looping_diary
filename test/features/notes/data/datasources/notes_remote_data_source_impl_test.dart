@@ -14,10 +14,7 @@ void main() {
   late FirebaseRestClient _mockFirebaseRestClient;
   late NotesRemoteDataSourceImpl _notesRemoteDataSource;
 
-  setUpAll(() {
-    baseSetup();
-    getIt.registerFactory<FirebaseJsonConverter>(FirebaseJsonConverter.new);
-  });
+  setUpAll(baseSetup);
 
   setUp(() {
     _mockFirebaseRestClient = MockFirebaseRestClient();
@@ -26,7 +23,7 @@ void main() {
 
   group('saveNote', () {
     test(
-      'should make a call to firebaseRestClient.patch on a successful saveNote call',
+      'should make a call to firebaseRestClient.patchWithQueryParameters on a successful saveNote call',
       () async {
         // arrange
         when(
@@ -61,8 +58,7 @@ void main() {
       'should throw ServerException on an unsuccessful call',
       () async {
         // arrange
-        when(() => _mockFirebaseRestClient.patch(captureAny(), captureAny()))
-            .thenThrow(ServerException('An error occurred in saveNote'));
+        when(() => _mockFirebaseRestClient.patch(captureAny(), captureAny())).thenThrow(tServerException);
 
         // act
         final result = _notesRemoteDataSource.saveNote;
@@ -103,10 +99,7 @@ void main() {
           final result = _notesRemoteDataSource.getNote;
 
           // assert
-          expect(
-            () async => await result(tNoteDateDTO),
-            throwsA(isA<ServerException>()),
-          );
+          expect(() async => await result(tNoteDateDTO), throwsA(isA<ServerException>()));
         },
       );
     },
