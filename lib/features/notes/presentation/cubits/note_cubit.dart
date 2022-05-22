@@ -42,9 +42,7 @@ class NoteCubit extends Cubit<NoteState> {
 
   void updateNoteEntry(String entry) => emit(state.copyWith.currentNote(entry: entry));
 
-  void updateCurrentNote(Note? note) {
-    emit(state.copyWith(currentNote: note ?? Note.today));
-  }
+  void updateCurrentNote(Note? note) => emit(state.copyWith(currentNote: note ?? Note.today));
 
   bool get wasNoteCreatedToday =>
       state.allNotes.firstWhereOrNull((note) => note.noteDate == Note.today.noteDate) != null;

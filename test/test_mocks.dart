@@ -6,6 +6,9 @@ import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_state.dart';
+import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_local_data_source.dart';
+import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_remote_data_source.dart';
+import 'package:looping_diary/features/onboarding/data/repositories/onboarding_repository.dart';
 import 'package:looping_diary/features/user/data/datasources/user_local_data_source.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -23,6 +26,8 @@ class MockSaveNoteUseCase extends Mock implements SaveNoteUseCase {}
 
 class MockNotesRepository extends Mock implements NotesRepository {}
 
+class MockOnboardingRepository extends Mock implements OnboardingRepository {}
+
 // Data sources
 
 class MockUserLocalDataSource extends Mock implements UserLocalDataSource {}
@@ -30,3 +35,7 @@ class MockUserLocalDataSource extends Mock implements UserLocalDataSource {}
 class MockNotesLocalDataSource extends Mock implements NotesLocalDataSource {}
 
 class MockNotesRemoteDataSource extends Mock implements NotesRemoteDataSource {}
+
+class MockOnboardingLocalDataSource extends Mock implements OnboardingLocalDataSource {}
+
+class MockOnboardingRemoteDataSource extends Mock implements OnboardingRemoteDataSource {}

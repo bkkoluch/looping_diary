@@ -6,6 +6,7 @@ import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/user/domain/repositories/user_repository.dart';
 
 const String _baseUrl = 'https://firestore.googleapis.com/v1/projects/looping-diary/databases/(default)/documents/';
+const String updateMaskFieldPathsString = 'updateMask.fieldPaths';
 
 @injectable
 class FirebaseRestClient {

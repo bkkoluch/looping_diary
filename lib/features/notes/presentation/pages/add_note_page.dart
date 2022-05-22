@@ -40,10 +40,7 @@ class _AddNotePageState extends State<AddNotePage> {
               noteDate: widget.noteToAddOrEdit?.noteDate,
               leading: IconButton(
                 onPressed: () => popPageDependingOnContents(context),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: ColorTokens.white,
-                ),
+                icon: const Icon(Icons.arrow_back, color: ColorTokens.white),
                 color: ColorTokens.brandPrimary,
               ),
             ),

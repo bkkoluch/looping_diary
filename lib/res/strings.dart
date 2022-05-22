@@ -1,3 +1,13 @@
+// Onboarding
+const String firstPageTitle = 'firstPageTitle';
+const String firstPageSubtitle = 'firstPageSubtitle';
+const String secondPageTitle = 'secondPageTitle';
+const String secondPageSubtitle = 'secondPageSubtitle';
+const String thirdPageTitle = 'thirdPageTitle';
+const String thirdPageSubtitle = 'thirdPageSubtitle';
+const String getStartedButtonText = 'getStartedButtonText';
+const String startKeepingNotesButtonText = 'startKeepingNotesButtonText';
+
 // LoginPage
 const String loginScreenTitle = 'loginScreenTitle';
 const String loginScreenSubtitle = 'loginScreenSubtitle';

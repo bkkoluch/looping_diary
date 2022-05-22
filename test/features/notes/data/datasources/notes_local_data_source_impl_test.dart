@@ -16,7 +16,7 @@ void main() {
   setUpAll(baseSetup);
 
   setUp(() {
-    _mockedSharedPreferences = MockedSharedPreferences();
+    _mockedSharedPreferences = MockSharedPreferences();
     _notesLocalDataSource = NotesLocalDataSourceImpl(_mockedSharedPreferences);
   });
 

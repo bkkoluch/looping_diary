@@ -9,4 +9,9 @@ class Illustrations {
 
   // Illustrations
   static const String morningCoffeeWithDiary = '${illustrationPath}morning_coffee_with_diary.jpg';
+  static const String notes = '${illustrationPath}notes.svg';
+  static const String addNotes = '${illustrationPath}add_notes.svg';
+  static const String notebook = '${illustrationPath}notebook.svg';
+  static const String personalNotebook = '${illustrationPath}personal_notebook.svg';
+  static const String takingNotes = '${illustrationPath}taking_notes.svg';
 }
