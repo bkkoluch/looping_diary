@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
+import 'package:looping_diary/core/style/lotties.dart';
 import 'package:looping_diary/features/onboarding/presentation/pages/onboarding_carrousel_page.dart';
 import 'package:looping_diary/res/strings.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../test_setup.dart';
@@ -35,12 +36,12 @@ void main() {
       'should display OnboardingPageIllustration correctly',
       (WidgetTester tester) async {
         final Widget widget = prepareTestableWidget(
-          const OnboardingPageIllustration(asset: Illustrations.addNotes, pageIndex: 0),
+          const OnboardingPageIllustration(asset: Lotties.makingNotesFemale, pageIndex: 0),
         );
 
         await tester.pumpWidget(widget);
         await tester.pumpAndSettle();
-        expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(Lottie), findsOneWidget);
       },
     );
 
