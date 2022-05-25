@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart';
@@ -32,6 +33,19 @@ void main() {
   });
 
   group('NoteCubit::fetchAllNotes', () {
+    List<List<Note>> sortNotesByDayAndYear(List<Note> notes) {
+      final List<List<Note>> sortedList = List.generate(366, (_) => []);
+      for (final Note note in notes) {
+        sortedList[note.noteDate.toDateTime.dayOfYear].add(note);
+      }
+
+      for (final List<Note> list in sortedList) {
+        list.sort((a, b) => b.noteDate.toDateTime.compareTo(a.noteDate.toDateTime));
+      }
+
+      return sortedList;
+    }
+
     blocTest<NoteCubit, NoteState>(
       'should emit correct states when use case returns an error',
       build: NoteCubit.new,
@@ -55,6 +69,11 @@ void main() {
       expect: () => [
         initialState.copyWith(status: NoteStateStatus.loading),
         initialState.copyWith(allNotes: [tNote], status: NoteStateStatus.loaded),
+        initialState.copyWith(
+          allNotes: [tNote],
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+        ),
       ],
     );
   });

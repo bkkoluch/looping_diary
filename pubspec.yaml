@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   alchemist: ^0.3.3
+  auto_size_text: ^3.0.0
   cloud_firestore: ^3.1.15
   cupertino_icons: ^1.0.4
   dartz: ^0.10.1

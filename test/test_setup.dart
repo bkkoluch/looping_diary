@@ -26,6 +26,7 @@ Future<void> baseSetup() async {
   getIt
     ..registerFactory<CrashReportingService>(MockCrashReportingService.new)
     ..registerFactory<FirebaseCrashlytics>(MockFirebaseCrashlytics.new)
+    ..registerFactory<FirebaseAuth>(MockFirebaseAuth.new)
     ..registerFactoryAsync<FirebaseRestClient>(() async => MockFirebaseRestClient())
     ..registerFactoryAsync<SharedPreferences>(() async => MockSharedPreferences())
     ..registerFactory<FirebaseJsonConverter>(FirebaseJsonConverter.new);
@@ -37,6 +38,8 @@ void baseTearDown() => getIt.reset();
 class MockCrashReportingService extends Mock implements CrashReportingService {}
 
 class MockFirebaseCrashlytics extends Mock implements FirebaseCrashlytics {}
+
+class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
 class MockFirebaseRestClient extends Mock implements FirebaseRestClient {}
 

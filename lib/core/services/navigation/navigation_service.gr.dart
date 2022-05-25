@@ -17,7 +17,7 @@ import '../../../features/home/presentation/pages/home_page.dart' as _i4;
 import '../../../features/login/presentation/auth_gate_page.dart' as _i3;
 import '../../../features/login/presentation/pages/forgot_password_page.dart' as _i5;
 import '../../../features/notes/domain/models/note.dart' as _i10;
-import '../../../features/notes/presentation/pages/add_note_page.dart' as _i6;
+import '../../../features/notes/presentation/pages/note_details_page.dart' as _i6;
 import '../../../features/onboarding/presentation/pages/onboarding_carrousel_page.dart' as _i2;
 import '../../../features/startup/presentation/pages/startup_page.dart' as _i1;
 import 'navigation_service.dart' as _i9;
@@ -66,7 +66,7 @@ class AppRouter extends _i7.RootStackRouter {
       final args = routeData.argsAs<AddNoteRouteArgs>(orElse: () => const AddNoteRouteArgs());
       return _i7.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i6.AddNotePage(noteToAddOrEdit: args.noteToAddOrEdit, key: args.key),
+          child: _i6.NoteDetailsPage(noteToAddOrEdit: args.noteToAddOrEdit, key: args.key),
           customRouteBuilder: _i9.fadeInRouteBuilder,
           opaque: true,
           barrierDismissible: false);
@@ -125,7 +125,7 @@ class ForgotPasswordRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.AddNotePage]
+/// [_i6.NoteDetailsPage]
 class AddNoteRoute extends _i7.PageRouteInfo<AddNoteRouteArgs> {
   AddNoteRoute({_i10.Note? noteToAddOrEdit, _i8.Key? key})
       : super(AddNoteRoute.name,
