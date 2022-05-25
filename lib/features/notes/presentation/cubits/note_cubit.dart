@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/errors/failures.dart';
+import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/extensions/either_extensions.dart';
 import 'package:looping_diary/core/extensions/list_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
@@ -19,6 +20,7 @@ class NoteCubit extends Cubit<NoteState> {
     final List<Note>? notes = (await (await getIt.getAsync<GetAllNotesUseCase>())()).foldOrNull();
     if (notes != null) {
       emit(state.copyWith(allNotes: notes, status: NoteStateStatus.loaded));
+      _sortNotesByDayAndYear(notes);
     } else {
       emit(state.copyWith(status: NoteStateStatus.loaded));
     }
@@ -43,6 +45,19 @@ class NoteCubit extends Cubit<NoteState> {
   void updateNoteEntry(String entry) => emit(state.copyWith.currentNote(entry: entry));
 
   void updateCurrentNote(Note? note) => emit(state.copyWith(currentNote: note ?? Note.today));
+
+  void _sortNotesByDayAndYear(List<Note> notes) {
+    final List<List<Note>> sortedList = List.generate(366, (_) => []);
+    for (final Note note in notes) {
+      sortedList[note.noteDate.toDateTime.dayOfYear].add(note);
+    }
+
+    for (final List<Note> list in sortedList) {
+      list.sort((a, b) => b.noteDate.toDateTime.compareTo(a.noteDate.toDateTime));
+    }
+
+    emit(state.copyWith(notesSortedByDayAndYears: sortedList));
+  }
 
   bool get wasNoteCreatedToday =>
       state.allNotes.firstWhereOrNull((note) => note.noteDate == Note.today.noteDate) != null;

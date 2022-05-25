@@ -1,5 +1,6 @@
 class CoreDimensions {
   // Paddings
+  static const double paddingXS = 4;
   static const double paddingS = 8;
   static const double paddingM = 16;
   static const double paddingL = 24;
@@ -10,6 +11,8 @@ class CoreDimensions {
 
   // Spacings
   static const double spacingOne = 1;
+  static const double spacingL = 24;
+  static const double spacingMXL = 36;
   static const double spacingXL = 48;
 
   static const double onboardingTextContentContainerHeight = 200;
@@ -21,6 +24,7 @@ class CoreDimensions {
   // Various
   static const double bottomNavigationBarHeight = 60;
   static const double defaultAppBarHeight = 64;
+  static const double noteCardStartPadding = 42;
 
   // Images
   static const double defaultIconSize = 24;
@@ -40,4 +44,8 @@ class CoreDimensions {
   static const double pageIndicatorDotWidth = 24;
   static const double pageIndicatorDotHeight = 10;
   static const double pageIndicatorStrokeWidth = 1.5;
+
+  // Note card
+  static const double lastYearBookmarkHeight = 24;
+  static const double lastYearActiveBookmarkAdditionalWidth = 35;
 }

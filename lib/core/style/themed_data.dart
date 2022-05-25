@@ -11,6 +11,7 @@ class ThemedData {
       ),
     ),
     primaryColor: ColorTokens.brandPrimary,
-    fontFamily: GoogleFonts.lato().fontFamily,
+    // fontFamily: GoogleFonts.lato().fontFamily,
+    fontFamily: GoogleFonts.permanentMarker().fontFamily,
   );
 }

@@ -10,17 +10,18 @@ import 'package:looping_diary/features/common/presentation/widgets/safe_area_scr
 import 'package:looping_diary/features/home/presentation/widgets/core_app_bar.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
+import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
 
-class AddNotePage extends StatefulWidget {
-  const AddNotePage({this.noteToAddOrEdit, Key? key}) : super(key: key);
+class NoteDetailsPage extends StatefulWidget {
+  const NoteDetailsPage({this.noteToAddOrEdit, Key? key}) : super(key: key);
 
   final Note? noteToAddOrEdit;
 
   @override
-  State<AddNotePage> createState() => _AddNotePageState();
+  State<NoteDetailsPage> createState() => _NoteDetailsPageState();
 }
 
-class _AddNotePageState extends State<AddNotePage> {
+class _NoteDetailsPageState extends State<NoteDetailsPage> {
   final TextEditingController noteTextFieldController = TextEditingController();
   final NoteCubit cubit = getIt<NoteCubit>();
 
@@ -44,27 +45,30 @@ class _AddNotePageState extends State<AddNotePage> {
                 color: ColorTokens.brandPrimary,
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(CoreDimensions.paddingL),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CoreTextField(
-                        focusNode: FocusNode(),
-                        controller: noteTextFieldController,
-                        maxLines: 28,
-                        onChanged: (_) {
-                          setState(() {});
-                        },
-                      ),
-                    ],
+            child: NotebookStack(
+              pageIndex: 0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(CoreDimensions.paddingL),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CoreTextField(
+                          focusNode: FocusNode(),
+                          controller: noteTextFieldController,
+                          maxLines: 28,
+                          onChanged: (_) {
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             floatingActionButton: AnimatedSlide(
               duration: const Duration(milliseconds: 1000),

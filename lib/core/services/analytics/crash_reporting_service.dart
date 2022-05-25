@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:looping_diary/utils/log.dart';
@@ -23,4 +25,27 @@ class CrashReportingService {
       printDetails: Log.isLoggingOn,
     );
   }
+
+// void logFatalError(dynamic error, {StackTrace? stackTrace, String? reason}) {
+//   unawaited(
+//     FirebaseCrashlytics.instance.recordError(
+//       Exception(error),
+//       stackTrace,
+//       reason: reason,
+//       fatal: true,
+//       printDetails: false,
+//     ),
+//   );
+// }
+//
+// void logNonFatalError(dynamic error, {StackTrace? stackTrace, String? reason}) {
+//   unawaited(
+//     FirebaseCrashlytics.instance.recordError(
+//       Exception(error),
+//       stackTrace,
+//       reason: reason,
+//       printDetails: false,
+//     ),
+//   );
+// }
 }
