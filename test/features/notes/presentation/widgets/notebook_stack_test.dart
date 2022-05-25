@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
-import 'package:looping_diary/res/painters/notebook_painter.dart';
 
 import '../../../../test_setup.dart';
 

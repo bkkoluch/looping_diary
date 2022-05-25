@@ -17,13 +17,15 @@ void main() {
   testWidgets(
     'should display NoteListWithBookmarks correctly',
     (WidgetTester tester) async {
-      final Widget widget = prepareTestableWidget(NoteListWithBookmarks(
-        onNoteTapped: ([Note? _]) {},
-        onPagesScrolled: () {},
-        listScrollController: ScrollController(),
-        listIndex: 0,
-        notesDividedByDay: const [tNote, tNote],
-      ));
+      final Widget widget = prepareTestableWidget(
+        NoteListWithBookmarks(
+          onNoteTapped: ([Note? _]) {},
+          onPagesScrolled: () {},
+          listScrollController: ScrollController(),
+          listIndex: 0,
+          notesDividedByDay: const [tNote, tNote],
+        ),
+      );
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
