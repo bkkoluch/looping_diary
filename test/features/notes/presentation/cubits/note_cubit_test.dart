@@ -28,24 +28,24 @@ void main() {
 
   final NoteState initialState = NoteState.initial();
 
+  List<List<Note>> sortNotesByDayAndYear(List<Note> notes) {
+    final List<List<Note>> sortedList = List.generate(366, (_) => []);
+    for (final Note note in notes) {
+      sortedList[note.noteDate.toDateTime.dayOfYear].add(note);
+    }
+
+    for (final List<Note> list in sortedList) {
+      list.sort((a, b) => b.noteDate.toDateTime.compareTo(a.noteDate.toDateTime));
+    }
+
+    return sortedList;
+  }
+
   test('NoteCubit\'s initial state equals to NoteState.initial()', () {
     expect(NoteCubit().state, initialState);
   });
 
   group('NoteCubit::fetchAllNotes', () {
-    List<List<Note>> sortNotesByDayAndYear(List<Note> notes) {
-      final List<List<Note>> sortedList = List.generate(366, (_) => []);
-      for (final Note note in notes) {
-        sortedList[note.noteDate.toDateTime.dayOfYear].add(note);
-      }
-
-      for (final List<Note> list in sortedList) {
-        list.sort((a, b) => b.noteDate.toDateTime.compareTo(a.noteDate.toDateTime));
-      }
-
-      return sortedList;
-    }
-
     blocTest<NoteCubit, NoteState>(
       'should emit correct states when use case returns an error',
       build: NoteCubit.new,
@@ -55,7 +55,10 @@ void main() {
       act: (cubit) => cubit.fetchAllNotes(),
       expect: () => [
         initialState.copyWith(status: NoteStateStatus.loading),
-        initialState.copyWith(status: NoteStateStatus.loaded),
+        initialState.copyWith(
+          status: NoteStateStatus.loaded,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
+        ),
       ],
     );
 
@@ -68,9 +71,7 @@ void main() {
       act: (cubit) => cubit.fetchAllNotes(),
       expect: () => [
         initialState.copyWith(status: NoteStateStatus.loading),
-        initialState.copyWith(allNotes: [tNote], status: NoteStateStatus.loaded),
         initialState.copyWith(
-          allNotes: [tNote],
           notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
           status: NoteStateStatus.loaded,
         ),
@@ -82,27 +83,41 @@ void main() {
     blocTest<NoteCubit, NoteState>(
       'should emit correct states when note is saved successfully',
       build: NoteCubit.new,
+      skip: 2,
       setUp: () {
         when(() => saveNoteUseCase.call(captureAny())).thenAnswer((_) async => const Right(null));
       },
       act: (cubit) => cubit
+        ..fetchAllNotes()
         ..updateCurrentNote(tNote)
         ..saveNote(),
       expect: () => [
-        initialState.copyWith(currentNote: tNote),
-        initialState.copyWith(allNotes: [tNote], currentNote: tNote)
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+        )
       ],
     );
 
     blocTest<NoteCubit, NoteState>(
       'should emit correct states when note saving fails',
       build: NoteCubit.new,
+      skip: 2,
       setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
         when(() => saveNoteUseCase.call(captureAny())).thenAnswer((_) async => const Left(tServerFailure));
       },
-      act: (cubit) => cubit.saveNote(),
+      act: (cubit) => cubit
+        ..fetchAllNotes()
+        ..updateCurrentNote(tNote)
+        ..saveNote(),
       expect: () => [
-        initialState.copyWith(allNotes: [Note.today], currentNote: Note.today)
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+        ),
       ],
     );
   });

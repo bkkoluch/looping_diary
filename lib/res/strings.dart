@@ -19,6 +19,9 @@ const String loginScreenForgotPasswordLabel = 'loginScreenForgotPasswordLabel';
 const String loginScreenLoginButtonText = 'loginScreenLoginButtonText';
 const String loginScreenSignInWithGoogleLabel = 'loginScreenSignInWithGoogleLabel';
 
+// Notes
+const String emptyNotePageAddNewNoteText = 'emptyNotePageAddNewNoteText';
+
 // FlutterFireUI Labels
 const String arrayLabel = 'arrayLabel';
 const String booleanLabel = 'booleanLabel';

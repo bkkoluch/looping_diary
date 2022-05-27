@@ -16,6 +16,7 @@
   "loginScreenForgotPasswordLabel": "Nie pamiętasz hasła?",
   "loginScreenLoginButtonText": "Zaloguj się",
   "loginScreenSignInWithGoogleLabel": "Zaloguj się z Google",
+  "emptyNotePageAddNewNoteText": "Aby dodać nową notatkę na dany dzień, kliknij na zagięty dolny róg strony ✏️",
   "arrayLabel": "array",
   "booleanLabel": "boolean",
   "cancelLabel": "cancel",

@@ -1,20 +1,24 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
+import 'package:looping_diary/core/style/text_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
-import 'package:looping_diary/features/notes/utils/note_helper.dart';
+import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 import 'package:looping_diary/res/painters/empty_notebook_painter.dart';
+import 'package:looping_diary/res/strings.dart';
 
 class EmptyNoteCard extends StatelessWidget {
-  const EmptyNoteCard({required this.pageIndex, Key? key}) : super(key: key);
+  const EmptyNoteCard({required this.pageIndex, required this.pageViewController, Key? key}) : super(key: key);
 
   final int pageIndex;
+  final PageController pageViewController;
 
   @override
   Widget build(BuildContext context) => Card(
@@ -26,55 +30,77 @@ class EmptyNoteCard extends StatelessWidget {
               height: context.screenHeight,
               painter: EmptyNotebookPainter(pageIndex),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: CoreDimensions.spacingMXL),
-                Center(
-                  child: Text(
-                    pageIndexToDayAndMonth(pageIndex),
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                ),
-                const SizedBox(height: CoreDimensions.spacingMXL),
-                // To remove
-                Center(
-                  child: ElevatedButton(
-                    onPressed: getIt<FirebaseAuth>().signOut,
-                    child: const Text('Log out'),
-                  ),
-                )
-              ],
+            _buildEmptyNoteDate(context),
+            _buildEmptyNoteContent(context),
+            _buildFoldedCornerGestureDetector(context),
+          ],
+        ),
+      );
+
+  Widget _buildEmptyNoteDate(BuildContext context) => Padding(
+        padding: EdgeInsets.only(
+          right: note_helper.isPageEven(pageIndex) ? CoreDimensions.paddingXS : 0,
+          left: note_helper.isPageEven(pageIndex) ? 0 : CoreDimensions.paddingXS,
+        ),
+        child: Align(
+          alignment: note_helper.isPageEven(pageIndex) ? Alignment.topRight : Alignment.topLeft,
+          child: Column(
+            children: [
+              SizedBox(height: context.screenHeight * 0.05),
+              Text(emptyNoteNoteDate.toReadableDate, style: TextTokens.titleLg(context)),
+            ],
+          ),
+        ),
+      );
+
+  Widget _buildEmptyNoteContent(BuildContext context) => Padding(
+        padding: EdgeInsets.only(
+          right: note_helper.isPageEven(pageIndex) ? CoreDimensions.paddingXS : 0,
+          left: note_helper.isPageEven(pageIndex) ? 0 : CoreDimensions.paddingXS,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: context.screenHeight * 0.11),
+            Text(
+              emptyNotePageAddNewNoteText.tr(),
+              textAlign: note_helper.isPageEven(pageIndex) ? TextAlign.right : TextAlign.left,
+              style: TextTokens.titleMd(context),
             ),
-            Align(
-              alignment: isPageEven ? Alignment.bottomRight : Alignment.bottomLeft,
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () => _pushAddNotePageAndRebuildWhenPopped(context),
-                child: SizedBox(
-                  width: context.screenWidth * 0.18,
-                  height: context.screenHeight * 0.1,
-                ),
+            // To remove
+            Center(
+              child: ElevatedButton(
+                onPressed: getIt<FirebaseAuth>().signOut,
+                child: const Text('Log out'),
               ),
             )
           ],
         ),
       );
 
-  void _pushAddNotePageAndRebuildWhenPopped(BuildContext context) => context.router.push(
-        AddNoteRoute(
-          noteToAddOrEdit: Note(
-            noteDate: emptyNoteNoteDate,
-            id: emptyNoteNoteDate.toDateTime.toIso8601String(),
+  Widget _buildFoldedCornerGestureDetector(BuildContext context) => Align(
+        alignment: note_helper.isPageEven(pageIndex) ? Alignment.bottomRight : Alignment.bottomLeft,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => _pushNoteDetailsPageAndScrollToNoteWhenPopped(context),
+          child: SizedBox(
+            width: context.screenWidth * 0.18,
+            height: context.screenHeight * 0.1,
           ),
         ),
       );
 
-  bool get isPageEven => pageIndex % 2 == 0;
+  void _pushNoteDetailsPageAndScrollToNoteWhenPopped(BuildContext context) => context.router
+      .push(
+        NoteDetailsRoute(
+          pageIndex: pageIndex,
+          note: Note(
+            noteDate: emptyNoteNoteDate,
+            id: emptyNoteNoteDate.toDateTime.toIso8601String(),
+          ),
+        ),
+      )
+      .whenComplete(() => pageViewController.jumpToPage(pageIndex));
 
-  NoteDate get emptyNoteNoteDate => NoteDate(day: day, month: month, year: DateTime.now().year);
-
-  int get day => int.tryParse(pageIndexToDayAndMonth(pageIndex).split('/')[0])!;
-
-  int get month => int.tryParse(pageIndexToDayAndMonth(pageIndex).split('/')[1])!;
+  NoteDate get emptyNoteNoteDate => note_helper.getNoteDateFromPageIndex(pageIndex);
 }

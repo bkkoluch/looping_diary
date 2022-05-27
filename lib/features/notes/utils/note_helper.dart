@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:looping_diary/core/extensions/context_extensions.dart';
+import 'package:looping_diary/features/notes/domain/models/note_date.dart';
+
+const numberOfNotebookLinesOnAPage = 16;
+
 const List<int> _numberOfDaysPassedSinceStartOFTheYearForEachMonth = [
   31,
   60,
@@ -13,6 +19,16 @@ const List<int> _numberOfDaysPassedSinceStartOFTheYearForEachMonth = [
   366,
 ];
 
+NoteDate getNoteDateFromPageIndex(int pageIndex) => NoteDate(
+      day: pageIndexToDay(pageIndex),
+      month: pageIndexToMonth(pageIndex),
+      year: DateTime.now().year,
+    );
+
+int pageIndexToDay(int pageIndex) => int.tryParse(pageIndexToDayAndMonth(pageIndex).split('/')[0])!;
+
+int pageIndexToMonth(int pageIndex) => int.tryParse(pageIndexToDayAndMonth(pageIndex).split('/')[1])!;
+
 String pageIndexToDayAndMonth(int pageIndex) {
   final int nextMonthIndex = _numberOfDaysPassedSinceStartOFTheYearForEachMonth.indexOf(
     _numberOfDaysPassedSinceStartOFTheYearForEachMonth.firstWhere((nextMonthIndex) => nextMonthIndex >= pageIndex),
@@ -25,3 +41,13 @@ String pageIndexToDayAndMonth(int pageIndex) {
 
   return '$day/$currentMonth';
 }
+
+double calculateTextSize(BuildContext context) {
+  final screenHeightMultiplier = context.screenHeight * 0.01;
+  final singleLinesHeightFactor = numberOfNotebookLinesOnAPage / screenHeightMultiplier;
+  final scaledTextHeight = 1.81 / singleLinesHeightFactor * 2.45;
+
+  return scaledTextHeight;
+}
+
+bool isPageEven(int pageIndex) => pageIndex % 2 == 0;

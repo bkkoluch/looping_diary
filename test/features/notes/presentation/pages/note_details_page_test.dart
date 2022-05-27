@@ -6,6 +6,7 @@ import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
 import 'package:looping_diary/features/notes/presentation/pages/note_details_page.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
 
+import '../../../../test_data.dart';
 import '../../../../test_mocks.dart';
 import '../../../../test_setup.dart';
 
@@ -18,7 +19,7 @@ void main() {
   testWidgets(
     'should display NoteDetailsPage correctly',
     (WidgetTester tester) async {
-      final Widget widget = prepareTestableWidget(const NoteDetailsPage());
+      final Widget widget = prepareTestableWidget(const NoteDetailsPage(note: tNote, pageIndex: 0));
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();

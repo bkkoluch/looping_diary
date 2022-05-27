@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/injector/injector.dart';
-import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_bookmark.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_card.dart';
@@ -19,10 +18,10 @@ void main() {
     (WidgetTester tester) async {
       final Widget widget = prepareTestableWidget(
         NoteListWithBookmarks(
-          onNoteTapped: ([Note? _]) {},
+          onNoteTapped: (_, __, ___) {},
           onPagesScrolled: () {},
           listScrollController: ScrollController(),
-          listIndex: 0,
+          pageIndex: 0,
           notesDividedByDay: const [tNote, tNote],
         ),
       );
