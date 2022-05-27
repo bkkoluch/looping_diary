@@ -11,7 +11,10 @@ class ThemedData {
       ),
     ),
     primaryColor: ColorTokens.brandPrimary,
-    // fontFamily: GoogleFonts.lato().fontFamily,
-    fontFamily: GoogleFonts.permanentMarker().fontFamily,
+    fontFamily: GoogleFonts.lato().fontFamily,
+    // fontFamily: GoogleFonts.montserrat().fontFamily,
+    // fontFamily: GoogleFonts.raleway().fontFamily,
+    // fontFamily: GoogleFonts.merriweather().fontFamily,
+    // fontFamily: GoogleFonts.permanentMarker().fontFamily,
   );
 }

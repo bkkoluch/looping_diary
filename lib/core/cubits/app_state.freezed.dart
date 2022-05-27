@@ -34,7 +34,6 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   _$AppStateCopyWithImpl(this._value, this._then);
 
   final AppState _value;
-
   // ignore: unused_field
   final $Res Function(AppState) _then;
 

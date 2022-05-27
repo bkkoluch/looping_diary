@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
+import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
+import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 import 'package:looping_diary/res/painters/notebook_painter.dart';
 
 class NotebookStack extends StatelessWidget {
@@ -18,7 +20,13 @@ class NotebookStack extends StatelessWidget {
             height: context.screenHeight,
             painter: NotebookPainter(pageIndex),
           ),
-          child
+          Padding(
+            padding: EdgeInsets.only(
+              left: note_helper.isPageEven(pageIndex) ? CoreDimensions.noteCardStartPadding : CoreDimensions.paddingS,
+              right: note_helper.isPageEven(pageIndex) ? CoreDimensions.paddingS : CoreDimensions.noteCardStartPadding,
+            ),
+            child: child,
+          )
         ],
       );
 }

@@ -16,6 +16,7 @@
   "loginScreenForgotPasswordLabel": "Forgot password?",
   "loginScreenLoginButtonText": "Login",
   "loginScreenSignInWithGoogleLabel": "Sign in with Google",
+  "emptyNotePageAddNewNoteText": "To add a new note for that day, click on the folded corner of the page in the bottom ✏️",
   "arrayLabel": "array",
   "booleanLabel": "boolean",
   "cancelLabel": "cancel",

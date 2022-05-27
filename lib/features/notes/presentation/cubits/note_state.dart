@@ -14,7 +14,6 @@ class NoteState with _$NoteState {
   const NoteState._();
 
   const factory NoteState({
-    required List<Note> allNotes,
     required List<List<Note>> notesSortedByDayAndYears,
     required Note currentNote,
     required NoteStateStatus status,
@@ -31,7 +30,6 @@ class NoteState with _$NoteState {
           year: today.year,
         ),
       ),
-      allNotes: List.empty(growable: true),
       notesSortedByDayAndYears: List.empty(growable: true),
       status: NoteStateStatus.loading,
     );

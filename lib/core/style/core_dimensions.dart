@@ -1,5 +1,6 @@
 class CoreDimensions {
   // Paddings
+  static const double paddingXXS = 2;
   static const double paddingXS = 4;
   static const double paddingS = 8;
   static const double paddingM = 16;

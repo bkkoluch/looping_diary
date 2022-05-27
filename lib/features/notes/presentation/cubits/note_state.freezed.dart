@@ -16,8 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NoteState {
-  List<Note> get allNotes => throw _privateConstructorUsedError;
-
   List<List<Note>> get notesSortedByDayAndYears => throw _privateConstructorUsedError;
 
   Note get currentNote => throw _privateConstructorUsedError;
@@ -32,7 +30,7 @@ mixin _$NoteState {
 abstract class $NoteStateCopyWith<$Res> {
   factory $NoteStateCopyWith(NoteState value, $Res Function(NoteState) then) = _$NoteStateCopyWithImpl<$Res>;
 
-  $Res call({List<Note> allNotes, List<List<Note>> notesSortedByDayAndYears, Note currentNote, NoteStateStatus status});
+  $Res call({List<List<Note>> notesSortedByDayAndYears, Note currentNote, NoteStateStatus status});
 
   $NoteCopyWith<$Res> get currentNote;
 }
@@ -47,16 +45,11 @@ class _$NoteStateCopyWithImpl<$Res> implements $NoteStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? allNotes = freezed,
     Object? notesSortedByDayAndYears = freezed,
     Object? currentNote = freezed,
     Object? status = freezed,
   }) {
     return _then(_value.copyWith(
-      allNotes: allNotes == freezed
-          ? _value.allNotes
-          : allNotes // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
       notesSortedByDayAndYears: notesSortedByDayAndYears == freezed
           ? _value.notesSortedByDayAndYears
           : notesSortedByDayAndYears // ignore: cast_nullable_to_non_nullable
@@ -86,7 +79,7 @@ abstract class _$$_NoteStateCopyWith<$Res> implements $NoteStateCopyWith<$Res> {
       __$$_NoteStateCopyWithImpl<$Res>;
 
   @override
-  $Res call({List<Note> allNotes, List<List<Note>> notesSortedByDayAndYears, Note currentNote, NoteStateStatus status});
+  $Res call({List<List<Note>> notesSortedByDayAndYears, Note currentNote, NoteStateStatus status});
 
   @override
   $NoteCopyWith<$Res> get currentNote;
@@ -102,16 +95,11 @@ class __$$_NoteStateCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res> imp
 
   @override
   $Res call({
-    Object? allNotes = freezed,
     Object? notesSortedByDayAndYears = freezed,
     Object? currentNote = freezed,
     Object? status = freezed,
   }) {
     return _then(_$_NoteState(
-      allNotes: allNotes == freezed
-          ? _value._allNotes
-          : allNotes // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
       notesSortedByDayAndYears: notesSortedByDayAndYears == freezed
           ? _value._notesSortedByDayAndYears
           : notesSortedByDayAndYears // ignore: cast_nullable_to_non_nullable
@@ -132,24 +120,11 @@ class __$$_NoteStateCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res> imp
 
 class _$_NoteState extends _NoteState {
   const _$_NoteState(
-      {required final List<Note> allNotes,
-      required final List<List<Note>> notesSortedByDayAndYears,
-      required this.currentNote,
-      required this.status})
-      : _allNotes = allNotes,
-        _notesSortedByDayAndYears = notesSortedByDayAndYears,
+      {required final List<List<Note>> notesSortedByDayAndYears, required this.currentNote, required this.status})
+      : _notesSortedByDayAndYears = notesSortedByDayAndYears,
         super._();
 
-  final List<Note> _allNotes;
-
-  @override
-  List<Note> get allNotes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_allNotes);
-  }
-
   final List<List<Note>> _notesSortedByDayAndYears;
-
   @override
   List<List<Note>> get notesSortedByDayAndYears {
     // ignore: implicit_dynamic_type
@@ -163,7 +138,7 @@ class _$_NoteState extends _NoteState {
 
   @override
   String toString() {
-    return 'NoteState(allNotes: $allNotes, notesSortedByDayAndYears: $notesSortedByDayAndYears, currentNote: $currentNote, status: $status)';
+    return 'NoteState(notesSortedByDayAndYears: $notesSortedByDayAndYears, currentNote: $currentNote, status: $status)';
   }
 
   @override
@@ -171,19 +146,14 @@ class _$_NoteState extends _NoteState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NoteState &&
-            const DeepCollectionEquality().equals(other._allNotes, _allNotes) &&
             const DeepCollectionEquality().equals(other._notesSortedByDayAndYears, _notesSortedByDayAndYears) &&
             const DeepCollectionEquality().equals(other.currentNote, currentNote) &&
             const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_allNotes),
-      const DeepCollectionEquality().hash(_notesSortedByDayAndYears),
-      const DeepCollectionEquality().hash(currentNote),
-      const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_notesSortedByDayAndYears),
+      const DeepCollectionEquality().hash(currentNote), const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
@@ -192,15 +162,10 @@ class _$_NoteState extends _NoteState {
 
 abstract class _NoteState extends NoteState {
   const factory _NoteState(
-      {required final List<Note> allNotes,
-      required final List<List<Note>> notesSortedByDayAndYears,
+      {required final List<List<Note>> notesSortedByDayAndYears,
       required final Note currentNote,
       required final NoteStateStatus status}) = _$_NoteState;
-
   const _NoteState._() : super._();
-
-  @override
-  List<Note> get allNotes => throw _privateConstructorUsedError;
 
   @override
   List<List<Note>> get notesSortedByDayAndYears => throw _privateConstructorUsedError;

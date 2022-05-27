@@ -62,11 +62,11 @@ class AppRouter extends _i7.RootStackRouter {
           opaque: true,
           barrierDismissible: false);
     },
-    AddNoteRoute.name: (routeData) {
-      final args = routeData.argsAs<AddNoteRouteArgs>(orElse: () => const AddNoteRouteArgs());
+    NoteDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<NoteDetailsRouteArgs>();
       return _i7.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i6.NoteDetailsPage(noteToAddOrEdit: args.noteToAddOrEdit, key: args.key),
+          child: _i6.NoteDetailsPage(note: args.note, pageIndex: args.pageIndex, key: args.key),
           customRouteBuilder: _i9.fadeInRouteBuilder,
           opaque: true,
           barrierDismissible: false);
@@ -80,7 +80,7 @@ class AppRouter extends _i7.RootStackRouter {
         _i7.RouteConfig(AuthGateRoute.name, path: '/auth-gate-page'),
         _i7.RouteConfig(HomeRoute.name, path: '/home-page'),
         _i7.RouteConfig(ForgotPasswordRoute.name, path: '/forgot-password-page'),
-        _i7.RouteConfig(AddNoteRoute.name, path: '/add-note-page')
+        _i7.RouteConfig(NoteDetailsRoute.name, path: '/note-details-page')
       ];
 }
 
@@ -126,23 +126,25 @@ class ForgotPasswordRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.NoteDetailsPage]
-class AddNoteRoute extends _i7.PageRouteInfo<AddNoteRouteArgs> {
-  AddNoteRoute({_i10.Note? noteToAddOrEdit, _i8.Key? key})
-      : super(AddNoteRoute.name,
-            path: '/add-note-page', args: AddNoteRouteArgs(noteToAddOrEdit: noteToAddOrEdit, key: key));
+class NoteDetailsRoute extends _i7.PageRouteInfo<NoteDetailsRouteArgs> {
+  NoteDetailsRoute({required _i10.Note note, required int pageIndex, _i8.Key? key})
+      : super(NoteDetailsRoute.name,
+            path: '/note-details-page', args: NoteDetailsRouteArgs(note: note, pageIndex: pageIndex, key: key));
 
-  static const String name = 'AddNoteRoute';
+  static const String name = 'NoteDetailsRoute';
 }
 
-class AddNoteRouteArgs {
-  const AddNoteRouteArgs({this.noteToAddOrEdit, this.key});
+class NoteDetailsRouteArgs {
+  const NoteDetailsRouteArgs({required this.note, required this.pageIndex, this.key});
 
-  final _i10.Note? noteToAddOrEdit;
+  final _i10.Note note;
+
+  final int pageIndex;
 
   final _i8.Key? key;
 
   @override
   String toString() {
-    return 'AddNoteRouteArgs{noteToAddOrEdit: $noteToAddOrEdit, key: $key}';
+    return 'NoteDetailsRouteArgs{note: $note, pageIndex: $pageIndex, key: $key}';
   }
 }

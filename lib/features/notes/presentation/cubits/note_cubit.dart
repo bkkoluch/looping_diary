@@ -18,27 +18,30 @@ class NoteCubit extends Cubit<NoteState> {
   void fetchAllNotes() async {
     emit(state.copyWith(status: NoteStateStatus.loading));
     final List<Note>? notes = (await (await getIt.getAsync<GetAllNotesUseCase>())()).foldOrNull();
-    if (notes != null) {
-      emit(state.copyWith(allNotes: notes, status: NoteStateStatus.loaded));
-      _sortNotesByDayAndYear(notes);
-    } else {
-      emit(state.copyWith(status: NoteStateStatus.loaded));
-    }
+    _sortNotesByDayAndYear(notes ?? []);
+    emit(state.copyWith(status: NoteStateStatus.loaded));
   }
 
   void saveNote() async {
-    final result = await (await getIt.getAsync<SaveNoteUseCase>())(state.currentNote);
-    if (result is! Failure) {
-      final int noteIndex = state.allNotes.indexWhere((note) => note.noteDate == state.currentNote.noteDate);
+    emit(state.copyWith(status: NoteStateStatus.loading));
 
-      final List<Note> notes = state.allNotes.clone();
-      if (noteIndex >= 0) {
-        notes[noteIndex] = state.currentNote;
+    final result = await (await getIt.getAsync<SaveNoteUseCase>())(state.currentNote);
+
+    if (result is! Failure) {
+      final int listIndex = state.currentNote.noteDate.toDateTime.dayOfYear;
+
+      final List<List<Note>> notes = state.notesSortedByDayAndYears.clone();
+      final Note? noteToUpdate =
+          notes[listIndex].firstWhereOrNull((note) => note.noteDate == state.currentNote.noteDate);
+      if (listIndex >= 0 && noteToUpdate != null) {
+        final int noteIndex = notes[listIndex]
+            .indexOf(notes[listIndex].firstWhere((note) => note.noteDate == state.currentNote.noteDate));
+        notes[listIndex][noteIndex] = state.currentNote;
       } else {
-        notes.add(state.currentNote);
+        notes[listIndex].add(state.currentNote);
       }
 
-      emit(state.copyWith(allNotes: notes));
+      emit(state.copyWith(notesSortedByDayAndYears: notes, status: NoteStateStatus.loaded));
     }
   }
 
@@ -56,9 +59,6 @@ class NoteCubit extends Cubit<NoteState> {
       list.sort((a, b) => b.noteDate.toDateTime.compareTo(a.noteDate.toDateTime));
     }
 
-    emit(state.copyWith(notesSortedByDayAndYears: sortedList));
+    emit(state.copyWith(notesSortedByDayAndYears: sortedList, status: NoteStateStatus.loaded));
   }
-
-  bool get wasNoteCreatedToday =>
-      state.allNotes.firstWhereOrNull((note) => note.noteDate == Note.today.noteDate) != null;
 }

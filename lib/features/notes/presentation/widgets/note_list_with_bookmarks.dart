@@ -5,51 +5,57 @@ import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_bookmark.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_card.dart';
 
-class NoteListWithBookmarks extends StatelessWidget {
+class NoteListWithBookmarks extends StatefulWidget {
   const NoteListWithBookmarks({
     required this.onNoteTapped,
     required this.onPagesScrolled,
     required this.listScrollController,
-    required this.listIndex,
+    required this.pageIndex,
     required this.notesDividedByDay,
     Key? key,
   }) : super(key: key);
 
-  final Function([Note? note]) onNoteTapped;
+  final Function(BuildContext context, Note note, int pageIndex) onNoteTapped;
   final VoidCallback onPagesScrolled;
   final ScrollController listScrollController;
-  final int listIndex;
+  final int pageIndex;
   final List<Note> notesDividedByDay;
 
+  @override
+  State<NoteListWithBookmarks> createState() => _NoteListWithBookmarksState();
+}
+
+class _NoteListWithBookmarksState extends State<NoteListWithBookmarks> {
   @override
   Widget build(BuildContext context) => Stack(
         children: [
           ListView.builder(
             padding: EdgeInsets.zero,
-            controller: listScrollController,
+            controller: widget.listScrollController,
             physics: const ClampingScrollPhysics(),
-            itemCount: notesDividedByDay.length,
+            itemCount: widget.notesDividedByDay.length,
             itemBuilder: (_, int noteIndex) => GestureDetector(
-              onTap: () => onNoteTapped(notesDividedByDay[noteIndex]),
-              child: NoteCard(note: notesDividedByDay[noteIndex], pageIndex: listIndex),
+              onTap: () => widget.onNoteTapped(context, widget.notesDividedByDay[noteIndex], widget.pageIndex),
+              // onTap: () => widget.onNoteTapped(context, widget.notesDividedByDay[noteIndex], widget.listIndex),
+              child: NoteCard(note: widget.notesDividedByDay[noteIndex], pageIndex: widget.pageIndex),
             ),
           ),
-          if (notesDividedByDay.length > 1)
+          if (widget.notesDividedByDay.length > 1)
             Positioned.fill(
               bottom: CoreDimensions.lastYearBookmarkHeight,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  ...notesDividedByDay.map(
+                  ...widget.notesDividedByDay.map(
                     (note) => NoteBookmark(
-                      listScrollController: listScrollController,
-                      onPageScrolled: onPagesScrolled,
+                      listScrollController: widget.listScrollController,
+                      onPageScrolled: widget.onPagesScrolled,
                       note: note,
-                      firstNoteOnTheList: notesDividedByDay.first,
-                      pageIndex: listIndex,
-                      noteIndex: notesDividedByDay.indexOf(note),
-                      color: bookmarkColors[notesDividedByDay.indexOf(note) % bookmarkColors.length],
+                      firstNoteOnTheList: widget.notesDividedByDay.first,
+                      pageIndex: widget.pageIndex,
+                      noteIndex: widget.notesDividedByDay.indexOf(note),
+                      color: bookmarkColors[widget.notesDividedByDay.indexOf(note) % bookmarkColors.length],
                     ),
                   )
                 ],
