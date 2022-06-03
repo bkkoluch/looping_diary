@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/color_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 
 class TextTokens {
