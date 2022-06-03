@@ -74,10 +74,6 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
                     focusNode: noteTextFieldFocusNode,
                     controller: noteTextFieldController,
                     maxLines: context.isKeyboardVisible ? 11 : 16,
-                    // onChanged: (_) {
-                    //   print(_);
-                    //   setState(() {});
-                    // },
                   ),
                 ),
               ],
@@ -90,12 +86,12 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
         children: [
           Container(
             padding: EdgeInsets.only(left: note_helper.isPageEven(widget.pageIndex) ? CoreDimensions.paddingXS : 0),
-            width: note_helper.isPageEven(widget.pageIndex) ? context.screenWidth * 0.1 : context.screenWidth * 0.9,
+            width: note_helper.isPageEven(widget.pageIndex) ? _noteBookMarginWidth : _noteBookContentWidth,
             child: note_helper.isPageEven(widget.pageIndex) ? _buildQuickActionsColumn() : const SizedBox.shrink(),
           ),
           Container(
             padding: EdgeInsets.only(right: note_helper.isPageEven(widget.pageIndex) ? 0 : CoreDimensions.paddingXS),
-            width: note_helper.isPageEven(widget.pageIndex) ? context.screenWidth * 0.9 : context.screenWidth * 0.1,
+            width: note_helper.isPageEven(widget.pageIndex) ? _noteBookContentWidth : _noteBookMarginWidth,
             child: note_helper.isPageEven(widget.pageIndex) ? const SizedBox.shrink() : _buildQuickActionsColumn(),
           ),
         ],
@@ -109,16 +105,16 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
             child: Image.asset(
               Illustrations.home,
               color: ColorTokens.brandAccent,
-              height: context.screenHeight * 0.05,
-              width: context.screenHeight * 0.05,
+              height: _iconSize,
+              width: _iconSize,
             ),
           ),
           InkWell(
             onTap: () => saveNote(context, noteTextFieldController.text),
             child: CorePainterImage.sized(
               painter: PainterTokens.iconSaveNote,
-              height: context.screenHeight * 0.05,
-              width: context.screenHeight * 0.05,
+              height: _iconSize,
+              width: _iconSize,
             ),
           ),
           if (cubit.state.currentNote.entry != null)
@@ -126,8 +122,8 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
               onTap: showDeleteNotePopup,
               child: CorePainterImage.sized(
                 painter: PainterTokens.iconDeleteNote,
-                height: context.screenHeight * 0.05,
-                width: context.screenHeight * 0.05,
+                height: _iconSize,
+                width: _iconSize,
               ),
             ),
         ],
@@ -164,4 +160,10 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
     showNotificationSnackBar(CoreSnackBar.information(text: deletedYourNoteSnackBarText.tr()));
     await context.router.pop();
   }
+
+  double get _iconSize => context.screenHeight * 0.05;
+
+  double get _noteBookMarginWidth => context.screenHeight * 0.1;
+
+  double get _noteBookContentWidth => context.screenHeight * 0.9;
 }
