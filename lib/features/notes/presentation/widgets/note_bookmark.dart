@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/color_tokens.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
+import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/res/painters/bookmark_painter.dart';

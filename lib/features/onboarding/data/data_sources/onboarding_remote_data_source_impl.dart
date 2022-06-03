@@ -28,7 +28,7 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
         },
       );
     } catch (e) {
-      throw ServerException('An error occured in $markOnboardingAsSeenRemotely: $e');
+      throw ServerException('An error occurred in $markOnboardingAsSeenRemotely: $e');
     }
   }
 

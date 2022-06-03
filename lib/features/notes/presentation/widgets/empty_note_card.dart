@@ -6,7 +6,7 @@ import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/text_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
@@ -39,15 +39,15 @@ class EmptyNoteCard extends StatelessWidget {
 
   Widget _buildEmptyNoteDate(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-          right: note_helper.isPageEven(pageIndex) ? CoreDimensions.paddingXS : 0,
-          left: note_helper.isPageEven(pageIndex) ? 0 : CoreDimensions.paddingXS,
+          right: note_helper.isPageEven(pageIndex) ? CoreDimensions.paddingS : 0,
+          left: note_helper.isPageEven(pageIndex) ? 0 : CoreDimensions.paddingS,
         ),
         child: Align(
           alignment: note_helper.isPageEven(pageIndex) ? Alignment.topRight : Alignment.topLeft,
           child: Column(
             children: [
               SizedBox(height: context.screenHeight * 0.05),
-              Text(emptyNoteNoteDate.toReadableDate, style: TextTokens.titleLg(context)),
+              Text(emptyNoteNoteDate.toReadableDate, style: TextTokens.titleLg(context: context)),
             ],
           ),
         ),
@@ -65,7 +65,7 @@ class EmptyNoteCard extends StatelessWidget {
             Text(
               emptyNotePageAddNewNoteText.tr(),
               textAlign: note_helper.isPageEven(pageIndex) ? TextAlign.right : TextAlign.left,
-              style: TextTokens.titleMd(context),
+              style: TextTokens.titleMd(context: context),
             ),
             // To remove
             Center(

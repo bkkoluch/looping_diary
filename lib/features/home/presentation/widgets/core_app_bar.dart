@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/color_tokens.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
+import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 
 class CoreAppBar extends StatelessWidget implements PreferredSizeWidget {

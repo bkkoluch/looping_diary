@@ -19,6 +19,11 @@ class ColorTokens {
   static const Color brownDarker = Color(0xFFFBA04B);
 
   static const Color transparent = Colors.transparent;
+
+  static const Color systemSuccess = Color(0xFF0B9854);
+  static const Color systemInformation = Color(0xFF1777BD);
+  static const Color systemWarning = Color(0xFFFFD53E);
+  static const Color systemError = Color(0xFFF3203A);
 }
 
 List<Color> bookmarkColors = [

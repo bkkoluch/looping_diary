@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/text_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 
 class CoreTextField extends StatelessWidget {
   const CoreTextField({
@@ -22,7 +22,7 @@ class CoreTextField extends StatelessWidget {
         controller: controller,
         maxLines: maxLines,
         onChanged: onChanged,
-        style: TextTokens.bodyLg(context),
+        style: TextTokens.bodyLg(context: context),
         decoration: const InputDecoration(border: InputBorder.none),
       );
 }
