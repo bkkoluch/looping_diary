@@ -20,13 +20,13 @@ void main() {
     test(
       'should correctly set onboardingSeen variable in SharedPreferences',
       () async {
-        // arrange
+        // Arrange
         when(() => sharedPreferences.setBool(captureAny(), captureAny())).thenAnswer((_) async => true);
 
-        // act
+        // Act
         await onboardingLocalDataSourceImpl.markOnboardingAsSeenLocally();
 
-        // assert
+        // Assert
         verify(() => sharedPreferences.setBool(SharedPrefsKeys.onboardingSeen(), true)).called(1);
         verifyNoMoreInteractions(sharedPreferences);
       },
@@ -37,13 +37,13 @@ void main() {
     test(
       'should return false if SharedPreferences returns null',
       () async {
-        // arrange
+        // Arrange
         when(() => sharedPreferences.getBool(captureAny())).thenAnswer((_) => null);
 
-        // act
+        // Act
         final result = onboardingLocalDataSourceImpl.getOnboardingSeen();
 
-        // assert
+        // Assert
         expect(result, false);
         verify(() => sharedPreferences.getBool(SharedPrefsKeys.onboardingSeen())).called(1);
       },
@@ -52,13 +52,13 @@ void main() {
     test(
       'should return true if SharedPreferences returns true',
       () async {
-        // arrange
+        // Arrange
         when(() => sharedPreferences.getBool(captureAny())).thenAnswer((_) => true);
 
-        // act
+        // Act
         final result = onboardingLocalDataSourceImpl.getOnboardingSeen();
 
-        // assert
+        // Assert
         expect(result, isTrue);
         verify(() => sharedPreferences.getBool(SharedPrefsKeys.onboardingSeen())).called(1);
       },

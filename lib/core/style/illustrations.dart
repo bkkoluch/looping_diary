@@ -1,4 +1,6 @@
+import 'package:looping_diary/res/painters/icons/delete_note_painter.dart';
 import 'package:looping_diary/res/painters/icons/info_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/save_note_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/add_notes_illustration_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/notebook_illustration_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/notes_illustration_painter.dart';
@@ -26,6 +28,8 @@ class Illustrations {
 class PainterTokens {
   // Icons
   static const iconInfo = InfoIconPainter();
+  static const iconDeleteNote = DeleteNotePainter();
+  static const iconSaveNote = SaveNotePainter();
 
   // Illustrations
   static const addNotes = AddNotesIllustrationPainter();

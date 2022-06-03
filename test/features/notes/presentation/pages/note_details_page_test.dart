@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/injector/injector.dart';
@@ -12,7 +13,14 @@ import '../../../../test_setup.dart';
 
 void main() {
   setUpAll(() {
-    getIt.registerFactory<NoteCubit>(MockNoteCubit.new);
+    final NoteCubit noteCubit = MockNoteCubit();
+    getIt.registerFactory<NoteCubit>(() => noteCubit);
+
+    whenListen(
+      noteCubit,
+      Stream.fromIterable([NoteState.initial().copyWith(status: NoteStateStatus.loaded)]),
+      initialState: NoteState.initial(),
+    );
     baseSetup();
   });
 

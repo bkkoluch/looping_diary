@@ -23,14 +23,14 @@ void main() {
     test(
       'should properly call remote data sources',
       () async {
-        // arrange
+        // Arrange
         when(() => onboardingLocalDataSource.markOnboardingAsSeenLocally()).thenAnswer((_) async => null);
         when(() => onboardingRemoteDataSource.markOnboardingAsSeenRemotely()).thenAnswer((_) async => null);
 
-        // act
+        // Act
         await onboardingRepository.markOnboardingAsSeen();
 
-        // assert
+        // Assert
         verify(() => onboardingLocalDataSource.markOnboardingAsSeenLocally()).called(1);
         verify(() => onboardingRemoteDataSource.markOnboardingAsSeenRemotely()).called(1);
       },

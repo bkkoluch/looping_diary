@@ -14,14 +14,15 @@ import 'package:looping_diary/core/network/firebase_json_converter.dart' as _i8;
 import 'package:looping_diary/core/network/firebase_rest_client.dart' as _i9;
 import 'package:looping_diary/core/services/analytics/crash_reporting_service.dart' as _i21;
 import 'package:looping_diary/core/services/navigation/navigation_service.dart' as _i3;
-import 'package:looping_diary/core/services/registration_service.dart' as _i35;
+import 'package:looping_diary/core/services/registration_service.dart' as _i36;
 import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart' as _i22;
 import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source_impl.dart' as _i23;
 import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source.dart' as _i11;
 import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source_impl.dart' as _i12;
 import 'package:looping_diary/features/notes/data/repositories/notes_repository_impl.dart' as _i25;
 import 'package:looping_diary/features/notes/domain/repositories/notes_repository.dart' as _i24;
-import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart' as _i32;
+import 'package:looping_diary/features/notes/domain/use_cases/delete_note_use_case.dart' as _i32;
+import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart' as _i33;
 import 'package:looping_diary/features/notes/domain/use_cases/save_all_notes_use_case.dart' as _i30;
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart' as _i31;
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart' as _i10;
@@ -31,8 +32,8 @@ import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_r
 import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_remote_data_source_impl.dart' as _i15;
 import 'package:looping_diary/features/onboarding/data/repositories/onboarding_repository.dart' as _i28;
 import 'package:looping_diary/features/onboarding/domain/repositories/onboarding_repository_impl.dart' as _i29;
-import 'package:looping_diary/features/onboarding/domain/use_cases/get_onboarding_seen_use_case.dart' as _i33;
-import 'package:looping_diary/features/onboarding/domain/use_cases/mark_onboarding_as_seen_use_case.dart' as _i34;
+import 'package:looping_diary/features/onboarding/domain/use_cases/get_onboarding_seen_use_case.dart' as _i34;
+import 'package:looping_diary/features/onboarding/domain/use_cases/mark_onboarding_as_seen_use_case.dart' as _i35;
 import 'package:looping_diary/features/onboarding/presentation/cubits/onboarding_cubit.dart' as _i13;
 import 'package:looping_diary/features/user/data/datasources/user_local_data_source.dart' as _i17;
 import 'package:looping_diary/features/user/data/datasources/user_local_data_source_impl.dart' as _i18;
@@ -75,13 +76,15 @@ _i1.GetIt $initGetIt(_i1.GetIt get, {String? environment, _i2.EnvironmentFilter?
   gh.factoryAsync<_i30.SaveAllNotesUseCase>(
       () async => _i30.SaveAllNotesUseCase(await get.getAsync<_i24.NotesRepository>()));
   gh.factoryAsync<_i31.SaveNoteUseCase>(() async => _i31.SaveNoteUseCase(await get.getAsync<_i24.NotesRepository>()));
-  gh.factoryAsync<_i32.GetAllNotesUseCase>(
-      () async => _i32.GetAllNotesUseCase(await get.getAsync<_i24.NotesRepository>()));
-  gh.factoryAsync<_i33.GetOnboardingSeenUseCase>(
-      () async => _i33.GetOnboardingSeenUseCase(await get.getAsync<_i28.OnboardingRepository>()));
-  gh.factoryAsync<_i34.MarkOnboardingAsSeenUseCase>(
-      () async => _i34.MarkOnboardingAsSeenUseCase(await get.getAsync<_i28.OnboardingRepository>()));
+  gh.factoryAsync<_i32.DeleteNoteUseCase>(
+      () async => _i32.DeleteNoteUseCase(await get.getAsync<_i24.NotesRepository>()));
+  gh.factoryAsync<_i33.GetAllNotesUseCase>(
+      () async => _i33.GetAllNotesUseCase(await get.getAsync<_i24.NotesRepository>()));
+  gh.factoryAsync<_i34.GetOnboardingSeenUseCase>(
+      () async => _i34.GetOnboardingSeenUseCase(await get.getAsync<_i28.OnboardingRepository>()));
+  gh.factoryAsync<_i35.MarkOnboardingAsSeenUseCase>(
+      () async => _i35.MarkOnboardingAsSeenUseCase(await get.getAsync<_i28.OnboardingRepository>()));
   return get;
 }
 
-class _$RegistrationService extends _i35.RegistrationService {}
+class _$RegistrationService extends _i36.RegistrationService {}

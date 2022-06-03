@@ -37,12 +37,12 @@ void main() {
   test(
     'should make a call to FirebaseCrashlytics when logError is invoked -- null errorDescription and no exception',
     () {
-      // arrange
+      // Arrange
 
-      // act
+      // Act
       crashReportingService.logError(null, stackTrace: tStackTrace);
 
-      // assert
+      // Assert
       verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)).called(1);
       verify(
         () => firebaseCrashlytics.recordError(
@@ -58,16 +58,16 @@ void main() {
   test(
     'should make a call to FirebaseCrashlytics when logError is invoked -- non null errorDescription and with exception',
     () async {
-      // arrange
+      // Arrange
 
-      // act
+      // Act
       crashReportingService.logError(
         tMessage,
         stackTrace: tStackTrace,
         exception: tException,
       );
 
-      // assert
+      // Assert
       verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)).called(1);
       verify(
         () => firebaseCrashlytics.recordError(

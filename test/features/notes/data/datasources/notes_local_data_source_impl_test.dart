@@ -24,13 +24,13 @@ void main() {
     test(
       'should make a call to sharedPreferences.setString',
       () async {
-        // arrange
+        // Arrange
         when(() => _mockedSharedPreferences.setString(captureAny(), captureAny())).thenAnswer((_) async => true);
 
-        // act
+        // Act
         await _notesLocalDataSource.saveNote(tNoteDTO);
 
-        // assert
+        // Assert
         verify(() => _mockedSharedPreferences.getString(SharedPrefsKeys.allNotes()));
         verify(() => _mockedSharedPreferences.setString(SharedPrefsKeys.allNotes(), jsonEncode([tNoteDTO]))).called(1);
         verifyNoMoreInteractions(_mockedSharedPreferences);

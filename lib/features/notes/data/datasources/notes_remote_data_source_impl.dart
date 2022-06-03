@@ -46,4 +46,22 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
       throw ServerException('An error occurred in $getAllNotes: $e');
     }
   }
+
+  @override
+  Future<void> deleteNote(NoteDTO noteDTO) async {
+    try {
+      await firebaseRestClient.patchWithQueryParameters(
+        Endpoints.notes,
+        getIt<FirebaseJsonConverter>().convertToFirebaseJson(
+          notesField,
+          {},
+        ),
+        {
+          updateMaskFieldPathsString: [noteDTO.noteDate.withAppendedChars]
+        },
+      );
+    } catch (e) {
+      throw ServerException('An error occurred in $deleteNote: $e');
+    }
+  }
 }

@@ -25,7 +25,7 @@ void main() {
     test(
       'should make a call to firebaseRestClient.patchWithQueryParameters on a successful saveNote call',
       () async {
-        // arrange
+        // Arrange
         when(
           () => _mockFirebaseRestClient.patchWithQueryParameters(
             captureAny(),
@@ -34,10 +34,10 @@ void main() {
           ),
         ).thenAnswer((_) async => null);
 
-        // act
+        // Act
         await _notesRemoteDataSource.saveNote(tNoteDTO);
 
-        // assert
+        // Assert
         verify(
           () => _mockFirebaseRestClient.patchWithQueryParameters(
             Endpoints.notes,
@@ -57,13 +57,63 @@ void main() {
     test(
       'should throw ServerException on an unsuccessful call',
       () async {
-        // arrange
-        when(() => _mockFirebaseRestClient.patch(captureAny(), captureAny())).thenThrow(tServerException);
+        // Arrange
+        when(() => _mockFirebaseRestClient.patchWithQueryParameters(captureAny(), captureAny(), captureAny()))
+            .thenThrow(tServerException);
 
-        // act
+        // Act
         final result = _notesRemoteDataSource.saveNote;
 
-        // assert
+        // Assert
+        expect(() async => await result(tNoteDTO), throwsA(isA<ServerException>()));
+      },
+    );
+  });
+
+  group('deleteNote', () {
+    test(
+      'should make a call to firebaseRestClient.patchWithQueryParameters on a successful deleteNote call',
+      () async {
+        // Arrange
+        when(
+          () => _mockFirebaseRestClient.patchWithQueryParameters(
+            captureAny(),
+            captureAny(),
+            captureAny(),
+          ),
+        ).thenAnswer((_) async => null);
+
+        // Act
+        await _notesRemoteDataSource.deleteNote(tNoteDTO);
+
+        // Assert
+        verify(
+          () => _mockFirebaseRestClient.patchWithQueryParameters(
+            Endpoints.notes,
+            getIt<FirebaseJsonConverter>().convertToFirebaseJson(
+              'notes',
+              {},
+            ),
+            {
+              'updateMask.fieldPaths': [tNoteDTO.noteDate.withAppendedChars]
+            },
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(_mockFirebaseRestClient);
+      },
+    );
+
+    test(
+      'should throw ServerException on an unsuccessful call',
+      () async {
+        // Arrange
+        when(() => _mockFirebaseRestClient.patchWithQueryParameters(captureAny(), captureAny(), captureAny()))
+            .thenThrow(tServerException);
+
+        // Act
+        final result = _notesRemoteDataSource.saveNote;
+
+        // Assert
         expect(() async => await result(tNoteDTO), throwsA(isA<ServerException>()));
       },
     );

@@ -19,9 +19,6 @@ class FirebaseRestClient {
 
   Future<String?> get _userId async => (await getIt.getAsync<UserRepository>()).getUserId();
 
-  Future patch(String uri, Map<String, dynamic> json) async =>
-      http.patch(Uri.parse('$_baseUrl${await _userId}$uri'), body: json);
-
   Future patchWithQueryParameters(String uri, Map<String, dynamic> json, Map<String, dynamic> queryParameters) async =>
       http.patch(
         Uri.parse('$_baseUrl${await _userId}$uri').replace(queryParameters: queryParameters),
@@ -44,6 +41,4 @@ class FirebaseRestClient {
 
     return resultAfterConversion;
   }
-
-  Future<void> delete(String uri) async => http.delete(Uri.parse('$_baseUrl${await _userId}$uri'));
 }

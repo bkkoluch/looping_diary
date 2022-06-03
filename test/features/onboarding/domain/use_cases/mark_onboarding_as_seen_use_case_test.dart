@@ -18,13 +18,13 @@ void main() {
   test(
     'should properly call repository',
     () async {
-      // arrange
+      // Arrange
       when(() => onboardingRepository.markOnboardingAsSeen()).thenAnswer((_) async => null);
 
-      // act
+      // Act
       await markOnboardingAsSeenUseCase.call();
 
-      // assert
+      // Assert
       verify(() => onboardingRepository.markOnboardingAsSeen()).called(1);
     },
   );
