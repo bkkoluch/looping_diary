@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/text_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 
@@ -26,7 +26,7 @@ class NoteContent extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: context.screenHeight * 0.05),
-                AutoSizeText(noteDate.toReadableDate, style: TextTokens.titleLg(context)),
+                AutoSizeText(noteDate.toReadableDate, style: TextTokens.titleLg(context: context)),
               ],
             ),
           ),

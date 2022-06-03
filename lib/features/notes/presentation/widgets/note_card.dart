@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/text_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/note_content.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
@@ -34,7 +34,7 @@ class NoteCard extends StatelessWidget {
                   note.entry ?? '',
                   overflow: TextOverflow.ellipsis,
                   maxLines: note_helper.numberOfNotebookLinesOnAPage,
-                  style: TextTokens.bodyLg(context),
+                  style: TextTokens.bodyLg(context: context),
                   minFontSize: _minimumNoteEntryFontSize,
                 ),
               ],

@@ -17,15 +17,19 @@ class FirebaseRestClient {
   @factoryMethod
   static Future<FirebaseRestClient> create() async => const FirebaseRestClient();
 
-  String? get _userId => getIt<UserRepository>().getUserId();
+  Future<String?> get _userId async => (await getIt.getAsync<UserRepository>()).getUserId();
 
-  Future patch(String uri, Map<String, dynamic> json) => http.patch(Uri.parse('$_baseUrl$_userId$uri'), body: json);
+  Future patch(String uri, Map<String, dynamic> json) async =>
+      http.patch(Uri.parse('$_baseUrl${await _userId}$uri'), body: json);
 
-  Future patchWithQueryParameters(String uri, Map<String, dynamic> json, Map<String, dynamic> queryParameters) =>
-      http.patch(Uri.parse('$_baseUrl$_userId$uri').replace(queryParameters: queryParameters), body: jsonEncode(json));
+  Future patchWithQueryParameters(String uri, Map<String, dynamic> json, Map<String, dynamic> queryParameters) async =>
+      http.patch(
+        Uri.parse('$_baseUrl${await _userId}$uri').replace(queryParameters: queryParameters),
+        body: jsonEncode(json),
+      );
 
   Future<Map<String, dynamic>?> get(String uri) async {
-    final http.Response result = await http.get(Uri.parse('$_baseUrl$_userId$uri'));
+    final http.Response result = await http.get(Uri.parse('$_baseUrl${await _userId}$uri'));
 
     final decodedJson = json.decode(result.body);
 
@@ -41,5 +45,5 @@ class FirebaseRestClient {
     return resultAfterConversion;
   }
 
-  Future<void> delete(String uri) => http.delete(Uri.parse('$_baseUrl$_userId$uri'));
+  Future<void> delete(String uri) async => http.delete(Uri.parse('$_baseUrl${await _userId}$uri'));
 }

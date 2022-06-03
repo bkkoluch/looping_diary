@@ -42,11 +42,17 @@ String pageIndexToDayAndMonth(int pageIndex) {
   return '$day/$currentMonth';
 }
 
-double calculateTextSize(BuildContext context) {
+double calculateTextSize(BuildContext? context) {
+  if (context == null) {
+    return 1;
+  }
+
+  // TODO: work on text size to scale correctly on different phones
+
   final screenHeightMultiplier = context.screenHeight * 0.01;
   final singleLinesHeightFactor = numberOfNotebookLinesOnAPage / screenHeightMultiplier;
-  final scaledTextHeight = 1.81 / singleLinesHeightFactor * 2.45;
-
+  // final scaledTextHeight = 1.81 / singleLinesHeightFactor * 2.45;
+  final scaledTextHeight = 4.4345 / singleLinesHeightFactor;
   return scaledTextHeight;
 }
 

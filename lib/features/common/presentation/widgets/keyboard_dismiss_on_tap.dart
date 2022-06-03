@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:looping_diary/core/utils/keyboard_utils.dart' as keyboard_utils;
 
 /// KeyboardDismissOnTap widget
 ///
@@ -12,7 +13,7 @@ class KeyboardDismissOnTapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: FocusScope.of(context).unfocus,
+        onTap: keyboard_utils.hideKeyboard,
         child: child,
       );
 }

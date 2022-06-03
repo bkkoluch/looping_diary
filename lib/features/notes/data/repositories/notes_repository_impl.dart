@@ -27,18 +27,21 @@ class NotesRepositoryImpl implements NotesRepository {
   @override
   Future<Either<Failure, List<NoteDTO>>> getAllNotes() async {
     try {
-      final List<NoteDTO> localNotes = _notesLocalDataSource.getAllNotes();
+      // final List<NoteDTO> localNotes = _notesLocalDataSource.getAllNotes();
 
       final List<NoteDTO> remoteNotes = await _notesRemoteDataSource.getAllNotes();
 
-      if (remoteNotes.length > localNotes.length) {
-        await _notesLocalDataSource.saveAllNotes(remoteNotes);
-        return Right(remoteNotes);
-      } else {
-        return Right(localNotes);
-      }
+      // if (remoteNotes.length > localNotes.length) {
+      await _notesLocalDataSource.saveAllNotes(remoteNotes);
+      return Right(remoteNotes);
+      // } else {
+      //   return Right(localNotes);
+      // }
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<void> saveAllNotes(List<NoteDTO> allNotes) async => await _notesLocalDataSource.saveAllNotes(allNotes);
 }

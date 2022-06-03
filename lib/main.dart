@@ -6,6 +6,7 @@ import 'package:looping_diary/core/localizer/localizer.dart';
 import 'package:looping_diary/firebase_options.dart';
 import 'package:looping_diary/looping_diary_app.dart';
 import 'package:looping_diary/utils/constants.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 Future<void> main() async {
   await configureInjector();
@@ -16,7 +17,7 @@ Future<void> main() async {
     EasyLocalization(
       path: translationFolderPath,
       supportedLocales: supportedLocales,
-      child: LoopingDiaryApp(),
+      child: OverlaySupport.global(child: LoopingDiaryApp()),
     ),
   );
 }

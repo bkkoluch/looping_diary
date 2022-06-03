@@ -5,7 +5,7 @@ import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
-import 'package:looping_diary/core/style/color_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => DeviceSizeBox(
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: ColorTokens.brandSecondaryVeryLight,
           body: Stack(
             children: [
@@ -59,11 +60,7 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-  Widget _buildLoadingIndicator() => const Center(
-        child: CircularProgressIndicator(
-          color: ColorTokens.brandAccent,
-        ),
-      );
+  Widget _buildLoadingIndicator() => const Center(child: CircularProgressIndicator(color: ColorTokens.brandAccent));
 
   Widget _buildNotesLists() {
     final List<List<Note>> notesDividedByDayAndMonth = cubit.state.notesSortedByDayAndYears;
@@ -87,7 +84,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _pushAddNotePageAndScrollToItWhenPopped(BuildContext context, Note note, int pageIndex) => context.router
-      .push(NoteDetailsRoute(note: note, pageIndex: pageIndex))
-      .whenComplete(() => notesCarrouselController.jumpToPage(pageIndex));
+  void _pushAddNotePageAndScrollToItWhenPopped(BuildContext context, Note note, int pageIndex) =>
+      context.router.push(NoteDetailsRoute(note: note, pageIndex: pageIndex)).whenComplete(() {
+        if (notesCarrouselController.hasClients) {
+          notesCarrouselController.jumpToPage(pageIndex);
+        }
+      });
 }

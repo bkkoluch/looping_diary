@@ -10,7 +10,7 @@ extension DateTimeExtensions on DateTime {
     int days = 0;
 
     while (tempMonth > 1) {
-      days = days + _numberOfDaysByMonth[tempMonth - 1];
+      days = days + _numberOfDaysByMonth[tempMonth - 2];
       tempMonth--;
     }
 

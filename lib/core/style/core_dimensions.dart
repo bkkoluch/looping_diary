@@ -12,6 +12,8 @@ class CoreDimensions {
 
   // Spacings
   static const double spacingOne = 1;
+  static const double spacingS = 8;
+  static const double spacingMS = 12;
   static const double spacingL = 24;
   static const double spacingMXL = 36;
   static const double spacingXL = 48;
@@ -21,6 +23,7 @@ class CoreDimensions {
   // Radius
   static const double defaultAppBarBorderRadius = 20;
   static const double noteCardBorderRadius = 20;
+  static const double coreSnackBarBorderRadius = 8;
 
   // Various
   static const double bottomNavigationBarHeight = 60;
