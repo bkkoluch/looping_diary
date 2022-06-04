@@ -25,13 +25,13 @@ void main() {
     test(
       'should return user id when UserLocalDataSource.getUserId is not null',
       () async {
-        // arrange
+        // Arrange
         when(() => mockedUserLocalDataSource.getUserId()).thenAnswer((_) => tId);
 
-        // act
+        // Act
         final result = userRepository.getUserId();
 
-        // assert
+        // Assert
         expect(result, tId);
         verify(() => mockedUserLocalDataSource.getUserId()).called(1);
         verifyNoMoreInteractions(mockedUserLocalDataSource);
@@ -41,13 +41,13 @@ void main() {
     test(
       'should return null when UserLocalDataSource.getUserId is null',
       () async {
-        // arrange
+        // Arrange
         when(() => mockedUserLocalDataSource.getUserId()).thenAnswer((_) => null);
 
-        // act
+        // Act
         final result = userRepository.getUserId();
 
-        // assert
+        // Assert
         expect(result, null);
         verify(() => mockedUserLocalDataSource.getUserId()).called(1);
         verifyNoMoreInteractions(mockedUserLocalDataSource);

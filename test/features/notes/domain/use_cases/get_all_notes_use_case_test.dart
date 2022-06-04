@@ -21,13 +21,13 @@ void main() {
   test(
     'should return list of Notes on a successful call',
     () async {
-      // arrange
+      // Arrange
       when(() => notesRepository.getAllNotes()).thenAnswer((_) async => const Right([tNoteDTO]));
 
-      // act
+      // Act
       final result = await getAllNotesUseCase.call();
 
-      // assert
+      // Assert
       result.fold(
         (_) => null,
         (notes) {
@@ -41,13 +41,13 @@ void main() {
   test(
     'should return an empty list on a successful call when repository returns an empty list',
     () async {
-      // arrange
+      // Arrange
       when(() => notesRepository.getAllNotes()).thenAnswer((_) async => const Right([]));
 
-      // act
+      // Act
       final result = await getAllNotesUseCase.call();
 
-      // assert
+      // Assert
 
       result.fold(
         (_) => null,
@@ -62,13 +62,13 @@ void main() {
   test(
     'should return an error if the call is unsuccessful',
     () async {
-      // arrange
+      // Arrange
       when(() => notesRepository.getAllNotes()).thenAnswer((_) async => const Left(tServerFailure));
 
-      // act
+      // Act
       final result = await getAllNotesUseCase.call();
 
-      // assert
+      // Assert
       verify(() => notesRepository.getAllNotes());
       expect(result, const Left(tServerFailure));
       verifyNoMoreInteractions(notesRepository);

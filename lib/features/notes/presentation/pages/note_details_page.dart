@@ -8,6 +8,7 @@ import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
 import 'package:looping_diary/core/ui/snack_bar.dart';
 import 'package:looping_diary/core/utils/keyboard_utils.dart' as keyboard_utils;
+import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_snackbar.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_text_field.dart';
 import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
@@ -15,7 +16,8 @@ import 'package:looping_diary/features/common/presentation/widgets/keyboard_dism
 import 'package:looping_diary/features/common/presentation/widgets/note_content.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
-import 'package:looping_diary/features/notes/presentation/dialogs/are_you_sure_dialog.dart';
+import 'package:looping_diary/features/notes/presentation/dialogs/delete_note_dialog.dart';
+import 'package:looping_diary/features/notes/presentation/dialogs/leave_without_saving_note_dialog.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 import 'package:looping_diary/res/strings.dart';
@@ -32,6 +34,7 @@ class NoteDetailsPage extends StatefulWidget {
 
 class _NoteDetailsPageState extends State<NoteDetailsPage> {
   final TextEditingController noteTextFieldController = TextEditingController();
+  final FocusNode noteTextFieldFocusNode = FocusNode();
   final NoteCubit cubit = getIt<NoteCubit>();
 
   @override
@@ -65,11 +68,13 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
             noteEntryWidget: Column(
               children: [
                 SizedBox(height: context.screenHeight * 0.092),
-                CoreTextField(
-                  focusNode: FocusNode(),
-                  controller: noteTextFieldController,
-                  maxLines: context.isKeyboardVisible ? 11 : 16,
-                  onChanged: (_) => setState(() {}),
+                GestureDetector(
+                  onTap: noteTextFieldFocusNode.requestFocus,
+                  child: CoreTextField(
+                    focusNode: noteTextFieldFocusNode,
+                    controller: noteTextFieldController,
+                    maxLines: context.isKeyboardVisible ? 11 : 16,
+                  ),
                 ),
               ],
             ),
@@ -81,12 +86,12 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
         children: [
           Container(
             padding: EdgeInsets.only(left: note_helper.isPageEven(widget.pageIndex) ? CoreDimensions.paddingXS : 0),
-            width: note_helper.isPageEven(widget.pageIndex) ? context.screenWidth * 0.1 : context.screenWidth * 0.9,
+            width: note_helper.isPageEven(widget.pageIndex) ? _noteBookMarginWidth : _noteBookContentWidth,
             child: note_helper.isPageEven(widget.pageIndex) ? _buildQuickActionsColumn() : const SizedBox.shrink(),
           ),
           Container(
             padding: EdgeInsets.only(right: note_helper.isPageEven(widget.pageIndex) ? 0 : CoreDimensions.paddingXS),
-            width: note_helper.isPageEven(widget.pageIndex) ? context.screenWidth * 0.9 : context.screenWidth * 0.1,
+            width: note_helper.isPageEven(widget.pageIndex) ? _noteBookContentWidth : _noteBookMarginWidth,
             child: note_helper.isPageEven(widget.pageIndex) ? const SizedBox.shrink() : _buildQuickActionsColumn(),
           ),
         ],
@@ -100,25 +105,35 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
             child: Image.asset(
               Illustrations.home,
               color: ColorTokens.brandAccent,
-              height: context.screenHeight * 0.05,
+              height: _iconSize,
+              width: _iconSize,
             ),
           ),
           InkWell(
             onTap: () => saveNote(context, noteTextFieldController.text),
-            child: Image.asset(
-              Illustrations.newNote,
-              color: ColorTokens.brandAccent,
-              height: context.screenHeight * 0.05,
+            child: CorePainterImage.sized(
+              painter: PainterTokens.iconSaveNote,
+              height: _iconSize,
+              width: _iconSize,
             ),
           ),
+          if (cubit.state.currentNote.entry != null)
+            InkWell(
+              onTap: showDeleteNotePopup,
+              child: CorePainterImage.sized(
+                painter: PainterTokens.iconDeleteNote,
+                height: _iconSize,
+                width: _iconSize,
+              ),
+            ),
         ],
       );
 
   void popPageDependingOnContents(BuildContext context) async {
     await keyboard_utils.hideKeyboard();
-
+    noteTextFieldFocusNode.unfocus();
     if (cubit.state.currentNote.entry != noteTextFieldController.text) {
-      await AreYouSureDialog().show(context: context);
+      await LeaveWithoutSavingNoteDialog().show(context: context);
     } else {
       await context.router.pop();
     }
@@ -130,6 +145,25 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
     cubit
       ..updateNoteEntry(noteTextFieldController.text)
       ..saveNote();
+
     showNotificationSnackBar(CoreSnackBar.information(text: savedYourNoteSnackBarText.tr()));
   }
+
+  void showDeleteNotePopup() async {
+    noteTextFieldFocusNode.unfocus();
+    await keyboard_utils.hideKeyboard();
+    await DeleteNoteDialog(deleteTheNoteAndShowASnackBar).show(context: context);
+  }
+
+  void deleteTheNoteAndShowASnackBar() async {
+    cubit.deleteNote();
+    showNotificationSnackBar(CoreSnackBar.information(text: deletedYourNoteSnackBarText.tr()));
+    await context.router.pop();
+  }
+
+  double get _iconSize => context.screenHeight * 0.05;
+
+  double get _noteBookMarginWidth => context.screenHeight * 0.1;
+
+  double get _noteBookContentWidth => context.screenHeight * 0.9;
 }

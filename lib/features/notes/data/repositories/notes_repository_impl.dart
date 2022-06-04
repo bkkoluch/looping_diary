@@ -44,4 +44,13 @@ class NotesRepositoryImpl implements NotesRepository {
 
   @override
   Future<void> saveAllNotes(List<NoteDTO> allNotes) async => await _notesLocalDataSource.saveAllNotes(allNotes);
+
+  @override
+  Future<Either<Failure, void>> deleteNote(NoteDTO noteDTO) async {
+    try {
+      return Right(await _notesRemoteDataSource.deleteNote(noteDTO));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

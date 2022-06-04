@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/res/strings.dart';
 
-class AreYouSureDialog {
+class LeaveWithoutSavingNoteDialog {
   Future<void> show({required BuildContext context}) async => await AwesomeDialog(
         context: context,
         animType: AnimType.BOTTOMSLIDE,
@@ -14,9 +14,9 @@ class AreYouSureDialog {
         dismissOnTouchOutside: false,
         title: areYouSureDialogTitle.tr(),
         desc: areYouSureDialogSubtitle.tr(),
-        btnCancelText: areYouSureDialogCancelButtonText.tr(),
-        btnOkText: areYouSureDialogOkButtonText.tr(),
-        btnCancelOnPress: () {},
-        btnOkOnPress: () => context.router.pop(),
+        btnOkText: areYouSureDialogCancelButtonText.tr(),
+        btnCancelText: areYouSureDialogOkButtonText.tr(),
+        btnOkOnPress: () {},
+        btnCancelOnPress: () => context.router.pop(),
       ).show();
 }

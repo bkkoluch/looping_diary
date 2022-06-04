@@ -28,14 +28,14 @@ void main() {
     test(
       'should make a call to both data sources on successful saveNote call',
       () async {
-        // arrange
+        // Arrange
         when(() => notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
         when(() => notesRemoteDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
 
-        // act
+        // Act
         final result = await notesRepositoryImpl.saveNote(tNoteDTO);
 
-        // assert
+        // Assert
         expect(result, const Right(null));
         verify(() => notesLocalDataSource.saveNote(tNoteDTO)).called(1);
         verify(() => notesRemoteDataSource.saveNote(tNoteDTO)).called(1);
@@ -47,18 +47,52 @@ void main() {
     test(
       'should return ServerFailure on an unsuccessful call to any datasource',
       () async {
-        // arrange
+        // Arrange
         when(() => notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
         when(() => notesRemoteDataSource.saveNote(captureAny())).thenThrow(ServerException('Error'));
 
-        // act
+        // Act
         final result = await notesRepositoryImpl.saveNote(tNoteDTO);
 
-        // assert
+        // Assert
         result.fold((failure) => expect(failure, isInstanceOf<ServerFailure>()), (_) {});
         verify(() => notesLocalDataSource.saveNote(tNoteDTO)).called(1);
         verify(() => notesRemoteDataSource.saveNote(tNoteDTO)).called(1);
         verifyNoMoreInteractions(notesLocalDataSource);
+        verifyNoMoreInteractions(notesRemoteDataSource);
+      },
+    );
+  });
+
+  group('deleteNote', () {
+    test(
+      'should make a call to both data sources on successful deleteNote call',
+      () async {
+        // Arrange
+        when(() => notesRemoteDataSource.deleteNote(captureAny())).thenAnswer((_) async => null);
+
+        // Act
+        final result = await notesRepositoryImpl.deleteNote(tNoteDTO);
+
+        // Assert
+        expect(result, const Right(null));
+        verify(() => notesRemoteDataSource.deleteNote(tNoteDTO)).called(1);
+        verifyNoMoreInteractions(notesRemoteDataSource);
+      },
+    );
+
+    test(
+      'should return ServerFailure on an unsuccessful call to any datasource',
+      () async {
+        // Arrange
+        when(() => notesRemoteDataSource.deleteNote(captureAny())).thenThrow(ServerException('Error'));
+
+        // Act
+        final result = await notesRepositoryImpl.deleteNote(tNoteDTO);
+
+        // Assert
+        result.fold((failure) => expect(failure, isInstanceOf<ServerFailure>()), (_) {});
+        verify(() => notesRemoteDataSource.deleteNote(tNoteDTO)).called(1);
         verifyNoMoreInteractions(notesRemoteDataSource);
       },
     );

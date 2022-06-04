@@ -21,13 +21,13 @@ void main() {
     test(
       'should properly call MarkOnboardingAsSeenUseCase',
       () async {
-        // arrange
+        // Arrange
         when(() => markOnboardingAsSeenUseCase.call()).thenAnswer((_) async => null);
 
-        // act
+        // Act
         await onboardingCubit.markOnboardingAsSeen();
 
-        // assert
+        // Assert
         verify(() => markOnboardingAsSeenUseCase.call()).called(1);
         verifyNoMoreInteractions(markOnboardingAsSeenUseCase);
       },

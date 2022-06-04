@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
+import 'package:looping_diary/features/notes/domain/use_cases/delete_note_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
@@ -14,8 +15,9 @@ import '../../../../test_mocks.dart';
 import '../../../../test_setup.dart';
 
 void main() {
-  late final GetAllNotesUseCase getAllNotesUseCase = MockGetAllNotesUseCase();
-  late final SaveNoteUseCase saveNoteUseCase = MockSaveNoteUseCase();
+  final GetAllNotesUseCase getAllNotesUseCase = MockGetAllNotesUseCase();
+  final SaveNoteUseCase saveNoteUseCase = MockSaveNoteUseCase();
+  final DeleteNoteUseCase deleteNoteUseCase = MockDeleteNoteUseCase();
 
   setUpAll(() {
     baseSetup();
@@ -23,7 +25,8 @@ void main() {
     getIt
       ..registerFactory<NoteCubit>(MockNoteCubit.new)
       ..registerFactoryAsync<GetAllNotesUseCase>(() async => getAllNotesUseCase)
-      ..registerFactoryAsync<SaveNoteUseCase>(() async => saveNoteUseCase);
+      ..registerFactoryAsync<SaveNoteUseCase>(() async => saveNoteUseCase)
+      ..registerFactoryAsync<DeleteNoteUseCase>(() async => deleteNoteUseCase);
   });
 
   final NoteState initialState = NoteState.initial();
@@ -150,6 +153,34 @@ void main() {
       expect: () => [
         initialState.copyWith(currentNote: Note.today),
       ],
+    );
+  });
+
+  group('NoteCubit::deleteNote', () {
+    blocTest<NoteCubit, NoteState>(
+      'should delete the note correctly',
+      skip: 1,
+      build: NoteCubit.new,
+      setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
+        when(() => deleteNoteUseCase(captureAny())).thenAnswer((_) async => const Right(null));
+      },
+      act: (cubit) => cubit
+        ..fetchAllNotes()
+        ..updateCurrentNote(tNote)
+        ..deleteNote(),
+      expect: () => [
+        initialState.copyWith(currentNote: tNote),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
+          status: NoteStateStatus.loaded,
+        ),
+      ],
+      verify: (cubit) {
+        verify(getAllNotesUseCase.call);
+        verify(() => deleteNoteUseCase(tNote)).called(1);
+      },
     );
   });
 }

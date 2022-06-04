@@ -91,7 +91,7 @@ class EmptyNoteCard extends StatelessWidget {
       );
 
   void _pushNoteDetailsPageAndScrollToNoteWhenPopped(BuildContext context) => context.router
-      .push(
+          .push(
         NoteDetailsRoute(
           pageIndex: pageIndex,
           note: Note(
@@ -100,7 +100,11 @@ class EmptyNoteCard extends StatelessWidget {
           ),
         ),
       )
-      .whenComplete(() => pageViewController.jumpToPage(pageIndex));
+          .whenComplete(() {
+        if (pageViewController.hasClients) {
+          pageViewController.jumpToPage(pageIndex);
+        }
+      });
 
   NoteDate get emptyNoteNoteDate => note_helper.getNoteDateFromPageIndex(pageIndex);
 }

@@ -7,6 +7,7 @@ import 'package:looping_diary/core/extensions/either_extensions.dart';
 import 'package:looping_diary/core/extensions/list_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
+import 'package:looping_diary/features/notes/domain/use_cases/delete_note_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_state.dart';
@@ -48,6 +49,22 @@ class NoteCubit extends Cubit<NoteState> {
   void updateNoteEntry(String entry) => emit(state.copyWith.currentNote(entry: entry));
 
   void updateCurrentNote(Note? note) => emit(state.copyWith(currentNote: note ?? Note.today));
+
+  void deleteNote() async {
+    final result = await (await getIt.getAsync<DeleteNoteUseCase>())(state.currentNote);
+
+    if (result is! Failure) {
+      final int listIndex = state.currentNote.noteDate.toDateTime.dayOfYear;
+
+      final List<List<Note>> notes = state.notesSortedByDayAndYears.clone();
+      final Note? noteToRemove =
+          notes[listIndex].firstWhereOrNull((note) => note.noteDate == state.currentNote.noteDate);
+
+      notes[listIndex].remove(noteToRemove);
+
+      emit(state.copyWith(notesSortedByDayAndYears: notes, status: NoteStateStatus.loaded));
+    }
+  }
 
   void _sortNotesByDayAndYear(List<Note> notes) {
     final List<List<Note>> sortedList = List.generate(366, (_) => []);

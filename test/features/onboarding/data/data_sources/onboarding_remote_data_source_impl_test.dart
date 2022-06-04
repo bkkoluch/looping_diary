@@ -28,7 +28,7 @@ void main() {
     test(
       'should call patchWithQueryParameters on a successful call without error',
       () async {
-        // arrange
+        // Arrange
         when(
           () => firebaseRestClient.patchWithQueryParameters(
             captureAny(),
@@ -37,10 +37,10 @@ void main() {
           ),
         ).thenAnswer((_) async => null);
 
-        // act
+        // Act
         await onboardingRemoteDataSource.markOnboardingAsSeenRemotely();
 
-        // assert
+        // Assert
         verify(
           () => firebaseRestClient.patchWithQueryParameters(
             Endpoints.userMilestones,
@@ -60,7 +60,7 @@ void main() {
     test(
       'should throw ServerException on an unsuccessful call',
       () async {
-        // arrange
+        // Arrange
         when(
           () => firebaseRestClient.patchWithQueryParameters(
             captureAny(),
@@ -69,10 +69,10 @@ void main() {
           ),
         ).thenThrow(tServerFailure);
 
-        // act
+        // Act
         final result = onboardingRemoteDataSource.markOnboardingAsSeenRemotely;
 
-        // assert
+        // Assert
         expect(() async => await result(), throwsA(isA<ServerException>()));
       },
     );
@@ -82,13 +82,13 @@ void main() {
     test(
       'should return onboardingSeen value on a successful call',
       () async {
-        // arrange
+        // Arrange
         when(() => firebaseRestClient.get(captureAny())).thenAnswer((_) async => {onboardingSeenField: true});
 
-        // act
+        // Act
         final result = await onboardingRemoteDataSource.getOnboardingSeen();
 
-        // assert
+        // Assert
         verify(() => firebaseRestClient.get(Endpoints.userMilestones)).called(1);
         expect(result, isTrue);
       },
@@ -97,13 +97,13 @@ void main() {
     test(
       'should throw ServerException on an unsuccessful call',
       () async {
-        // arrange
+        // Arrange
         when(() => firebaseRestClient.get(captureAny())).thenThrow(tServerException);
 
-        // act
+        // Act
         final result = onboardingRemoteDataSource.getOnboardingSeen;
 
-        // assert
+        // Assert
         expect(() async => await result(), throwsA(isA<ServerException>()));
         verify(() => firebaseRestClient.get(Endpoints.userMilestones)).called(1);
       },

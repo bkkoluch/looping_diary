@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart';
 import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source.dart';
 import 'package:looping_diary/features/notes/domain/repositories/notes_repository.dart';
+import 'package:looping_diary/features/notes/domain/use_cases/delete_note_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
@@ -22,6 +23,8 @@ class MockNoteCubit extends MockCubit<NoteState> implements NoteCubit {}
 class MockGetAllNotesUseCase extends Mock implements GetAllNotesUseCase {}
 
 class MockSaveNoteUseCase extends Mock implements SaveNoteUseCase {}
+
+class MockDeleteNoteUseCase extends Mock implements DeleteNoteUseCase {}
 
 class MockMarkOnboardingAsSeenUseCase extends Mock implements MarkOnboardingAsSeenUseCase {}
 

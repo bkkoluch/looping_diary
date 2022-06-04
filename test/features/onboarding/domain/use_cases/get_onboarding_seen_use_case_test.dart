@@ -17,13 +17,13 @@ void main() {
   test(
     'should properly call repository and return a value',
     () async {
-      // arrange
+      // Arrange
       when(() => onboardingRepository.getOnboardingSeen()).thenAnswer((_) async => true);
 
-      // act
+      // Act
       final result = await getOnboardingSeenUseCase.call();
 
-      // assert
+      // Assert
       verify(() => onboardingRepository.getOnboardingSeen()).called(1);
       expect(result, isTrue);
       verifyNoMoreInteractions(onboardingRepository);

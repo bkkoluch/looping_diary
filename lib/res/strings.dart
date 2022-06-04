@@ -22,10 +22,15 @@ const String loginScreenSignInWithGoogleLabel = 'loginScreenSignInWithGoogleLabe
 // Notes
 const String emptyNotePageAddNewNoteText = 'emptyNotePageAddNewNoteText';
 const String savedYourNoteSnackBarText = 'savedYourNoteSnackBarText';
+const String deletedYourNoteSnackBarText = 'deletedYourNoteSnackBarText';
 const String areYouSureDialogTitle = 'areYouSureDialogTitle';
 const String areYouSureDialogSubtitle = 'areYouSureDialogSubtitle';
 const String areYouSureDialogCancelButtonText = 'areYouSureDialogCancelButtonText';
 const String areYouSureDialogOkButtonText = 'areYouSureDialogOkButtonText';
+const String deleteNoteDialogTitle = 'deleteNoteDialogTitle';
+const String deleteNoteDialogSubtitle = 'deleteNoteDialogSubtitle';
+const String deleteNoteDialogCancelButtonText = 'deleteNoteDialogCancelButtonText';
+const String deleteNoteDialogOkButtonText = 'deleteNoteDialogOkButtonText';
 
 // FlutterFireUI Labels
 const String arrayLabel = 'arrayLabel';
