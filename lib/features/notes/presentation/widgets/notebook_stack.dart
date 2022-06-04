@@ -3,7 +3,7 @@ import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
-import 'package:looping_diary/res/painters/notebook_painter.dart';
+import 'package:looping_diary/res/painters/notebook_painters/notebook_painter.dart';
 
 class NotebookStack extends StatelessWidget {
   const NotebookStack({required this.pageIndex, required this.child, Key? key}) : super(key: key);

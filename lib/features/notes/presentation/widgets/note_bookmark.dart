@@ -4,7 +4,7 @@ import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
-import 'package:looping_diary/res/painters/bookmark_painter.dart';
+import 'package:looping_diary/res/painters/notebook_painters/bookmark_painter.dart';
 
 class NoteBookmark extends StatefulWidget {
   const NoteBookmark({

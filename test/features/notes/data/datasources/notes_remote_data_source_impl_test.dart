@@ -4,7 +4,7 @@ import 'package:looping_diary/core/errors/remote_exceptions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/network/firebase_json_converter.dart';
 import 'package:looping_diary/core/network/firebase_rest_client.dart';
-import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source_impl.dart';
+import 'package:looping_diary/features/notes/data/data_sources/notes_remote_data_source_impl.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../test_data.dart';

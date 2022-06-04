@@ -11,7 +11,7 @@ import 'package:looping_diary/features/common/presentation/widgets/core_painter_
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
-import 'package:looping_diary/res/painters/empty_notebook_painter.dart';
+import 'package:looping_diary/res/painters/notebook_painters/empty_notebook_painter.dart';
 import 'package:looping_diary/res/strings.dart';
 
 class EmptyNoteCard extends StatelessWidget {

@@ -7,7 +7,7 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppState.initial());
 
   void checkScreenToShow() async {
-    final bool userSawOnboarding = await (await getIt.getAsync<GetOnboardingSeenUseCase>())();
+    final bool userSawOnboarding = (await getIt.getAsync<GetOnboardingSeenUseCase>())();
 
     if (!userSawOnboarding) {
       emit(state.copyWith(appStateStatus: AppStateStatus.showOnboarding));

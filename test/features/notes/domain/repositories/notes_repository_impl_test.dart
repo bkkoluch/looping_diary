@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/errors/failures.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
-import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart';
-import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source.dart';
+import 'package:looping_diary/features/notes/data/data_sources/notes_local_data_source.dart';
+import 'package:looping_diary/features/notes/data/data_sources/notes_remote_data_source.dart';
 import 'package:looping_diary/features/notes/data/repositories/notes_repository_impl.dart';
 import 'package:mocktail/mocktail.dart';
 

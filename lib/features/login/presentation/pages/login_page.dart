@@ -5,7 +5,7 @@ import 'package:flutterfire_ui/auth.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
-import 'package:looping_diary/features/common/presentation/widgets/faded_backgroud.dart';
+import 'package:looping_diary/features/common/presentation/widgets/faded_background.dart';
 import 'package:looping_diary/res/strings.dart';
 import 'package:looping_diary/secrets/keys.dart';
 

@@ -163,7 +163,7 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
 
   double get _iconSize => context.screenHeight * 0.05;
 
-  double get _noteBookMarginWidth => context.screenHeight * 0.1;
+  double get _noteBookMarginWidth => context.screenWidth * 0.1;
 
-  double get _noteBookContentWidth => context.screenHeight * 0.9;
+  double get _noteBookContentWidth => context.screenWidth * 0.9;
 }

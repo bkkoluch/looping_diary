@@ -13,7 +13,7 @@ import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart
 import 'package:looping_diary/features/notes/presentation/cubits/note_state.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/empty_note_card.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_list_with_bookmarks.dart';
-import 'package:looping_diary/res/painters/notebook_painter.dart';
+import 'package:looping_diary/res/painters/notebook_painters/notebook_painter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

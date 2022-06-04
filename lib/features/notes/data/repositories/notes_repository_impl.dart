@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/errors/failures.dart';
-import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart';
-import 'package:looping_diary/features/notes/data/datasources/notes_remote_data_source.dart';
+import 'package:looping_diary/features/notes/data/data_sources/notes_local_data_source.dart';
+import 'package:looping_diary/features/notes/data/data_sources/notes_remote_data_source.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
 import 'package:looping_diary/features/notes/domain/repositories/notes_repository.dart';
 
@@ -41,9 +41,6 @@ class NotesRepositoryImpl implements NotesRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
-
-  @override
-  Future<void> saveAllNotes(List<NoteDTO> allNotes) async => await _notesLocalDataSource.saveAllNotes(allNotes);
 
   @override
   Future<Either<Failure, void>> deleteNote(NoteDTO noteDTO) async {

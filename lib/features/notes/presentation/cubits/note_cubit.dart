@@ -51,6 +51,8 @@ class NoteCubit extends Cubit<NoteState> {
   void updateCurrentNote(Note? note) => emit(state.copyWith(currentNote: note ?? Note.today));
 
   void deleteNote() async {
+    emit(state.copyWith(status: NoteStateStatus.loading));
+
     final result = await (await getIt.getAsync<DeleteNoteUseCase>())(state.currentNote);
 
     if (result is! Failure) {

@@ -18,10 +18,10 @@ void main() {
     'should properly call repository and return a value',
     () async {
       // Arrange
-      when(() => onboardingRepository.getOnboardingSeen()).thenAnswer((_) async => true);
+      when(() => onboardingRepository.getOnboardingSeen()).thenAnswer((_) => true);
 
       // Act
-      final result = await getOnboardingSeenUseCase.call();
+      final result = getOnboardingSeenUseCase.call();
 
       // Assert
       verify(() => onboardingRepository.getOnboardingSeen()).called(1);

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:looping_diary/features/user/data/datasources/user_local_data_source.dart';
+import 'package:looping_diary/features/user/data/data_sources/user_local_data_source.dart';
 import 'package:looping_diary/features/user/data/repositories/user_repository_impl.dart';
 import 'package:looping_diary/features/user/domain/repositories/user_repository.dart';
 import 'package:mocktail/mocktail.dart';
