@@ -49,7 +49,6 @@ void main() {
           '<<< No exception provided for crash logs >>>',
           tStackTrace,
           reason: '\n<<< No error description provided for crash logs >>>',
-          printDetails: true,
         ),
       ).called(1);
     },
@@ -74,7 +73,6 @@ void main() {
           tException,
           tStackTrace,
           reason: '\n<<< $tMessage >>>',
-          printDetails: true,
         ),
       ).called(1);
     },
