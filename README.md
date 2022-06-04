@@ -8,7 +8,7 @@ throughout the years.
 
 Project is created using Clean Architecture.
 
-### Technology stack & main project dependencies
+## Technology stack & main project dependencies
 
 - Flutter - version 3.0.1
 
@@ -26,16 +26,13 @@ Project is created using Clean Architecture.
 | Remote storage & more | [firebase](https://pub.dev/packages/firebase) [flutterfire_ui](https://pub.dev/packages/flutterfire_ui) |
 | Functional programming | [dartz](https://pub.dev/packages/dartz)  |
 
-### Prerequisites
+## Prerequisites
 
 [Flutter](https://flutter.dev/docs/get-started/install "Flutter")
+
 [Android studio](https://developer.android.com/studio/ "Android Studio")
 
-### Secrets
-
-**1**. You should have a valid `keys.dart` file containing secrets
-
-### Clean Architecture used in the app & main folder structure
+## App architecture & main folder structure
 
 - **core** - folder containing common files used through the app (extensions, injector, localizer,
   etc.)
@@ -60,8 +57,9 @@ Project is created using Clean Architecture.
 - **scripts** - folder containing any helper scripts
 - **test** - folder for unit/widget/cubit & bloc/golden tests
 
-### How to run the project
+## How to run the project
 
+#### You should have a valid `keys.dart` file containing secrets
 #### Get all dependencies by running command:
 
 `flutter pub get`
@@ -70,7 +68,7 @@ Project is created using Clean Architecture.
 
 `flutter run --debug`
 
-### Tests
+## Tests
 
 #### To run all tests (unit/widget/cubit & bloc/golden)
 
