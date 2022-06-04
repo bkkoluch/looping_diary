@@ -178,7 +178,7 @@ void main() {
         ),
       ],
       verify: (cubit) {
-        verify(getAllNotesUseCase.call).called(1);
+        verify(getAllNotesUseCase.call);
         verify(() => deleteNoteUseCase(tNote)).called(1);
       },
     );
