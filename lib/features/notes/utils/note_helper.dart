@@ -51,8 +51,6 @@ double calculateTextSize(BuildContext? context) {
 
   final screenHeightMultiplier = context.screenHeight * 0.01;
   final singleLinesHeightFactor = numberOfNotebookLinesOnAPage / screenHeightMultiplier;
-  // final scaledTextHeight = 1.81 / singleLinesHeightFactor * 2.45;
-  // final scaledTextHeight = 4.4345 / singleLinesHeightFactor;
   final scaledTextHeight = 4.425 / singleLinesHeightFactor;
   return scaledTextHeight;
 }

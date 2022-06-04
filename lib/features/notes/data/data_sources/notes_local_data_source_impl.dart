@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/extensions/list_extensions.dart';
-import 'package:looping_diary/features/notes/data/datasources/notes_local_data_source.dart';
+import 'package:looping_diary/features/notes/data/data_sources/notes_local_data_source.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
 import 'package:looping_diary/utils/shared_prefs_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';

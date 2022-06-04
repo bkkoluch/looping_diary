@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:looping_diary/utils/log.dart';
 
 class CrashReportingService {
   CrashReportingService(this._firebaseCrashlytics) {
@@ -22,7 +21,6 @@ class CrashReportingService {
       exception ?? '<<< No exception provided for crash logs >>>',
       stackTrace ?? StackTrace.current,
       reason: "\n<<< ${errorDescription ?? "No error description provided for crash logs"} >>>",
-      printDetails: Log.isLoggingOn,
     );
   }
 

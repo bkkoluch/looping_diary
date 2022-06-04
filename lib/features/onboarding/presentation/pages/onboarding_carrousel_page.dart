@@ -7,7 +7,7 @@ import 'package:looping_diary/core/services/navigation/navigation_service.gr.dar
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/core/style/lotties.dart';
-import 'package:looping_diary/features/onboarding/presentation/cubits/onboarding_cubit.dart';
+import 'package:looping_diary/features/onboarding/presentation/cubits/cubit.dart';
 import 'package:looping_diary/res/strings.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -40,7 +40,7 @@ class _OnboardingCarrouselState extends State<OnboardingCarrouselPage> {
                 ),
                 OnboardingPage(
                   onPressed: _goToNextPage,
-                  asset: Lotties.test,
+                  asset: Lotties.question,
                   pageIndex: 1,
                   pageController: pageController,
                 ),

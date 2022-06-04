@@ -7,7 +7,5 @@ abstract class NotesRepository {
 
   Future<Either<Failure, List<NoteDTO>>> getAllNotes();
 
-  Future<void> saveAllNotes(List<NoteDTO> allNotes);
-
   Future<Either<Failure, void>> deleteNote(NoteDTO noteDTO);
 }
