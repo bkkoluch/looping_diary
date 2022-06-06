@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/network/firebase_json_converter.dart';
@@ -12,23 +12,22 @@ const String updateMaskFieldPathsString = 'updateMask.fieldPaths';
 
 @injectable
 class FirebaseRestClient {
-  const FirebaseRestClient();
+  const FirebaseRestClient(this.dio);
+
+  final Dio dio;
 
   @factoryMethod
-  static Future<FirebaseRestClient> create() async => const FirebaseRestClient();
+  static FirebaseRestClient create(Dio dio) => FirebaseRestClient(dio);
 
-  Future<String?> get _userId async => (await getIt.getAsync<UserRepository>()).getUserId();
+  String? get _userId => getIt.get<UserRepository>().getUserId();
 
   Future patchWithQueryParameters(String uri, Map<String, dynamic> json, Map<String, dynamic> queryParameters) async =>
-      http.patch(
-        Uri.parse('$_baseUrl${await _userId}$uri').replace(queryParameters: queryParameters),
-        body: jsonEncode(json),
-      );
+      await dio.patch('$_baseUrl$_userId$uri', data: jsonEncode(json), queryParameters: queryParameters);
 
   Future<Map<String, dynamic>?> get(String uri) async {
-    final http.Response result = await http.get(Uri.parse('$_baseUrl${await _userId}$uri'));
+    final Response result = await dio.get('$_baseUrl$_userId$uri');
 
-    final decodedJson = json.decode(result.body);
+    final decodedJson = result.data;
 
     if (decodedJson.entries.first.value is! String && decodedJson.entries.first.value['status'] == _notFoundField) {
       return null;

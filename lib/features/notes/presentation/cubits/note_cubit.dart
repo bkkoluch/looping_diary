@@ -3,7 +3,6 @@ import 'package:collection/collection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/errors/failures.dart';
 import 'package:looping_diary/core/extensions/datetime_extensions.dart';
-import 'package:looping_diary/core/extensions/either_extensions.dart';
 import 'package:looping_diary/core/extensions/list_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
@@ -18,9 +17,15 @@ class NoteCubit extends Cubit<NoteState> {
 
   void fetchAllNotes() async {
     emit(state.copyWith(status: NoteStateStatus.loading));
-    final List<Note>? notes = (await (await getIt.getAsync<GetAllNotesUseCase>())()).foldOrNull();
-    _sortNotesByDayAndYear(notes ?? []);
-    emit(state.copyWith(status: NoteStateStatus.loaded));
+    final result = await (await getIt.getAsync<GetAllNotesUseCase>())();
+
+    result.fold(
+      _emitErrorStateDependingOnAFailure,
+      (List<Note> notes) {
+        _sortNotesByDayAndYear(notes);
+        emit(state.copyWith(status: NoteStateStatus.loaded));
+      },
+    );
   }
 
   void saveNote() async {
@@ -28,22 +33,31 @@ class NoteCubit extends Cubit<NoteState> {
 
     final result = await (await getIt.getAsync<SaveNoteUseCase>())(state.currentNote);
 
-    if (result is! Failure) {
-      final int listIndex = state.currentNote.noteDate.toDateTime.dayOfYear;
+    result.fold(
+      _emitErrorStateDependingOnAFailure,
+      (_) {
+        final int listIndex = state.currentNote.noteDate.toDateTime.dayOfYear;
 
-      final List<List<Note>> notes = state.notesSortedByDayAndYears.clone();
-      final Note? noteToUpdate =
-          notes[listIndex].firstWhereOrNull((note) => note.noteDate == state.currentNote.noteDate);
-      if (listIndex >= 0 && noteToUpdate != null) {
-        final int noteIndex = notes[listIndex]
-            .indexOf(notes[listIndex].firstWhere((note) => note.noteDate == state.currentNote.noteDate));
-        notes[listIndex][noteIndex] = state.currentNote;
-      } else {
-        notes[listIndex].add(state.currentNote);
-      }
+        final List<List<Note>> notes = state.notesSortedByDayAndYears.clone();
+        final Note? noteToUpdate =
+            notes[listIndex].firstWhereOrNull((note) => note.noteDate == state.currentNote.noteDate);
+        if (listIndex >= 0 && noteToUpdate != null) {
+          final int noteIndex = notes[listIndex]
+              .indexOf(notes[listIndex].firstWhere((note) => note.noteDate == state.currentNote.noteDate));
+          notes[listIndex][noteIndex] = state.currentNote;
+        } else {
+          notes[listIndex].add(state.currentNote);
+        }
 
-      emit(state.copyWith(notesSortedByDayAndYears: notes, status: NoteStateStatus.loaded));
-    }
+        emit(
+          state.copyWith(
+            notesSortedByDayAndYears: notes,
+            status: NoteStateStatus.loaded,
+            shouldShowNoteSavedSnackBar: true,
+          ),
+        );
+      },
+    );
   }
 
   void updateNoteEntry(String entry) => emit(state.copyWith.currentNote(entry: entry));
@@ -55,18 +69,43 @@ class NoteCubit extends Cubit<NoteState> {
 
     final result = await (await getIt.getAsync<DeleteNoteUseCase>())(state.currentNote);
 
-    if (result is! Failure) {
-      final int listIndex = state.currentNote.noteDate.toDateTime.dayOfYear;
+    result.fold(
+      _emitErrorStateDependingOnAFailure,
+      (_) {
+        final int listIndex = state.currentNote.noteDate.toDateTime.dayOfYear;
 
-      final List<List<Note>> notes = state.notesSortedByDayAndYears.clone();
-      final Note? noteToRemove =
-          notes[listIndex].firstWhereOrNull((note) => note.noteDate == state.currentNote.noteDate);
+        final List<List<Note>> notes = state.notesSortedByDayAndYears.clone();
+        final Note? noteToRemove =
+            notes[listIndex].firstWhereOrNull((note) => note.noteDate == state.currentNote.noteDate);
 
-      notes[listIndex].remove(noteToRemove);
+        notes[listIndex].remove(noteToRemove);
 
-      emit(state.copyWith(notesSortedByDayAndYears: notes, status: NoteStateStatus.loaded));
+        emit(
+          state.copyWith(
+            notesSortedByDayAndYears: notes,
+            status: NoteStateStatus.loaded,
+            shouldShowNoteDeletedSnackBar: true,
+          ),
+        );
+      },
+    );
+  }
+
+  void clearShouldShowNoteSavedSnackBar() => emit(state.copyWith(shouldShowNoteSavedSnackBar: false));
+
+  void clearShouldShowNoteDeletedSnackBar() => emit(state.copyWith(shouldShowNoteDeletedSnackBar: false));
+
+  void _emitErrorStateDependingOnAFailure(Failure failure) {
+    if (failure is ServerFailure) {
+      _emitGeneralErrorStatus();
+    } else if (failure is NoConnectionFailure) {
+      _emitNoConnectionErrorStatus();
     }
   }
+
+  void _emitNoConnectionErrorStatus() => emit(state.copyWith(status: NoteStateStatus.noConnectionError));
+
+  void _emitGeneralErrorStatus() => emit(state.copyWith(status: NoteStateStatus.generalError));
 
   void _sortNotesByDayAndYear(List<Note> notes) {
     final List<List<Note>> sortedList = List.generate(366, (_) => []);

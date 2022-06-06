@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/data/endpoints.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
@@ -28,8 +31,12 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
           updateMaskFieldPathsString: [noteDTO.noteDate.withAppendedChars]
         },
       );
-    } catch (e) {
+    } on ServerException catch (e) {
       throw ServerException('An error occurred in $saveNote: $e');
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw const SocketException('No connection');
+      }
     }
   }
 
@@ -42,9 +49,15 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
         ..sort((a, b) => a.noteDate.toDateTime.compareTo(b.noteDate.toDateTime));
 
       return notes;
-    } catch (e) {
+    } on ServerException catch (e) {
       throw ServerException('An error occurred in $getAllNotes: $e');
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw const SocketException('No connection');
+      }
     }
+
+    return [];
   }
 
   @override
@@ -60,8 +73,12 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
           updateMaskFieldPathsString: [noteDTO.noteDate.withAppendedChars]
         },
       );
-    } catch (e) {
+    } on ServerException catch (e) {
       throw ServerException('An error occurred in $deleteNote: $e');
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw const SocketException('No connection');
+      }
     }
   }
 }

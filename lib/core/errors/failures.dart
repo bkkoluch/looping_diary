@@ -19,3 +19,7 @@ class LocalFailure extends Failure {
 class ServerFailure extends Failure {
   const ServerFailure(String message) : super(message);
 }
+
+class NoConnectionFailure extends Failure {
+  const NoConnectionFailure() : super('No connection');
+}

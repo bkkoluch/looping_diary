@@ -50,7 +50,7 @@ void main() {
 
   group('NoteCubit::fetchAllNotes', () {
     blocTest<NoteCubit, NoteState>(
-      'should emit correct states when use case returns an error',
+      'should emit correct states when use case returns a server failure',
       build: NoteCubit.new,
       setUp: () {
         when(getAllNotesUseCase.call).thenAnswer((_) async => const Left(tServerFailure));
@@ -58,10 +58,20 @@ void main() {
       act: (cubit) => cubit.fetchAllNotes(),
       expect: () => [
         initialState.copyWith(status: NoteStateStatus.loading),
-        initialState.copyWith(
-          status: NoteStateStatus.loaded,
-          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
-        ),
+        initialState.copyWith(status: NoteStateStatus.generalError),
+      ],
+    );
+
+    blocTest<NoteCubit, NoteState>(
+      'should emit correct states when use case returns a connection failure',
+      build: NoteCubit.new,
+      setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Left(tNoConnectionFailure));
+      },
+      act: (cubit) => cubit.fetchAllNotes(),
+      expect: () => [
+        initialState.copyWith(status: NoteStateStatus.loading),
+        initialState.copyWith(status: NoteStateStatus.noConnectionError),
       ],
     );
 
@@ -88,6 +98,7 @@ void main() {
       build: NoteCubit.new,
       skip: 2,
       setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
         when(() => saveNoteUseCase.call(captureAny())).thenAnswer((_) async => const Right(null));
       },
       act: (cubit) => cubit
@@ -99,12 +110,19 @@ void main() {
           currentNote: tNote,
           notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
           status: NoteStateStatus.loaded,
+          shouldShowNoteSavedSnackBar: false,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+          shouldShowNoteSavedSnackBar: true,
         )
       ],
     );
 
     blocTest<NoteCubit, NoteState>(
-      'should emit correct states when note saving fails',
+      'should emit correct states when note saving fails with a ServerFailure',
       build: NoteCubit.new,
       skip: 2,
       setUp: () {
@@ -120,6 +138,37 @@ void main() {
           currentNote: tNote,
           notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
           status: NoteStateStatus.loaded,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.generalError,
+        ),
+      ],
+    );
+
+    blocTest<NoteCubit, NoteState>(
+      'should emit correct states when note saving fails with a NoConnectionFailure',
+      build: NoteCubit.new,
+      skip: 2,
+      setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
+        when(() => saveNoteUseCase.call(captureAny())).thenAnswer((_) async => const Left(tNoConnectionFailure));
+      },
+      act: (cubit) => cubit
+        ..fetchAllNotes()
+        ..updateCurrentNote(tNote)
+        ..saveNote(),
+      expect: () => [
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.noConnectionError,
         ),
       ],
     );
@@ -159,7 +208,7 @@ void main() {
   group('NoteCubit::deleteNote', () {
     blocTest<NoteCubit, NoteState>(
       'should delete the note correctly',
-      skip: 1,
+      skip: 2,
       build: NoteCubit.new,
       setUp: () {
         when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
@@ -170,11 +219,105 @@ void main() {
         ..updateCurrentNote(tNote)
         ..deleteNote(),
       expect: () => [
-        initialState.copyWith(currentNote: tNote),
         initialState.copyWith(
           currentNote: tNote,
           notesSortedByDayAndYears: sortNotesByDayAndYear([]),
           status: NoteStateStatus.loaded,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
+          status: NoteStateStatus.loaded,
+          shouldShowNoteDeletedSnackBar: true,
+        ),
+      ],
+      verify: (cubit) {
+        verify(getAllNotesUseCase.call);
+        verify(() => deleteNoteUseCase(tNote)).called(1);
+      },
+    );
+  });
+
+  group('NoteCubit::clearShouldShowNoteSavedSnackBar', () {
+    blocTest<NoteCubit, NoteState>(
+      'should delete the note correctly',
+      skip: 2,
+      build: NoteCubit.new,
+      setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
+        when(() => saveNoteUseCase.call(captureAny())).thenAnswer((_) async => const Right(null));
+      },
+      act: (cubit) {
+        cubit
+          ..fetchAllNotes()
+          ..updateCurrentNote(tNote)
+          ..saveNote();
+
+        return Future.delayed(const Duration(seconds: 1), () {
+          cubit.clearShouldShowNoteSavedSnackBar();
+        });
+      },
+      expect: () => [
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+          shouldShowNoteSavedSnackBar: true,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+          status: NoteStateStatus.loaded,
+          shouldShowNoteSavedSnackBar: false,
+        ),
+      ],
+      verify: (cubit) {
+        verify(getAllNotesUseCase.call);
+      },
+    );
+  });
+
+  group('NoteCubit::clearShouldShowNoteDeletedSnackBar', () {
+    blocTest<NoteCubit, NoteState>(
+      'should clear shouldShowNoteDeletedSnackBar correctly',
+      skip: 2,
+      build: NoteCubit.new,
+      setUp: () {
+        when(getAllNotesUseCase.call).thenAnswer((_) async => const Right([tNote]));
+        when(() => deleteNoteUseCase(captureAny())).thenAnswer((_) async => const Right(null));
+      },
+      act: (cubit) {
+        cubit
+          ..fetchAllNotes()
+          ..updateCurrentNote(tNote)
+          ..deleteNote();
+
+        return Future.delayed(const Duration(seconds: 1), () {
+          cubit.clearShouldShowNoteDeletedSnackBar();
+        });
+      },
+      expect: () => [
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
+          status: NoteStateStatus.loaded,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
+          status: NoteStateStatus.loaded,
+          shouldShowNoteDeletedSnackBar: true,
+        ),
+        initialState.copyWith(
+          currentNote: tNote,
+          notesSortedByDayAndYears: sortNotesByDayAndYear([]),
+          status: NoteStateStatus.loaded,
+          shouldShowNoteDeletedSnackBar: false,
         ),
       ],
       verify: (cubit) {

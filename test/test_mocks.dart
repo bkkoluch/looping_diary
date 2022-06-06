@@ -9,6 +9,7 @@ import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart
 import 'package:looping_diary/features/notes/presentation/cubits/note_state.dart';
 import 'package:looping_diary/features/onboarding/data/data_sources/onboarding_local_data_source.dart';
 import 'package:looping_diary/features/onboarding/data/repositories/onboarding_repository.dart';
+import 'package:looping_diary/features/onboarding/domain/use_cases/get_onboarding_seen_use_case.dart';
 import 'package:looping_diary/features/onboarding/domain/use_cases/mark_onboarding_as_seen_use_case.dart';
 import 'package:looping_diary/features/user/data/data_sources/user_local_data_source.dart';
 import 'package:mocktail/mocktail.dart';
@@ -26,6 +27,8 @@ class MockSaveNoteUseCase extends Mock implements SaveNoteUseCase {}
 class MockDeleteNoteUseCase extends Mock implements DeleteNoteUseCase {}
 
 class MockMarkOnboardingAsSeenUseCase extends Mock implements MarkOnboardingAsSeenUseCase {}
+
+class MockGetOnboardingSeenUseCase extends Mock implements GetOnboardingSeenUseCase {}
 
 // Repositories
 

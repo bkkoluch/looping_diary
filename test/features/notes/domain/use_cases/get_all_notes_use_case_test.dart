@@ -74,4 +74,20 @@ void main() {
       verifyNoMoreInteractions(notesRepository);
     },
   );
+
+  test(
+    'should return Left(NoConnectionFailure) when there\'s no connection',
+    () async {
+      // Arrange
+      when(() => notesRepository.getAllNotes()).thenAnswer((_) async => const Left(tNoConnectionFailure));
+
+      // Act
+      final result = await getAllNotesUseCase.call();
+
+      // Assert
+      verify(() => notesRepository.getAllNotes());
+      expect(result, const Left(tNoConnectionFailure));
+      verifyNoMoreInteractions(notesRepository);
+    },
+  );
 }

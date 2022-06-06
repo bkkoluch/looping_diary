@@ -55,16 +55,15 @@ class EmptyNoteCard extends StatelessWidget {
 
   Widget _buildEmptyNoteContent(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-          right: note_helper.isPageEven(pageIndex) ? CoreDimensions.paddingXS : 0,
-          left: note_helper.isPageEven(pageIndex) ? 0 : CoreDimensions.paddingXS,
+          right: note_helper.isPageEven(pageIndex) ? 0 : context.screenWidth * 0.1,
+          left: note_helper.isPageEven(pageIndex) ? context.screenWidth * 0.11 : context.screenWidth * 0.01,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: context.screenHeight * 0.11),
             Text(
               emptyNotePageAddNewNoteText.tr(),
-              textAlign: note_helper.isPageEven(pageIndex) ? TextAlign.right : TextAlign.left,
+              textAlign: TextAlign.left,
               style: TextTokens.titleMd(context: context),
             ),
             // To remove

@@ -53,4 +53,22 @@ void main() {
       verifyNoMoreInteractions(mockedNotesRepository);
     },
   );
+
+  test(
+    'should return Left(NoConnectionFailure) when there\'s no connection',
+    () async {
+      // Arrange
+      when(() => mockedNotesRepository.saveNote(captureAny())).thenAnswer(
+        (_) async => const Left(tNoConnectionFailure),
+      );
+
+      // Act
+      final result = await saveNoteUseCase(tNote);
+
+      // Assert
+      expect(result, const Left(tNoConnectionFailure));
+      verify(() => mockedNotesRepository.saveNote(tNoteDTO)).called(1);
+      verifyNoMoreInteractions(mockedNotesRepository);
+    },
+  );
 }

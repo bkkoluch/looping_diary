@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/errors/failures.dart';
-import 'package:looping_diary/core/errors/remote_exceptions.dart';
 import 'package:looping_diary/features/notes/data/data_sources/notes_local_data_source.dart';
 import 'package:looping_diary/features/notes/data/data_sources/notes_remote_data_source.dart';
 import 'package:looping_diary/features/notes/data/repositories/notes_repository_impl.dart';
@@ -49,7 +48,7 @@ void main() {
       () async {
         // Arrange
         when(() => notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
-        when(() => notesRemoteDataSource.saveNote(captureAny())).thenThrow(ServerException('Error'));
+        when(() => notesRemoteDataSource.saveNote(captureAny())).thenThrow(tServerException);
 
         // Act
         final result = await notesRepositoryImpl.saveNote(tNoteDTO);
@@ -62,7 +61,28 @@ void main() {
         verifyNoMoreInteractions(notesRemoteDataSource);
       },
     );
+
+    test(
+      'should return NoConnectionFailure on an unsuccessful call to any datasource if there\'s no connection',
+      () async {
+        // Arrange
+        when(() => notesLocalDataSource.saveNote(captureAny())).thenAnswer((_) async => null);
+        when(() => notesRemoteDataSource.saveNote(captureAny())).thenThrow(tSocketException);
+
+        // Act
+        final result = await notesRepositoryImpl.saveNote(tNoteDTO);
+
+        // Assert
+        result.fold((failure) => expect(failure, isInstanceOf<NoConnectionFailure>()), (_) {});
+        verify(() => notesLocalDataSource.saveNote(tNoteDTO)).called(1);
+        verify(() => notesRemoteDataSource.saveNote(tNoteDTO)).called(1);
+        verifyNoMoreInteractions(notesLocalDataSource);
+        verifyNoMoreInteractions(notesRemoteDataSource);
+      },
+    );
   });
+
+  group('getAllNotes', () {});
 
   group('deleteNote', () {
     test(
@@ -85,13 +105,29 @@ void main() {
       'should return ServerFailure on an unsuccessful call to any datasource',
       () async {
         // Arrange
-        when(() => notesRemoteDataSource.deleteNote(captureAny())).thenThrow(ServerException('Error'));
+        when(() => notesRemoteDataSource.deleteNote(captureAny())).thenThrow(tServerException);
 
         // Act
         final result = await notesRepositoryImpl.deleteNote(tNoteDTO);
 
         // Assert
         result.fold((failure) => expect(failure, isInstanceOf<ServerFailure>()), (_) {});
+        verify(() => notesRemoteDataSource.deleteNote(tNoteDTO)).called(1);
+        verifyNoMoreInteractions(notesRemoteDataSource);
+      },
+    );
+
+    test(
+      'should return NoConnectionFailure on an unsuccessful call to any datasource if there\'s no connection',
+      () async {
+        // Arrange
+        when(() => notesRemoteDataSource.deleteNote(captureAny())).thenThrow(tSocketException);
+
+        // Act
+        final result = await notesRepositoryImpl.deleteNote(tNoteDTO);
+
+        // Assert
+        result.fold((failure) => expect(failure, isInstanceOf<NoConnectionFailure>()), (_) {});
         verify(() => notesRemoteDataSource.deleteNote(tNoteDTO)).called(1);
         verifyNoMoreInteractions(notesRemoteDataSource);
       },

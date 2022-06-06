@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
+import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
+import 'package:looping_diary/features/common/presentation/widgets/core_snackbar.dart';
 import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
@@ -14,6 +17,7 @@ import 'package:looping_diary/features/notes/presentation/cubits/note_state.dart
 import 'package:looping_diary/features/notes/presentation/widgets/empty_note_card.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_list_with_bookmarks.dart';
 import 'package:looping_diary/res/painters/notebook_painters/notebook_painter.dart';
+import 'package:looping_diary/res/strings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,6 +55,8 @@ class _HomePageState extends State<HomePage> {
                 builder: (_, NoteState state) {
                   if (state.status == NoteStateStatus.loading) {
                     return _buildLoadingIndicator();
+                  } else if (state.status == NoteStateStatus.noConnectionError) {
+                    return _buildRetryColumn();
                   }
                   return _buildNotesLists();
                 },
@@ -61,6 +67,17 @@ class _HomePageState extends State<HomePage> {
       );
 
   Widget _buildLoadingIndicator() => const Center(child: CircularProgressIndicator(color: ColorTokens.brandAccent));
+
+  Widget _buildRetryColumn() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: CoreDimensions.paddingXL),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CoreSnackBar.information(text: noConnectionPageText.tr()),
+            ElevatedButton(onPressed: cubit.fetchAllNotes, child: const Text('Retry'))
+          ],
+        ),
+      );
 
   Widget _buildNotesLists() {
     final List<List<Note>> notesDividedByDayAndMonth = cubit.state.notesSortedByDayAndYears;

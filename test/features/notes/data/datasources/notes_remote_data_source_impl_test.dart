@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/data/endpoints.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
@@ -68,7 +70,68 @@ void main() {
         expect(() async => await result(tNoteDTO), throwsA(isA<ServerException>()));
       },
     );
+
+    test(
+      'should throw SocketException if one occurs',
+      () async {
+        // Arrange
+        when(() => _mockFirebaseRestClient.patchWithQueryParameters(captureAny(), captureAny(), captureAny()))
+            .thenThrow(tSocketException);
+
+        // Act
+        final result = _notesRemoteDataSource.saveNote;
+
+        // Assert
+        expect(() async => await result(tNoteDTO), throwsA(isA<SocketException>()));
+      },
+    );
   });
+
+  group('getAllNotes', () {
+    test(
+      'should return a list of NoteDTOs on a successful call',
+      () async {
+        // Arrange
+        when(() => _mockFirebaseRestClient.get(captureAny())).thenAnswer((_) async => tGetAllNotesResponse);
+
+        // Act
+        final result = await _notesRemoteDataSource.getAllNotes();
+
+        // Assert
+        expect(result, [tNoteDTO]);
+        verify(() => _mockFirebaseRestClient.get(Endpoints.notes)).called(1);
+        verifyNoMoreInteractions(_mockFirebaseRestClient);
+      },
+    );
+
+    test(
+      'should throw ServerException on an unsuccessful call',
+      () async {
+        // Arrange
+        when(() => _mockFirebaseRestClient.get(captureAny())).thenThrow(tServerException);
+
+        // Act
+        final result = _notesRemoteDataSource.getAllNotes;
+
+        // Assert
+        expect(() async => await result(), throwsA(isA<ServerException>()));
+      },
+    );
+  });
+
+  test(
+    'should throw SocketException if one occurs',
+    () async {
+      // Arrange
+      when(() => _mockFirebaseRestClient.get(captureAny())).thenThrow(tSocketException);
+
+      // Act
+      final result = _notesRemoteDataSource.getAllNotes;
+
+      // Assert
+      expect(() async => await result(), throwsA(isA<SocketException>()));
+    },
+  );
 
   group('deleteNote', () {
     test(
@@ -111,11 +174,26 @@ void main() {
             .thenThrow(tServerException);
 
         // Act
-        final result = _notesRemoteDataSource.saveNote;
+        final result = _notesRemoteDataSource.deleteNote;
 
         // Assert
         expect(() async => await result(tNoteDTO), throwsA(isA<ServerException>()));
       },
     );
   });
+
+  test(
+    'should throw SocketException if one occurs',
+    () async {
+      // Arrange
+      when(() => _mockFirebaseRestClient.patchWithQueryParameters(captureAny(), captureAny(), captureAny()))
+          .thenThrow(tSocketException);
+
+      // Act
+      final result = _notesRemoteDataSource.deleteNote;
+
+      // Assert
+      expect(() async => await result(tNoteDTO), throwsA(isA<SocketException>()));
+    },
+  );
 }
