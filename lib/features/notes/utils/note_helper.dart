@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 
-const numberOfNotebookLinesOnAPage = 14;
+const numberOfNotebookLinesOnAPage = 16;
 
 const List<int> _numberOfDaysPassedSinceStartOFTheYearForEachMonth = [
   31,
