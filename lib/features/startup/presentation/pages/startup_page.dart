@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:looping_diary/core/cubits/cubit.dart';
 import 'package:looping_diary/core/injector/injector.dart';
-import 'package:looping_diary/features/common/presentation/pages/no_connection_page.dart';
 import 'package:looping_diary/features/login/presentation/auth_gate_page.dart';
 import 'package:looping_diary/features/onboarding/presentation/pages/onboarding_carrousel_page.dart';
 import 'package:looping_diary/features/startup/presentation/pages/loading_page.dart';
@@ -27,9 +26,7 @@ class _StartupPageState extends State<StartupPage> {
   Widget build(_) => BlocBuilder<AppCubit, AppState>(
         bloc: cubit,
         builder: (_, state) {
-          if (cubit.state.appStateStatus == AppStateStatus.noConnection) {
-            return const NoConnectionPage();
-          } else if (cubit.state.appStateStatus == AppStateStatus.idle) {
+          if (cubit.state.appStateStatus == AppStateStatus.idle) {
             return const LoadingPage();
           } else if (cubit.state.appStateStatus == AppStateStatus.showOnboarding) {
             return const OnboardingCarrouselPage();

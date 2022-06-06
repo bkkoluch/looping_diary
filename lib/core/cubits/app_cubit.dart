@@ -17,8 +17,4 @@ class AppCubit extends Cubit<AppState> {
       emit(state.copyWith(appStateStatus: AppStateStatus.showHome));
     }
   }
-
-  void emitNoConnectionState() {
-    emit(state.copyWith(appStateStatus: AppStateStatus.noConnection));
-  }
 }

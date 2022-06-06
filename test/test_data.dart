@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:looping_diary/core/errors/failures.dart';
 import 'package:looping_diary/core/errors/remote_exceptions.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_date_dto.dart';
@@ -21,6 +23,8 @@ const String tLongSubtitle =
 // Errors
 const ServerFailure tServerFailure = ServerFailure('Error');
 final ServerException tServerException = ServerException('Error');
+const SocketException tSocketException = SocketException('Error');
+const NoConnectionFailure tNoConnectionFailure = NoConnectionFailure();
 
 // Notes
 const NoteDate tNoteDate = NoteDate(day: 1, month: 12, year: 2020);
@@ -30,3 +34,11 @@ const Note tNote = Note(id: tId, entry: tEntry, noteDate: tNoteDate);
 const Note tLongEntryNote = Note(id: tId, entry: tLongEntry, noteDate: tNoteDate);
 
 const NoteDTO tNoteDTO = NoteDTO(id: tId, entry: tEntry, noteDate: tNoteDateDTO);
+
+const Map<String, dynamic> tGetAllNotesResponse = {
+  'x1122020x': {
+    'entry': tEntry,
+    'noteDate': {'day': 1, 'month': 12, 'year': 2020},
+    'id': tId
+  }
+};

@@ -163,7 +163,6 @@ class _$_NoteState extends _NoteState {
         super._();
 
   final List<List<Note>> _notesSortedByDayAndYears;
-
   @override
   List<List<Note>> get notesSortedByDayAndYears {
     // ignore: implicit_dynamic_type
@@ -217,7 +216,6 @@ abstract class _NoteState extends NoteState {
       required final NoteStateStatus status,
       required final bool shouldShowNoteSavedSnackBar,
       required final bool shouldShowNoteDeletedSnackBar}) = _$_NoteState;
-
   const _NoteState._() : super._();
 
   @override
@@ -225,10 +223,8 @@ abstract class _NoteState extends NoteState {
 
   @override
   Note get currentNote => throw _privateConstructorUsedError;
-
   @override
   NoteStateStatus get status => throw _privateConstructorUsedError;
-
   @override
   bool get shouldShowNoteSavedSnackBar => throw _privateConstructorUsedError;
 

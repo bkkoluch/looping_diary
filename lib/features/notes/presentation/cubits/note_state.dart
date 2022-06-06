@@ -41,7 +41,5 @@ class NoteState with _$NoteState {
     );
   }
 
-  bool get isNotErrorState => status != NoteStateStatus.generalError && status != NoteStateStatus.noConnectionError;
-
   bool get loading => status == NoteStateStatus.loading;
 }

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:looping_diary/features/common/presentation/pages/no_connection_page.dart';
 import 'package:looping_diary/features/home/presentation/pages/home_page.dart';
 import 'package:looping_diary/features/login/presentation/auth_gate_page.dart';
 import 'package:looping_diary/features/login/presentation/pages/forgot_password_page.dart';
@@ -19,7 +18,6 @@ typedef CustomRouteBuilder = Route<T> Function<T>(BuildContext context, Widget c
     CustomRoute(page: HomePage, customRouteBuilder: fadeInRouteBuilder),
     CustomRoute(page: ForgotPasswordPage, customRouteBuilder: fadeInRouteBuilder),
     CustomRoute(page: NoteDetailsPage, customRouteBuilder: fadeInRouteBuilder),
-    CustomRoute(page: NoConnectionPage, customRouteBuilder: fadeInRouteBuilder),
   ],
 )
 class $AppRouter {}

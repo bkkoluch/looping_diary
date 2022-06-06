@@ -6,7 +6,6 @@ enum AppStateStatus {
   idle,
   showOnboarding,
   showHome,
-  noConnection,
 }
 
 @freezed

@@ -50,7 +50,6 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
 
       return notes;
     } on ServerException catch (e) {
-      print('SERVER');
       throw ServerException('An error occurred in $getAllNotes: $e');
     } on DioError catch (e) {
       if (e.error is SocketException) {

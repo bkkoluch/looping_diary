@@ -95,7 +95,7 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
                   child: CoreTextField(
                     focusNode: noteTextFieldFocusNode,
                     controller: noteTextFieldController,
-                    maxLines: context.isKeyboardVisible ? 11 : 16,
+                    maxLines: context.isKeyboardVisible ? 10 : 16,
                   ),
                 ),
               ],
@@ -139,17 +139,16 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
               width: _iconSize,
             ),
           ),
-          if (cubit.state.currentNote.entry != null && cubit.state.isNotErrorState)
-            cubit.state.loading
-                ? const CircularProgressIndicator(color: ColorTokens.brandAccent)
-                : InkWell(
-                    onTap: showDeleteNotePopup,
-                    child: CorePainterImage.sized(
-                      painter: PainterTokens.iconDeleteNote,
-                      height: _iconSize,
-                      width: _iconSize,
-                    ),
+          cubit.state.loading
+              ? const CircularProgressIndicator(color: ColorTokens.brandAccent)
+              : InkWell(
+                  onTap: showDeleteNotePopup,
+                  child: CorePainterImage.sized(
+                    painter: PainterTokens.iconDeleteNote,
+                    height: _iconSize,
+                    width: _iconSize,
                   ),
+                ),
         ],
       );
 
