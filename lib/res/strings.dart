@@ -32,6 +32,10 @@ const String deleteNoteDialogSubtitle = 'deleteNoteDialogSubtitle';
 const String deleteNoteDialogCancelButtonText = 'deleteNoteDialogCancelButtonText';
 const String deleteNoteDialogOkButtonText = 'deleteNoteDialogOkButtonText';
 
+// SnackBars & errors
+const String noConnectionSnackBarText = 'noConnectionSnackBarText';
+const String noConnectionPageText = 'noConnectionPageText';
+
 // FlutterFireUI Labels
 const String arrayLabel = 'arrayLabel';
 const String booleanLabel = 'booleanLabel';

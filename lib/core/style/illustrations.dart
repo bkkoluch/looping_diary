@@ -23,6 +23,7 @@ class Illustrations {
   static const String notebook = '${illustrationPath}notebook.svg';
   static const String personalNotebook = '${illustrationPath}personal_notebook.svg';
   static const String takingNotes = '${illustrationPath}taking_notes.svg';
+  static const String noConnection = '${illustrationPath}no_connection.svg';
 }
 
 class PainterTokens {

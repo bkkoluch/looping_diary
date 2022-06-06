@@ -7,6 +7,8 @@ part 'note_state.freezed.dart';
 enum NoteStateStatus {
   loading,
   loaded,
+  noConnectionError,
+  generalError,
 }
 
 @freezed
@@ -17,6 +19,8 @@ class NoteState with _$NoteState {
     required List<List<Note>> notesSortedByDayAndYears,
     required Note currentNote,
     required NoteStateStatus status,
+    required bool shouldShowNoteSavedSnackBar,
+    required bool shouldShowNoteDeletedSnackBar,
   }) = _NoteState;
 
   factory NoteState.initial() {
@@ -32,6 +36,12 @@ class NoteState with _$NoteState {
       ),
       notesSortedByDayAndYears: List.empty(growable: true),
       status: NoteStateStatus.loading,
+      shouldShowNoteSavedSnackBar: false,
+      shouldShowNoteDeletedSnackBar: false,
     );
   }
+
+  bool get isNotErrorState => status != NoteStateStatus.generalError && status != NoteStateStatus.noConnectionError;
+
+  bool get loading => status == NoteStateStatus.loading;
 }

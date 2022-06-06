@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
@@ -15,7 +16,7 @@ import 'package:looping_diary/features/common/presentation/widgets/device_size_b
 import 'package:looping_diary/features/common/presentation/widgets/keyboard_dismiss_on_tap.dart';
 import 'package:looping_diary/features/common/presentation/widgets/note_content.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
-import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
+import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
 import 'package:looping_diary/features/notes/presentation/dialogs/delete_note_dialog.dart';
 import 'package:looping_diary/features/notes/presentation/dialogs/leave_without_saving_note_dialog.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
@@ -49,11 +50,32 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
         child: DeviceSizeBox(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            body: Stack(
-              children: [
-                _buildNoteDetails(),
-                _buildAboveLayerWithQuickActions(),
-              ],
+            body: BlocConsumer<NoteCubit, NoteState>(
+              bloc: cubit,
+              listener: (BuildContext context, NoteState state) {
+                if (state.shouldShowNoteSavedSnackBar) {
+                  cubit.clearShouldShowNoteSavedSnackBar();
+                  showNotificationSnackBar(CoreSnackBar.information(text: savedYourNoteSnackBarText.tr()));
+                } else if (state.shouldShowNoteDeletedSnackBar) {
+                  cubit.clearShouldShowNoteDeletedSnackBar();
+                  showNotificationSnackBar(
+                    CoreSnackBar.information(text: deletedYourNoteSnackBarText.tr()),
+                    notificationKeyString: 'noteDeletedSnackBar',
+                  );
+                  context.router.pop();
+                } else if (state.status == NoteStateStatus.noConnectionError) {
+                  showNotificationSnackBar(
+                    CoreSnackBar.information(text: noConnectionSnackBarText.tr()),
+                    notificationKeyString: 'generalErrorSnackBar',
+                  );
+                }
+              },
+              builder: (_, __) => Stack(
+                children: [
+                  _buildNoteDetails(),
+                  _buildAboveLayerWithQuickActions(),
+                ],
+              ),
             ),
           ),
         ),
@@ -117,15 +139,17 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
               width: _iconSize,
             ),
           ),
-          if (cubit.state.currentNote.entry != null)
-            InkWell(
-              onTap: showDeleteNotePopup,
-              child: CorePainterImage.sized(
-                painter: PainterTokens.iconDeleteNote,
-                height: _iconSize,
-                width: _iconSize,
-              ),
-            ),
+          if (cubit.state.currentNote.entry != null && cubit.state.isNotErrorState)
+            cubit.state.loading
+                ? const CircularProgressIndicator(color: ColorTokens.brandAccent)
+                : InkWell(
+                    onTap: showDeleteNotePopup,
+                    child: CorePainterImage.sized(
+                      painter: PainterTokens.iconDeleteNote,
+                      height: _iconSize,
+                      width: _iconSize,
+                    ),
+                  ),
         ],
       );
 
@@ -145,20 +169,12 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
     cubit
       ..updateNoteEntry(noteTextFieldController.text)
       ..saveNote();
-
-    showNotificationSnackBar(CoreSnackBar.information(text: savedYourNoteSnackBarText.tr()));
   }
 
   void showDeleteNotePopup() async {
     noteTextFieldFocusNode.unfocus();
     await keyboard_utils.hideKeyboard();
-    await DeleteNoteDialog(deleteTheNoteAndShowASnackBar).show(context: context);
-  }
-
-  void deleteTheNoteAndShowASnackBar() async {
-    cubit.deleteNote();
-    showNotificationSnackBar(CoreSnackBar.information(text: deletedYourNoteSnackBarText.tr()));
-    await context.router.pop();
+    await DeleteNoteDialog(cubit.deleteNote).show(context: context);
   }
 
   double get _iconSize => context.screenHeight * 0.05;

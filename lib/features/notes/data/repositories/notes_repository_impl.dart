@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:looping_diary/core/errors/failures.dart';
+import 'package:looping_diary/core/errors/remote_exceptions.dart';
 import 'package:looping_diary/features/notes/data/data_sources/notes_local_data_source.dart';
 import 'package:looping_diary/features/notes/data/data_sources/notes_remote_data_source.dart';
 import 'package:looping_diary/features/notes/data/dtos/note_dto.dart';
@@ -19,8 +22,10 @@ class NotesRepositoryImpl implements NotesRepository {
       await _notesLocalDataSource.saveNote(noteDTO);
       await _notesRemoteDataSource.saveNote(noteDTO);
       return const Right(null);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(ServerFailure(e.toString()));
+    } on SocketException {
+      return const Left(NoConnectionFailure());
     }
   }
 
@@ -37,8 +42,12 @@ class NotesRepositoryImpl implements NotesRepository {
       // } else {
       //   return Right(localNotes);
       // }
-    } catch (e) {
+    } on ServerException catch (e) {
+      print('OTHER');
       return Left(ServerFailure(e.toString()));
+    } on SocketException {
+      print('SOCKET');
+      return const Left(NoConnectionFailure());
     }
   }
 
@@ -46,8 +55,10 @@ class NotesRepositoryImpl implements NotesRepository {
   Future<Either<Failure, void>> deleteNote(NoteDTO noteDTO) async {
     try {
       return Right(await _notesRemoteDataSource.deleteNote(noteDTO));
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(ServerFailure(e.toString()));
+    } on SocketException {
+      return const Left(NoConnectionFailure());
     }
   }
 }

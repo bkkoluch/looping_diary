@@ -27,6 +27,8 @@
   "deleteNoteDialogSubtitle": "Your note will be deleted irreversibly.",
   "deleteNoteDialogCancelButtonText": "Delete",
   "deleteNoteDialogOkButtonText": "Cancel",
+  "noConnectionSnackBarText": "Retry the operation when your connection comes back on.",
+  "noConnectionPageText": "Make sure you're connected to the internet and retry the call by pressing the button below",
   "arrayLabel": "array",
   "booleanLabel": "boolean",
   "cancelLabel": "cancel",
