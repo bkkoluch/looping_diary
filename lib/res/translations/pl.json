@@ -28,6 +28,7 @@
   "deleteNoteDialogCancelButtonText": "Usuń notatkę",
   "deleteNoteDialogOkButtonText": "Anuluj",
   "todayButtonText": "Dzisiaj",
+  "settingsPageLogoutButtonText": "Wyloguj się",
   "noConnectionSnackBarText": "Ponów ostatnią operację kiedy wróci Twoje połączenie internetowe.",
   "noConnectionPageText": "Upewnij się że Twoje urządzenie jest podłączone do internetu i ponów operację poprzez wciśnięcie przycisku poniżej.",
   "arrayLabel": "array",
