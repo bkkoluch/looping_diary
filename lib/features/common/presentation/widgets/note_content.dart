@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -63,31 +65,33 @@ class NoteContent extends StatelessWidget {
         ],
       );
 
-  void _showYearChoiceBottomSheet(BuildContext context) {
+  void _showYearChoiceBottomSheet(BuildContext context) async {
     final ScrollController listScrollController = ScrollController();
-    keyboard_utils.hideKeyboard();
+    await keyboard_utils.hideKeyboard();
 
-    showBarModalBottomSheet(
-      context: context,
-      enableDrag: false,
-      builder: (context) => Container(
-        color: ColorTokens.brown,
-        height: context.screenHeight * 0.7,
-        child: ListView.builder(
-          controller: listScrollController,
-          itemCount: DateTime.now().year - _yearLimiter,
-          itemBuilder: (_, int year) => InkWell(
-            onTap: () => _onYearRowTapped(context, year),
-            child: Padding(
-              padding: const EdgeInsets.all(CoreDimensions.paddingM),
-              child: Column(
-                children: [
-                  CoreText.titleLg(
-                    '${_getYearToDisplay(year)}',
-                    color: _getYearToDisplay(year) == noteDate.year ? ColorTokens.brandAccent : ColorTokens.black,
-                  ),
-                  const Divider(),
-                ],
+    unawaited(
+      showBarModalBottomSheet(
+        context: context,
+        enableDrag: false,
+        builder: (context) => Container(
+          color: ColorTokens.brown,
+          height: context.screenHeight * 0.7,
+          child: ListView.builder(
+            controller: listScrollController,
+            itemCount: DateTime.now().year - _yearLimiter,
+            itemBuilder: (_, int year) => InkWell(
+              onTap: () => _onYearRowTapped(context, year),
+              child: Padding(
+                padding: const EdgeInsets.all(CoreDimensions.paddingM),
+                child: Column(
+                  children: [
+                    CoreText.titleLg(
+                      '${_getYearToDisplay(year)}',
+                      color: _getYearToDisplay(year) == noteDate.year ? ColorTokens.brandAccent : ColorTokens.black,
+                    ),
+                    const Divider(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -95,27 +99,28 @@ class NoteContent extends StatelessWidget {
       ),
     );
 
-    Future.delayed(const Duration(milliseconds: 200), () {
+    await Future.delayed(const Duration(milliseconds: 250), () {
       listScrollController.animateTo(
         listScrollController.position.maxScrollExtent,
         curve: Curves.ease,
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 500),
       );
     });
   }
 
-  Note _getNoteToEdit(BuildContext context, int year) => _noteExists(noteDate.copyWith(year: _getYearToDisplay(year)))
-      ? getIt<NoteCubit>().getNoteForDate(noteDate)!
-      : Note(
-          noteDate: noteDate.copyWith(year: _getYearToDisplay(year)),
-          id: noteDate.copyWith(year: _getYearToDisplay(year)).toDateTime.toIso8601String(),
-        );
+  Note _getNoteToEdit(int year) {
+    final NoteDate noteDateToPush = noteDate.copyWith(year: _getYearToDisplay(year));
+
+    return _noteExists(noteDateToPush)
+        ? getIt<NoteCubit>().getNoteForDate(noteDateToPush)!
+        : Note(noteDate: noteDateToPush, id: noteDateToPush.toDateTime.toIso8601String());
+  }
 
   void _onYearRowTapped(BuildContext context, int year) => context.router.push(
         NoteDetailsRoute(
           pageIndex: pageIndex,
           shouldNavigateToHomeOnPop: true,
-          note: _getNoteToEdit(context, year),
+          note: _getNoteToEdit(year),
         ),
       );
 

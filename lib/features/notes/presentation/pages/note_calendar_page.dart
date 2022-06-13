@@ -164,6 +164,6 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
         const NoteCalendarRoute(),
         NoteDetailsRoute(note: note, pageIndex: pageIndex, autofocus: false)
       ])
-          // SetState used to rebuild the page on pop, if used changed the note before coming back
+          // SetState used to rebuild the page on pop, if user changed the note before coming back
           .whenComplete(() => setState(() {}));
 }
