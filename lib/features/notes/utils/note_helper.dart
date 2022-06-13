@@ -42,6 +42,13 @@ String pageIndexToDayAndMonth(int pageIndex) {
   return '$day/$currentMonth';
 }
 
+int noteDateToPageIndex(NoteDate noteDate) {
+  final int day = noteDate.day;
+  final int month = noteDate.month;
+
+  return _numberOfDaysPassedSinceStartOFTheYearForEachMonth[month - 2] + day;
+}
+
 double calculateTextSize(BuildContext? context) {
   if (context == null) {
     return 1;

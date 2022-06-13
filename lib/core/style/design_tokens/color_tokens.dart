@@ -24,6 +24,8 @@ class ColorTokens {
   static const Color systemInformation = Color(0xFF1777BD);
   static const Color systemWarning = Color(0xFFFFD53E);
   static const Color systemError = Color(0xFFF3203A);
+
+  static const Color baseShadow = Color(0xFF540000);
 }
 
 List<Color> bookmarkColors = [

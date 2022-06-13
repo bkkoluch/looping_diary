@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:looping_diary/core/extensions/context_extensions.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_bookmark.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_card.dart';
+import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 
 class NoteListWithBookmarks extends StatefulWidget {
   const NoteListWithBookmarks({
@@ -34,10 +36,19 @@ class _NoteListWithBookmarksState extends State<NoteListWithBookmarks> {
             controller: widget.listScrollController,
             physics: const ClampingScrollPhysics(),
             itemCount: widget.notesDividedByDay.length,
-            itemBuilder: (_, int noteIndex) => GestureDetector(
-              onTap: () => widget.onNoteTapped(context, widget.notesDividedByDay[noteIndex], widget.pageIndex),
-              // onTap: () => widget.onNoteTapped(context, widget.notesDividedByDay[noteIndex], widget.listIndex),
-              child: NoteCard(note: widget.notesDividedByDay[noteIndex], pageIndex: widget.pageIndex),
+            itemBuilder: (_, int noteIndex) => Stack(
+              clipBehavior: Clip.none,
+              children: [
+                NoteCard(note: widget.notesDividedByDay[noteIndex], pageIndex: widget.pageIndex),
+                Align(
+                  alignment: note_helper.isPageEven(widget.pageIndex) ? Alignment.topRight : Alignment.topLeft,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => widget.onNoteTapped(context, widget.notesDividedByDay[noteIndex], widget.pageIndex),
+                    child: SizedBox(height: context.screenHeight * 0.5, width: context.screenWidth * 0.9),
+                  ),
+                ),
+              ],
             ),
           ),
           if (widget.notesDividedByDay.length > 1)

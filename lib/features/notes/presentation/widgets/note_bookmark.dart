@@ -70,6 +70,7 @@ class _NoteBookmarkState extends State<NoteBookmark> {
               ),
               PositionedDirectional(
                 end: context.screenWidth * 0.01,
+                start: _isPageEven ? null : context.screenWidth * 0.01,
                 top: context.screenWidth * 0.005,
                 child: Text(
                   widget.note.noteDate.year.toString(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DeleteNotePainter extends CustomPainter {
-  const DeleteNotePainter();
+class DeleteNoteIconPainter extends CustomPainter {
+  const DeleteNoteIconPainter();
 
   @override
   void paint(Canvas canvas, Size size) {
