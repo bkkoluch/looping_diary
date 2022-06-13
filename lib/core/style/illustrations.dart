@@ -1,6 +1,11 @@
-import 'package:looping_diary/res/painters/icons/delete_note_painter.dart';
+import 'package:looping_diary/res/painters/icons/back_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/calendar_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/delete_note_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/edit_note_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/info_icon_painter.dart';
-import 'package:looping_diary/res/painters/icons/save_note_painter.dart';
+import 'package:looping_diary/res/painters/icons/keyboard_hide_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/keyboard_show_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/save_note_icon_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/add_notes_illustration_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/notebook_illustration_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/notes_illustration_painter.dart';
@@ -29,8 +34,13 @@ class Illustrations {
 class PainterTokens {
   // Icons
   static const iconInfo = InfoIconPainter();
-  static const iconDeleteNote = DeleteNotePainter();
-  static const iconSaveNote = SaveNotePainter();
+  static const iconDeleteNote = DeleteNoteIconPainter();
+  static const iconSaveNote = SaveNoteIconPainter();
+  static const iconCalendar = CalendarIconPainter();
+  static const iconBack = BackIconPainter();
+  static const iconKeyboardShow = KeyboardShowIconPainter();
+  static const iconKeyboardHide = KeyboardHideIconPainter();
+  static const iconEditNote = EditNoteIconPainter();
 
   // Illustrations
   static const addNotes = AddNotesIllustrationPainter();

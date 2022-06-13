@@ -6,6 +6,7 @@ import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/extensions/list_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
+import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/delete_note_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart';
@@ -94,6 +95,18 @@ class NoteCubit extends Cubit<NoteState> {
   void clearShouldShowNoteSavedSnackBar() => emit(state.copyWith(shouldShowNoteSavedSnackBar: false));
 
   void clearShouldShowNoteDeletedSnackBar() => emit(state.copyWith(shouldShowNoteDeletedSnackBar: false));
+
+  Note? getNoteForDate(NoteDate noteDate) {
+    final List<Note>? notesWithTheDate = state.notesSortedByDayAndYears.firstWhereOrNull(
+      (List<Note> noteListForEachDay) => noteListForEachDay.any((note) => note.noteDate == noteDate),
+    );
+
+    if (notesWithTheDate == null) {
+      return null;
+    }
+
+    return notesWithTheDate.firstWhere((note) => note.noteDate == noteDate);
+  }
 
   void _emitErrorStateDependingOnAFailure(Failure failure) {
     if (failure is ServerFailure) {

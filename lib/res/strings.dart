@@ -31,6 +31,7 @@ const String deleteNoteDialogTitle = 'deleteNoteDialogTitle';
 const String deleteNoteDialogSubtitle = 'deleteNoteDialogSubtitle';
 const String deleteNoteDialogCancelButtonText = 'deleteNoteDialogCancelButtonText';
 const String deleteNoteDialogOkButtonText = 'deleteNoteDialogOkButtonText';
+const String todayButtonText = 'todayButtonText';
 
 // SnackBars & errors
 const String noConnectionSnackBarText = 'noConnectionSnackBarText';

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:looping_diary/core/extensions/datetime_extensions.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
+import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/delete_note_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/get_all_notes_use_case.dart';
 import 'package:looping_diary/features/notes/domain/use_cases/save_note_use_case.dart';
@@ -323,6 +324,42 @@ void main() {
       verify: (cubit) {
         verify(getAllNotesUseCase.call);
         verify(() => deleteNoteUseCase(tNote)).called(1);
+      },
+    );
+  });
+
+  group('NoteCubit::getNoteForDate', () {
+    final NoteCubit cubit = NoteCubit();
+    cubit.emit(
+      cubit.state.copyWith(
+        status: NoteStateStatus.loaded,
+        notesSortedByDayAndYears: sortNotesByDayAndYear([tNote]),
+      ),
+    );
+
+    test(
+      'should return null if cubit does not contain note with provided date',
+      () async {
+        // Arrange
+
+        // Act
+        final result = cubit.getNoteForDate(NoteDate.today);
+
+        // Assert
+        expect(result, null);
+      },
+    );
+
+    test(
+      'should return null if cubit contains note with provided date',
+      () async {
+        // Arrange
+
+        // Act
+        final result = cubit.getNoteForDate(tNote.noteDate);
+
+        // Assert
+        expect(result, tNote);
       },
     );
   });

@@ -3,6 +3,7 @@ class CoreDimensions {
   static const double paddingXXS = 2;
   static const double paddingXS = 4;
   static const double paddingS = 8;
+  static const double paddingXM = 12;
   static const double paddingM = 16;
   static const double paddingL = 24;
   static const double paddingXL = 48;
@@ -21,14 +22,16 @@ class CoreDimensions {
   static const double onboardingTextContentContainerHeight = 200;
 
   // Radius
-  static const double defaultAppBarBorderRadius = 20;
   static const double noteCardBorderRadius = 20;
+  static const double coreButtonBorderRadius = 20;
   static const double coreSnackBarBorderRadius = 8;
+  static const double defaultAppBarBorderRadius = 20;
+  static const double coreInputFieldBorderRadius = 20;
 
   // Various
-  static const double bottomNavigationBarHeight = 60;
   static const double defaultAppBarHeight = 64;
   static const double noteCardStartPadding = 42;
+  static const double bottomNavigationBarHeight = 60;
 
   // Images
   static const double defaultIconSize = 24;
@@ -52,4 +55,9 @@ class CoreDimensions {
   // Note card
   static const double lastYearBookmarkHeight = 24;
   static const double lastYearActiveBookmarkAdditionalWidth = 35;
+
+  // Buttons
+  static const double coreButtonWidth = 200;
+  static const double coreSmallButtonWidth = 100;
+  static const double coreButtonHeight = 48;
 }

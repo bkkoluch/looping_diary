@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SaveNotePainter extends CustomPainter {
-  const SaveNotePainter();
+class SaveNoteIconPainter extends CustomPainter {
+  const SaveNoteIconPainter();
 
   @override
   void paint(Canvas canvas, Size size) {

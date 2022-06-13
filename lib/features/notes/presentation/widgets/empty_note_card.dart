@@ -7,6 +7,7 @@ import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
+import 'package:looping_diary/features/common/presentation/widgets/core_button.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
@@ -68,8 +69,8 @@ class EmptyNoteCard extends StatelessWidget {
             ),
             // To remove
             Center(
-              child: ElevatedButton(
-                onPressed: getIt<FirebaseAuth>().signOut,
+              child: CoreButton(
+                onTap: getIt<FirebaseAuth>().signOut,
                 child: const Text('Log out'),
               ),
             )

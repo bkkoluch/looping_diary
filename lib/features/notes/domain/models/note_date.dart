@@ -19,6 +19,12 @@ class NoteDate with _$NoteDate {
         year: dto.year,
       );
 
+  factory NoteDate.fromDateTime(DateTime dateTime) => NoteDate(
+        day: dateTime.day,
+        month: dateTime.month,
+        year: dateTime.year,
+      );
+
   static NoteDate get today {
     final DateTime now = DateTime.now();
     return NoteDate(day: now.day, month: now.month, year: now.year);
