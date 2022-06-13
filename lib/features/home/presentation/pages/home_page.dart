@@ -147,6 +147,15 @@ class _HomePageState extends State<HomePage> {
               width: context.screenHeight * 0.05,
             ),
           ),
+          InkWell(
+            onTap: () => context.router.push(const SettingsRoute()),
+            child: Image.asset(
+              Illustrations.settings,
+              color: ColorTokens.brandAccent,
+              height: context.screenHeight * 0.05,
+              width: context.screenHeight * 0.05,
+            ),
+          ),
         ],
       );
 

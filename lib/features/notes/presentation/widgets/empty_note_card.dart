@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_button.dart';
+import 'package:looping_diary/core/style/illustrations.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
@@ -67,13 +66,11 @@ class EmptyNoteCard extends StatelessWidget {
               textAlign: TextAlign.left,
               style: TextTokens.titleMd(context: context),
             ),
-            // To remove
-            Center(
-              child: CoreButton(
-                onTap: getIt<FirebaseAuth>().signOut,
-                child: const Text('Log out'),
-              ),
-            )
+            SizedBox(height: context.screenHeight * 0.105),
+            SvgPicture.asset(
+              Illustrations.takingNotes,
+              width: context.screenWidth / 2,
+            ),
           ],
         ),
       );

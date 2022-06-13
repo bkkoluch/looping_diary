@@ -33,6 +33,9 @@ const String deleteNoteDialogCancelButtonText = 'deleteNoteDialogCancelButtonTex
 const String deleteNoteDialogOkButtonText = 'deleteNoteDialogOkButtonText';
 const String todayButtonText = 'todayButtonText';
 
+// Settings
+const String settingsPageLogoutButtonText = 'settingsPageLogoutButtonText';
+
 // SnackBars & errors
 const String noConnectionSnackBarText = 'noConnectionSnackBarText';
 const String noConnectionPageText = 'noConnectionPageText';

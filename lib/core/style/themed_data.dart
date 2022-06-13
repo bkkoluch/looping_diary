@@ -10,6 +10,7 @@ class ThemedData {
         borderRadius: BorderRadius.circular(CoreDimensions.paddingS),
       ),
     ),
+    backgroundColor: ColorTokens.brown,
     primaryColor: ColorTokens.brandPrimary,
     fontFamily: GoogleFonts.lato().fontFamily,
     textSelectionTheme: const TextSelectionThemeData(

@@ -29,6 +29,9 @@ class Illustrations {
   static const String personalNotebook = '${illustrationPath}personal_notebook.svg';
   static const String takingNotes = '${illustrationPath}taking_notes.svg';
   static const String noConnection = '${illustrationPath}no_connection.svg';
+  static const String profilePicture = '${illustrationPath}profile_picture.svg';
+  static const String mobileLogin = '${illustrationPath}mobile_login.svg';
+  static const String forgotPassword = '${illustrationPath}forgot_password.svg';
 }
 
 class PainterTokens {
