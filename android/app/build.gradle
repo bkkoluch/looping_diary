@@ -41,7 +41,7 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    ndkVersion "22.1.717670"
+    ndkVersion "24.0.8215888"
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.looping_diary"
