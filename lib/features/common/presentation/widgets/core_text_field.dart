@@ -31,7 +31,7 @@ class CoreTextField extends StatelessWidget {
         controller: controller,
         cursorHeight: context.screenHeight * 0.04,
         style: TextTokens.bodyLg(context: context),
-        decoration: const InputDecoration(border: InputBorder.none),
+        decoration: const InputDecoration(border: InputBorder.none, isCollapsed: true),
         cursorRadius: const Radius.circular(CoreDimensions.coreInputFieldBorderRadius),
       );
 }

@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
+import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 import 'package:looping_diary/res/strings.dart';
 
 class DeleteNoteDialog {
@@ -17,8 +18,10 @@ class DeleteNoteDialog {
         dismissOnTouchOutside: false,
         title: deleteNoteDialogTitle.tr(),
         desc: deleteNoteDialogSubtitle.tr(),
-        btnOkText: deleteNoteDialogCancelButtonText.tr(),
-        btnCancelText: deleteNoteDialogOkButtonText.tr(),
+        titleTextStyle: TextTokens.titleSm(),
+        descTextStyle: TextTokens.body(),
+        btnOkText: deleteNoteDialogOkButtonText.tr(),
+        btnCancelText: deleteNoteDialogCancelButtonText.tr(),
         btnOkOnPress: onOkPressed,
         btnCancelOnPress: () {},
       ).show();

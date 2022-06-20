@@ -2,10 +2,12 @@ import 'package:looping_diary/res/painters/icons/back_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/calendar_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/delete_note_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/edit_note_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/info_alternate_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/info_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/keyboard_hide_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/keyboard_show_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/save_note_icon_painter.dart';
+import 'package:looping_diary/res/painters/icons/settings_icon_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/add_notes_illustration_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/notebook_illustration_painter.dart';
 import 'package:looping_diary/res/painters/illustrations/notes_illustration_painter.dart';
@@ -19,10 +21,8 @@ class Illustrations {
   // Icons
   static const String home = '${iconPath}home.png';
   static const String settings = '${iconPath}settings.png';
-  static const String newNote = '${iconPath}new_note.png';
 
   // Illustrations
-  static const String morningCoffeeWithDiary = '${illustrationPath}morning_coffee_with_diary.jpg';
   static const String notes = '${illustrationPath}notes.svg';
   static const String addNotes = '${illustrationPath}add_notes.svg';
   static const String notebook = '${illustrationPath}notebook.svg';
@@ -44,6 +44,8 @@ class PainterTokens {
   static const iconKeyboardShow = KeyboardShowIconPainter();
   static const iconKeyboardHide = KeyboardHideIconPainter();
   static const iconEditNote = EditNoteIconPainter();
+  static const iconInfoAlternate = InfoAlternateIconPainter();
+  static const iconSettings = SettingsIconPainter();
 
   // Illustrations
   static const addNotes = AddNotesIllustrationPainter();

@@ -27,13 +27,11 @@ class NoteDetailsPage extends StatefulWidget {
     required this.note,
     required this.pageIndex,
     this.shouldNavigateToHomeOnPop = false,
-    this.autofocus = true,
     Key? key,
   }) : super(key: key);
 
   final Note note;
   final int pageIndex;
-  final bool autofocus;
   final bool shouldNavigateToHomeOnPop;
 
   @override
@@ -52,7 +50,7 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
     super.initState();
     cubit.updateCurrentNote(widget.note);
     noteTextFieldController.text = widget.note.entry ?? '';
-    isEditMode = widget.autofocus;
+    isEditMode = false;
   }
 
   @override
@@ -97,13 +95,13 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
             noteDate: widget.note.noteDate,
             noteEntryWidget: Column(
               children: [
-                SizedBox(height: context.screenHeight * 0.092),
+                SizedBox(height: context.screenHeight * 0.11),
                 CoreTextField(
                   focusNode: noteTextFieldFocusNode,
                   controller: noteTextFieldController,
-                  autofocus: widget.autofocus,
                   onTap: () => setState(() => isEditMode = true),
                   maxLines: context.isKeyboardVisible ? 10 : 16,
+                  autofocus: false,
                 ),
               ],
             ),
@@ -114,23 +112,16 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
   Column _buildQuickActionsColumn() => Column(
         children: [
           SizedBox(height: context.screenHeight * 0.1),
-          _buildBackOrHomeIcon(),
+          _buildBackIcon(),
           _buildSaveNoteIcon(),
           _buildDeleteNoteIcon(),
           _buildKeyboardToggleIcon(),
         ],
       );
 
-  Widget _buildBackOrHomeIcon() => InkWell(
+  Widget _buildBackIcon() => InkWell(
         onTap: () => _popPageDependingOnContents(context),
-        child: widget.autofocus
-            ? Image.asset(
-                Illustrations.home,
-                color: ColorTokens.brandAccent,
-                height: _iconSize,
-                width: _iconSize,
-              )
-            : _buildPainterIcon(PainterTokens.iconBack),
+        child: _buildPainterIcon(PainterTokens.iconBack),
       );
 
   Widget _buildSaveNoteIcon() => InkWell(
@@ -140,29 +131,32 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
 
   Widget _buildDeleteNoteIcon() => cubit.state.loading
       ? const CircularProgressIndicator(color: ColorTokens.brandAccent)
-      : InkWell(onTap: _showDeleteNotePopup, child: _buildPainterIcon(PainterTokens.iconDeleteNote));
+      : cubit.getNoteForDate(widget.note.noteDate)?.entry != null
+          ? InkWell(onTap: _showDeleteNotePopup, child: _buildPainterIcon(PainterTokens.iconDeleteNote))
+          : const SizedBox.shrink();
 
   Widget _buildKeyboardToggleIcon() => InkWell(
-        onTap: isEditMode
-            ? () {
-                keyboard_utils.hideKeyboard();
-                FocusScope.of(context).unfocus();
-                setState(() => isEditMode = false);
-              }
-            : () {
-                keyboard_utils.showKeyboardAndFocusNode(context, noteTextFieldFocusNode);
-                setState(() => isEditMode = true);
-              },
+        onTap: isEditMode ? () async => await _hideKeyboardAndChangeKeyboardIcon() : _showKeyboardAndChangeKeyboardIcon,
         child: _buildPainterIcon(isEditMode ? PainterTokens.iconKeyboardHide : PainterTokens.iconKeyboardShow),
       );
 
   Widget _buildPainterIcon(CustomPainter painter) =>
       CorePainterImage.sized(painter: painter, height: _iconSize, width: _iconSize);
 
+  Future<void> _hideKeyboardAndChangeKeyboardIcon() async {
+    await _hideKeyboard();
+    setState(() => isEditMode = false);
+  }
+
+  void _showKeyboardAndChangeKeyboardIcon() {
+    keyboard_utils.showKeyboardAndFocusNode(context, noteTextFieldFocusNode);
+    setState(() => isEditMode = true);
+  }
+
   void _popPageDependingOnContents(BuildContext context) async {
-    await keyboard_utils.hideKeyboard();
-    noteTextFieldFocusNode.unfocus();
-    if (cubit.state.currentNote.entry != noteTextFieldController.text) {
+    await _hideKeyboard();
+    if (cubit.state.currentNote.entry != noteTextFieldController.text &&
+        cubit.state.currentNote.noteDate == widget.note.noteDate) {
       await LeaveWithoutSavingNoteDialog(_popOrReplacePage).show(context: context);
     } else {
       await _popOrReplacePage();
@@ -170,7 +164,7 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
   }
 
   void _saveNote(BuildContext context, String noteEntry) async {
-    await keyboard_utils.hideKeyboard();
+    await _hideKeyboard();
 
     cubit
       ..updateNoteEntry(noteTextFieldController.text)
@@ -178,14 +172,24 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
   }
 
   void _showDeleteNotePopup() async {
-    noteTextFieldFocusNode.unfocus();
+    await _hideKeyboard();
+    await DeleteNoteDialog(_onDeleteNote).show(context: context);
+  }
+
+  void _onDeleteNote() async {
+    cubit.deleteNote();
+    await context.router.replace(HomeRoute(pageToScrollTo: widget.pageIndex));
+  }
+
+  Future<void> _hideKeyboard() async {
+    setState(() => isEditMode = false);
     await keyboard_utils.hideKeyboard();
-    await DeleteNoteDialog(cubit.deleteNote).show(context: context);
+    FocusScope.of(context).unfocus();
   }
 
   Future<void> _popOrReplacePage() async {
     if (widget.shouldNavigateToHomeOnPop) {
-      await context.router.replace(HomeRoute());
+      await context.router.replace(HomeRoute(pageToScrollTo: widget.pageIndex));
     } else {
       await context.router.pop();
     }

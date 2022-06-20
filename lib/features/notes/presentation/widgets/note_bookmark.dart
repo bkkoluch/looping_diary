@@ -100,7 +100,7 @@ class _NoteBookmarkState extends State<NoteBookmark> {
 
   void _animateToNote(BuildContext context) => widget.listScrollController
       .animateTo(
-        _calculateNumberOfNotesToFirstNote * context.screenHeight,
+        widget.noteIndex * context.screenHeight,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       )
@@ -118,9 +118,6 @@ class _NoteBookmarkState extends State<NoteBookmark> {
   double _bookmarkWidth(BuildContext context) => isActive
       ? context.screenWidth * 0.25 + CoreDimensions.lastYearActiveBookmarkAdditionalWidth
       : context.screenWidth * 0.25;
-
-  int get _calculateNumberOfNotesToFirstNote =>
-      widget.firstNoteOnTheList.noteDate.toDateTime.year - widget.note.noteDate.year;
 
   bool get _isPageEven => widget.pageIndex % 2 == 0;
 }

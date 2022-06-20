@@ -17,6 +17,7 @@ import '../../../features/home/presentation/pages/home_page.dart' as _i4;
 import '../../../features/login/presentation/auth_gate_page.dart' as _i3;
 import '../../../features/login/presentation/pages/forgot_password_page.dart' as _i5;
 import '../../../features/notes/domain/models/note.dart' as _i12;
+import '../../../features/notes/domain/models/note_date.dart' as _i13;
 import '../../../features/notes/presentation/pages/note_calendar_page.dart' as _i7;
 import '../../../features/notes/presentation/pages/note_details_page.dart' as _i6;
 import '../../../features/onboarding/presentation/pages/onboarding_carrousel_page.dart' as _i2;
@@ -73,16 +74,16 @@ class AppRouter extends _i9.RootStackRouter {
               note: args.note,
               pageIndex: args.pageIndex,
               shouldNavigateToHomeOnPop: args.shouldNavigateToHomeOnPop,
-              autofocus: args.autofocus,
               key: args.key),
           customRouteBuilder: _i11.fadeInRouteBuilder,
           opaque: true,
           barrierDismissible: false);
     },
     NoteCalendarRoute.name: (routeData) {
+      final args = routeData.argsAs<NoteCalendarRouteArgs>(orElse: () => const NoteCalendarRouteArgs());
       return _i9.CustomPage<dynamic>(
           routeData: routeData,
-          child: const _i7.NoteCalendarPage(),
+          child: _i7.NoteCalendarPage(noteDate: args.noteDate, key: args.key),
           customRouteBuilder: _i11.fadeInRouteBuilder,
           opaque: true,
           barrierDismissible: false);
@@ -168,30 +169,18 @@ class ForgotPasswordRoute extends _i9.PageRouteInfo<void> {
 /// [_i6.NoteDetailsPage]
 class NoteDetailsRoute extends _i9.PageRouteInfo<NoteDetailsRouteArgs> {
   NoteDetailsRoute(
-      {required _i12.Note note,
-      required int pageIndex,
-      bool shouldNavigateToHomeOnPop = false,
-      bool autofocus = true,
-      _i10.Key? key})
+      {required _i12.Note note, required int pageIndex, bool shouldNavigateToHomeOnPop = false, _i10.Key? key})
       : super(NoteDetailsRoute.name,
             path: '/note-details-page',
             args: NoteDetailsRouteArgs(
-                note: note,
-                pageIndex: pageIndex,
-                shouldNavigateToHomeOnPop: shouldNavigateToHomeOnPop,
-                autofocus: autofocus,
-                key: key));
+                note: note, pageIndex: pageIndex, shouldNavigateToHomeOnPop: shouldNavigateToHomeOnPop, key: key));
 
   static const String name = 'NoteDetailsRoute';
 }
 
 class NoteDetailsRouteArgs {
   const NoteDetailsRouteArgs(
-      {required this.note,
-      required this.pageIndex,
-      this.shouldNavigateToHomeOnPop = false,
-      this.autofocus = true,
-      this.key});
+      {required this.note, required this.pageIndex, this.shouldNavigateToHomeOnPop = false, this.key});
 
   final _i12.Note note;
 
@@ -199,22 +188,35 @@ class NoteDetailsRouteArgs {
 
   final bool shouldNavigateToHomeOnPop;
 
-  final bool autofocus;
-
   final _i10.Key? key;
 
   @override
   String toString() {
-    return 'NoteDetailsRouteArgs{note: $note, pageIndex: $pageIndex, shouldNavigateToHomeOnPop: $shouldNavigateToHomeOnPop, autofocus: $autofocus, key: $key}';
+    return 'NoteDetailsRouteArgs{note: $note, pageIndex: $pageIndex, shouldNavigateToHomeOnPop: $shouldNavigateToHomeOnPop, key: $key}';
   }
 }
 
 /// generated route for
 /// [_i7.NoteCalendarPage]
-class NoteCalendarRoute extends _i9.PageRouteInfo<void> {
-  const NoteCalendarRoute() : super(NoteCalendarRoute.name, path: '/note-calendar-page');
+class NoteCalendarRoute extends _i9.PageRouteInfo<NoteCalendarRouteArgs> {
+  NoteCalendarRoute({_i13.NoteDate? noteDate, _i10.Key? key})
+      : super(NoteCalendarRoute.name,
+            path: '/note-calendar-page', args: NoteCalendarRouteArgs(noteDate: noteDate, key: key));
 
   static const String name = 'NoteCalendarRoute';
+}
+
+class NoteCalendarRouteArgs {
+  const NoteCalendarRouteArgs({this.noteDate, this.key});
+
+  final _i13.NoteDate? noteDate;
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return 'NoteCalendarRouteArgs{noteDate: $noteDate, key: $key}';
+  }
 }
 
 /// generated route for
