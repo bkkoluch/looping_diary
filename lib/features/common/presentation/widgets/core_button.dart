@@ -28,6 +28,9 @@ class _CoreButtonState extends State<CoreButton> {
 
   @override
   Widget build(BuildContext context) => InkWell(
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(CoreDimensions.coreButtonBorderRadius),
+        ),
         onTapDown: (_) => _changeButtonState(true),
         onTapCancel: () => _changeButtonState(false),
         onTap: _onTap,
@@ -68,13 +71,15 @@ class GlassFilter extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
           child: Stack(
             children: [
-              Container(
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
                 width: isScreenWidth ? context.screenWidth : _buttonWidth,
                 height: CoreDimensions.coreButtonHeight,
                 decoration: _getBoxDecoration(),
                 child: Center(child: child),
               ),
-              Container(
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
                 width: isScreenWidth ? context.screenWidth : _buttonWidth,
                 height: isClicked ? 0 : 3,
                 margin: EdgeInsets.only(top: _buttonHeight),

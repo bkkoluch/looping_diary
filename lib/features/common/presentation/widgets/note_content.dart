@@ -116,13 +116,10 @@ class NoteContent extends StatelessWidget {
         : Note(noteDate: noteDateToPush, id: noteDateToPush.toDateTime.toIso8601String());
   }
 
-  void _onYearRowTapped(BuildContext context, int year) => context.router.push(
-        NoteDetailsRoute(
-          pageIndex: pageIndex,
-          shouldNavigateToHomeOnPop: true,
-          note: _getNoteToEdit(year),
-        ),
-      );
+  void _onYearRowTapped(BuildContext context, int year) {
+    context.router.pop();
+    context.router.push(NoteDetailsRoute(pageIndex: pageIndex, note: _getNoteToEdit(year)));
+  }
 
   bool _noteExists(NoteDate noteDate) => getIt<NoteCubit>().getNoteForDate(noteDate) != null;
 

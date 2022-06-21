@@ -34,10 +34,17 @@ String pageIndexToDayAndMonth(int pageIndex) {
     _numberOfDaysPassedSinceStartOFTheYearForEachMonth.firstWhere((nextMonthIndex) => nextMonthIndex >= pageIndex),
   );
 
-  final int currentMonthIndex = nextMonthIndex - 1;
+  final int day;
+  final int currentMonth;
 
-  final int day = pageIndex - _numberOfDaysPassedSinceStartOFTheYearForEachMonth[currentMonthIndex];
-  final int currentMonth = nextMonthIndex + 1;
+  if (nextMonthIndex > 0) {
+    final int currentMonthIndex = nextMonthIndex > 0 ? nextMonthIndex - 1 : nextMonthIndex;
+    day = pageIndex - _numberOfDaysPassedSinceStartOFTheYearForEachMonth[currentMonthIndex];
+    currentMonth = nextMonthIndex + 1;
+  } else {
+    day = pageIndex;
+    currentMonth = 1;
+  }
 
   return '$day/$currentMonth';
 }
@@ -46,7 +53,11 @@ int noteDateToPageIndex(NoteDate noteDate) {
   final int day = noteDate.day;
   final int month = noteDate.month;
 
-  return _numberOfDaysPassedSinceStartOFTheYearForEachMonth[month - 2] + day;
+  if (month > 1) {
+    return _numberOfDaysPassedSinceStartOFTheYearForEachMonth[month - 2] + day;
+  } else {
+    return day;
+  }
 }
 
 double calculateTextSize(BuildContext? context) {

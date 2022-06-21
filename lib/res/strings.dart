@@ -23,6 +23,18 @@ const String loginScreenSignInWithGoogleLabel = 'loginScreenSignInWithGoogleLabe
 const String emptyNotePageAddNewNoteText = 'emptyNotePageAddNewNoteText';
 const String savedYourNoteSnackBarText = 'savedYourNoteSnackBarText';
 const String deletedYourNoteSnackBarText = 'deletedYourNoteSnackBarText';
+const String todayButtonText = 'todayButtonText';
+
+// Settings
+const String settingsPageLogoutButtonText = 'settingsPageLogoutButtonText';
+const String settingsPageContactSupportText = 'settingsPageContactSupportText';
+const String settingsPageUrlLauncherErrorSnackBarText = 'settingsPageUrlLauncherErrorSnackBarText';
+
+// SnackBars & errors
+const String noConnectionSnackBarText = 'noConnectionSnackBarText';
+const String noConnectionPageText = 'noConnectionPageText';
+
+// Dialogs
 const String areYouSureDialogTitle = 'areYouSureDialogTitle';
 const String areYouSureDialogSubtitle = 'areYouSureDialogSubtitle';
 const String areYouSureDialogCancelButtonText = 'areYouSureDialogCancelButtonText';
@@ -31,14 +43,9 @@ const String deleteNoteDialogTitle = 'deleteNoteDialogTitle';
 const String deleteNoteDialogSubtitle = 'deleteNoteDialogSubtitle';
 const String deleteNoteDialogCancelButtonText = 'deleteNoteDialogCancelButtonText';
 const String deleteNoteDialogOkButtonText = 'deleteNoteDialogOkButtonText';
-const String todayButtonText = 'todayButtonText';
-
-// Settings
-const String settingsPageLogoutButtonText = 'settingsPageLogoutButtonText';
-
-// SnackBars & errors
-const String noConnectionSnackBarText = 'noConnectionSnackBarText';
-const String noConnectionPageText = 'noConnectionPageText';
+const String basicInfoDialogTitle = 'basicInfoDialogTitle';
+const String basicInfoDialogSubtitle = 'basicInfoDialogSubtitle';
+const String basicInfoDialogOkButtonText = 'basicInfoDialogOkButtonText';
 
 // FlutterFireUI Labels
 const String arrayLabel = 'arrayLabel';

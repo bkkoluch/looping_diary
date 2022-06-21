@@ -11,7 +11,9 @@ import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_button.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_text.dart';
+import 'package:looping_diary/features/url/url_launcher.dart';
 import 'package:looping_diary/res/strings.dart';
+import 'package:looping_diary/utils/constants.dart' as constants;
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -27,29 +29,57 @@ class SettingsPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: CoreDimensions.paddingL),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  children: [
-                    SvgPicture.asset(
-                      Illustrations.profilePicture,
-                      width: context.screenWidth / 2,
-                    ),
-                    const SizedBox(height: CoreDimensions.spacingS),
-                    CoreText.body('${getIt<FirebaseAuth>().currentUser?.email}', fontWeight: FontWeight.bold),
-                  ],
-                ),
-                CoreButton(
-                  isScreenWidth: true,
-                  onTap: () async {
-                    await getIt<FirebaseAuth>().signOut();
-                    await context.router.push(const AuthGateRoute());
-                  },
-                  child: CoreText.body(settingsPageLogoutButtonText.tr()),
-                ),
+                _buildProfileImageAndMailColumn(context),
+                const SizedBox(height: CoreDimensions.spacingL),
+                _buildLogoutButton(context),
               ],
             ),
           ),
         ),
       );
+
+  Widget _buildProfileImageAndMailColumn(BuildContext context) => Column(
+        children: [
+          Column(
+            children: [
+              SvgPicture.asset(
+                Illustrations.profilePicture,
+                width: context.screenWidth / 2,
+              ),
+              const SizedBox(height: CoreDimensions.spacingS),
+              CoreText.body('${getIt<FirebaseAuth>().currentUser?.email}', fontWeight: FontWeight.bold),
+            ],
+          ),
+          const SizedBox(height: CoreDimensions.spacingL),
+          _buildContactColumn(context),
+        ],
+      );
+
+  Widget _buildContactColumn(BuildContext context) => Column(
+        children: [
+          CoreText.body(
+            settingsPageContactSupportText.tr(),
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: CoreDimensions.spacingMS),
+          _buildButton(
+            onTap: () => UrlLauncher.openEmail(context: context, emailAddress: constants.appEmail),
+            child: CoreText.body(constants.appEmail),
+          ),
+        ],
+      );
+
+  Widget _buildLogoutButton(BuildContext context) => _buildButton(
+        onTap: () async {
+          await getIt<FirebaseAuth>().signOut();
+          await context.router.push(const AuthGateRoute());
+        },
+        child: CoreText.body(settingsPageLogoutButtonText.tr()),
+      );
+
+  Widget _buildButton({required VoidCallback onTap, required Widget child}) =>
+      CoreButton(isScreenWidth: true, onTap: onTap, child: child);
 }

@@ -9,19 +9,23 @@ import 'package:looping_diary/core/services/navigation/navigation_service.gr.dar
 import 'package:looping_diary/core/style/core_dimensions.dart';
 import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
+import 'package:looping_diary/core/style/lotties.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_button.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_snackbar.dart';
 import 'package:looping_diary/features/common/presentation/widgets/core_text.dart';
 import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
+import 'package:looping_diary/features/home/presentation/dialogs/basic_info_dialog.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_cubit.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/note_state.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/empty_note_card.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_list_with_bookmarks.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_page_overlay.dart';
+import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 import 'package:looping_diary/res/painters/notebook_painters/notebook_painter.dart';
 import 'package:looping_diary/res/strings.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({this.pageToScrollTo, Key? key}) : super(key: key);
@@ -92,7 +96,12 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-  Widget _buildLoadingIndicator() => const Center(child: CircularProgressIndicator(color: ColorTokens.brandAccent));
+  Widget _buildLoadingIndicator() => Center(
+        child: Padding(
+          padding: EdgeInsets.only(left: context.screenWidth * 0.1),
+          child: Lottie.asset(Lotties.bookFlipping, animate: true, repeat: true),
+        ),
+      );
 
   Widget _buildRetryColumn() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: CoreDimensions.paddingXL),
@@ -139,25 +148,27 @@ class _HomePageState extends State<HomePage> {
   Column _buildQuickActionsColumn() => Column(
         children: [
           SizedBox(height: context.screenHeight * 0.1),
-          InkWell(
-            onTap: () => context.router.push(const NoteCalendarRoute()),
-            child: CorePainterImage.sized(
-              painter: PainterTokens.iconCalendar,
-              height: context.screenHeight * 0.05,
-              width: context.screenHeight * 0.05,
-            ),
-          ),
-          InkWell(
-            onTap: () => context.router.push(const SettingsRoute()),
-            child: Image.asset(
-              Illustrations.settings,
-              color: ColorTokens.brandAccent,
-              height: context.screenHeight * 0.05,
-              width: context.screenHeight * 0.05,
-            ),
-          ),
+          _buildIcon(onTap: _navigateToCalendarPage, painter: PainterTokens.iconCalendar),
+          _buildIcon(onTap: _navigateToSettingsPage, painter: PainterTokens.iconSettings),
+          _buildIcon(onTap: _showInfoPopup, painter: PainterTokens.iconInfoAlternate),
         ],
       );
+
+  Widget _buildIcon({required VoidCallback onTap, required CustomPainter painter}) => InkWell(
+        onTap: onTap,
+        child: CorePainterImage.sized(
+          painter: painter,
+          height: context.screenHeight * 0.05,
+          width: context.screenHeight * 0.05,
+        ),
+      );
+
+  void _navigateToCalendarPage() =>
+      context.router.push(NoteCalendarRoute(noteDate: note_helper.getNoteDateFromPageIndex(displayedListIndex)));
+
+  void _navigateToSettingsPage() => context.router.push(const SettingsRoute());
+
+  void _showInfoPopup() async => await BasicInfoDialog().show(context: context);
 
   void _scrollToTodayNote() => notesCarrouselController.animateToPage(
         cubit.state.todayNoteIndex,
@@ -165,10 +176,11 @@ class _HomePageState extends State<HomePage> {
         curve: Curves.easeInOut,
       );
 
-  void _pushAddNotePageAndScrollToItWhenPopped(BuildContext context, Note note, int pageIndex) =>
-      context.router.push(NoteDetailsRoute(note: note, pageIndex: pageIndex, autofocus: false)).whenComplete(() {
-        if (notesCarrouselController.hasClients) {
-          notesCarrouselController.jumpToPage(pageIndex);
-        }
-      });
+  void _pushAddNotePageAndScrollToItWhenPopped(BuildContext context, Note note, int pageIndex) {
+    context.router.push(NoteDetailsRoute(note: note, pageIndex: pageIndex)).whenComplete(() {
+      if (notesCarrouselController.hasClients) {
+        notesCarrouselController.jumpToPage(pageIndex);
+      }
+    });
+  }
 }

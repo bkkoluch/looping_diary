@@ -16,7 +16,8 @@ import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_hel
 import 'package:table_calendar/table_calendar.dart';
 
 class NoteCalendarPage extends StatefulWidget {
-  const NoteCalendarPage({Key? key}) : super(key: key);
+  const NoteCalendarPage({this.noteDate, Key? key}) : super(key: key);
+  final NoteDate? noteDate;
 
   @override
   State<NoteCalendarPage> createState() => _NoteCalendarPageState();
@@ -32,6 +33,17 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
   DateTime _selectedDay = DateTime(2020, DateTime.now().month, DateTime.now().day);
 
   final NoteCubit _noteCubit = getIt<NoteCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.noteDate != null) {
+      setState(() {
+        _focusedDay = DateTime(2020, widget.noteDate!.month, widget.noteDate!.day);
+        _selectedDay = DateTime(2020, widget.noteDate!.month, widget.noteDate!.day);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -88,7 +100,7 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
           padding: const EdgeInsets.symmetric(vertical: CoreDimensions.paddingXM),
           child: CoreButton(
             isScreenWidth: true,
-            onTap: () => _navigateToNoteDetails(note, index),
+            onTap: () => _navigateToNoteDetails(note, noteListIndex + 2),
             child: Padding(
               padding: const EdgeInsets.all(CoreDimensions.paddingS),
               child: Row(
@@ -134,7 +146,7 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
   }
 
   int _getNoteListIndexFromSelectedDay(DateTime day) {
-    final DateTime _day = DateTime(2020, day.month, day.day);
+    final DateTime _day = DateTime(2020, day.month, day.month == 1 ? day.day - 1 : day.day);
     final DateTime _firstDay = DateTime(2020);
 
     return _day.difference(_firstDay).inDays;
@@ -142,6 +154,8 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     // On double tap on the same day, navigate to its page
+    // except 'Today', user will have to tap another day
+    // and tap it back twice
     if (selectedDay == _selectedDay) {
       final NoteDate selectedDayNoteDate = NoteDate.fromDateTime(selectedDay);
       context.router.replace(
@@ -161,8 +175,8 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
 
   void _navigateToNoteDetails(Note note, int pageIndex) => context.router.replaceAll([
         HomeRoute(),
-        const NoteCalendarRoute(),
-        NoteDetailsRoute(note: note, pageIndex: pageIndex, autofocus: false)
+        NoteCalendarRoute(noteDate: note.noteDate),
+        NoteDetailsRoute(note: note, pageIndex: pageIndex, shouldNavigateToHomeOnPop: true)
       ])
           // SetState used to rebuild the page on pop, if user changed the note before coming back
           .whenComplete(() => setState(() {}));
