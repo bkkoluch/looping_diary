@@ -76,8 +76,7 @@ Project is created using Clean Architecture.
 | Name | Description | Default value |
 | ------------ | ------------ | ------------ |
 | ENV_APP_NAME | A variable defining how the app will be named after installation | Looping Diary |
-ENV_ENVIRONMENT_SUFFIX | A variable determining the environment, choose between ".uat"/"" - where
-leaving it blank means PROD environment | null |
+| ENV_ENVIRONMENT_SUFFIX | A variable determining the environment, choose between ".uat"/"" - where leaving it blank means PROD environment | null |
 
 #### Run the project in debug mode on UAT environment:
 
