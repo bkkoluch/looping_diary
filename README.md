@@ -66,13 +66,25 @@ Project is created using Clean Architecture.
 ## How to run the project
 
 #### You should have a valid `keys.dart` file containing secrets
+
 #### Get all dependencies by running command:
 
 `flutter pub get`
 
-#### Run the project in debug mode:
+## $# Dart defines
 
-`flutter run --debug`
+To run the project use the command below and fill ENV_ENVIRONMENT_SUFFIX and ENV_APP_NAME according
+to the needs flutter run --dart-define=ENV_ENVIRONMENT_SUFFIX=.uat
+--dart-define=ENV_APP_NAME=Looping Diary
+
+| Name | Description | Default value | | ------------ | ------------ | ------------ | ------------ |
+| ENV_APP_NAME | A variable defining how the app will be named after installation | Looping Diary |
+ENV_ENVIRONMENT_SUFFIX | A variable determining the environment, choose between ".uat"/"" - where
+leaving it blank means PROD environment | null |
+
+#### Run the project in debug mode on UAT environment:
+
+`flutter run --dart-define=ENV_ENVIRONMENT_SUFFIX=.uat --dart-define=ENV_APP_NAME='Looping Diary UAT'`
 
 ## Tests
 
