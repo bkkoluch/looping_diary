@@ -2,6 +2,8 @@
 // ignore_for_file: lines_longer_than_80_chars
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:looping_diary/core/config/environment_config.dart';
+import 'package:looping_diary/secrets/keys.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -14,7 +16,7 @@ import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, Tar
 /// );
 /// ```
 class DefaultFirebaseOptions {
-  static FirebaseOptions get currentPlatform {
+  FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       throw UnsupportedError(
         'DefaultFirebaseOptions have not been configured for web - '
@@ -24,9 +26,9 @@ class DefaultFirebaseOptions {
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        return _setup();
       case TargetPlatform.iOS:
-        return ios;
+        return _setup();
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -34,26 +36,20 @@ class DefaultFirebaseOptions {
         );
     }
 
-    throw UnsupportedError(
-      'DefaultFirebaseOptions are not supported for this platform.',
-    );
+    throw UnsupportedError('DefaultFirebaseOptions are not supported for this platform.');
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC9tTnQwVRhIIF91alfPHWsanr4wWjpyYM',
-    appId: '1:941866307675:android:12d89ff5ff00f87aa42f7e',
-    messagingSenderId: '941866307675',
-    projectId: 'looping-diary',
-    storageBucket: 'looping-diary.appspot.com',
-  );
+  FirebaseOptions _setup() {
+    final EnvironmentSuffix env = EnvironmentConfig.getEnumFromString!;
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCdeb8Ki88sx5-y_FizY0X_Rv1JzIU_X_Q',
-    appId: '1:941866307675:ios:7017f5210684e2f4a42f7e',
-    messagingSenderId: '941866307675',
-    projectId: 'looping-diary',
-    storageBucket: 'looping-diary.appspot.com',
-    iosClientId: '941866307675-g789tiarcmb5mndd0ob0agjvemuc2qoe.apps.googleusercontent.com',
-    iosBundleId: 'com.example.app.loopingDiary',
-  );
+    return FirebaseOptions(
+      apiKey: Keys.getApiKey(env),
+      appId: Keys.getAppId(env),
+      projectId: Keys.getProjectId(env),
+      messagingSenderId: Keys.getMessagingSenderId(env),
+      storageBucket: Keys.getStorageBucket(env),
+      iosClientId: Keys.getIOSClientId(env),
+      iosBundleId: Keys.getIOSBundleId(env),
+    );
+  }
 }

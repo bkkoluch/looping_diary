@@ -13,20 +13,6 @@ class CoreText extends StatelessWidget {
     this.fontFeatures,
   });
 
-  const CoreText.custom(
-    String text, {
-    required TextStyle style,
-    int? maxLines,
-    TextAlign? textAlign,
-    List<FontFeature>? fontFeatures,
-  }) : this._(
-          text,
-          maxLines: maxLines,
-          textAlign: textAlign,
-          style: style,
-          fontFeatures: fontFeatures,
-        );
-
   CoreText.titleLg(
     String text, {
     Color? color,
@@ -88,51 +74,6 @@ class CoreText extends StatelessWidget {
           fontFeatures: fontFeatures,
         );
 
-  CoreText.bodySm(
-    String text, {
-    Color? color,
-    int? maxLines,
-    TextAlign? textAlign,
-    double? lineHeight,
-    FontWeight? fontWeight,
-    List<FontFeature>? fontFeatures,
-  }) : this._(
-          text,
-          maxLines: maxLines,
-          textAlign: textAlign,
-          style: TextTokens.bodySm(color: color, lineHeight: lineHeight, fontWeight: fontWeight),
-          fontFeatures: fontFeatures,
-        );
-
-  CoreText.bodyXs(
-    String text, {
-    Color? color,
-    int? maxLines,
-    TextAlign? textAlign,
-    double? lineHeight,
-    List<FontFeature>? fontFeatures,
-  }) : this._(
-          text,
-          maxLines: maxLines,
-          textAlign: textAlign,
-          style: TextTokens.bodyXs(color: color, lineHeight: lineHeight),
-          fontFeatures: fontFeatures,
-        );
-
-  CoreText.subBody(
-    String text, {
-    Color? color,
-    int? maxLines,
-    TextAlign? textAlign,
-    double? lineHeight,
-    List<FontFeature>? fontFeatures,
-  }) : this._(
-          text,
-          maxLines: maxLines,
-          textAlign: textAlign,
-          style: TextTokens.subBody(color: color, lineHeight: lineHeight),
-          fontFeatures: fontFeatures,
-        );
   final String text;
   final int? maxLines;
   final TextAlign? textAlign;

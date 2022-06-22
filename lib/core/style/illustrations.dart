@@ -8,20 +8,11 @@ import 'package:looping_diary/res/painters/icons/keyboard_hide_icon_painter.dart
 import 'package:looping_diary/res/painters/icons/keyboard_show_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/save_note_icon_painter.dart';
 import 'package:looping_diary/res/painters/icons/settings_icon_painter.dart';
-import 'package:looping_diary/res/painters/illustrations/add_notes_illustration_painter.dart';
-import 'package:looping_diary/res/painters/illustrations/notebook_illustration_painter.dart';
-import 'package:looping_diary/res/painters/illustrations/notes_illustration_painter.dart';
-import 'package:looping_diary/res/painters/illustrations/personal_notebook_illustration_painter.dart';
-import 'package:looping_diary/res/painters/illustrations/taking_notes_illustration_painter.dart';
 
 const String illustrationPath = 'lib/res/images/';
 const String iconPath = 'lib/res/icons/';
 
 class Illustrations {
-  // Icons
-  static const String home = '${iconPath}home.png';
-  static const String settings = '${iconPath}settings.png';
-
   // Illustrations
   static const String notes = '${illustrationPath}notes.svg';
   static const String addNotes = '${illustrationPath}add_notes.svg';
@@ -46,11 +37,4 @@ class PainterTokens {
   static const iconEditNote = EditNoteIconPainter();
   static const iconInfoAlternate = InfoAlternateIconPainter();
   static const iconSettings = SettingsIconPainter();
-
-  // Illustrations
-  static const addNotes = AddNotesIllustrationPainter();
-  static const notebook = NotebookIllustrationPainter();
-  static const notes = NotesIllustrationPainter();
-  static const personalNotebook = PersonalNotebookIllustrationPainter();
-  static const takingNotes = TakingNotesIllustrationPainter();
 }

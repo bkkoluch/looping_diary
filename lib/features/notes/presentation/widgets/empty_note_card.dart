@@ -67,10 +67,7 @@ class EmptyNoteCard extends StatelessWidget {
               style: TextTokens.titleMd(context: context),
             ),
             SizedBox(height: context.screenHeight * 0.105),
-            SvgPicture.asset(
-              Illustrations.takingNotes,
-              width: context.screenWidth / 2,
-            ),
+            SvgPicture.asset(Illustrations.takingNotes, width: context.screenWidth / 2),
           ],
         ),
       );
@@ -80,10 +77,7 @@ class EmptyNoteCard extends StatelessWidget {
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () => _pushNoteDetailsPageAndScrollToNoteWhenPopped(context),
-          child: SizedBox(
-            width: context.screenWidth * 0.18,
-            height: context.screenHeight * 0.1,
-          ),
+          child: SizedBox(width: context.screenWidth * 0.18, height: context.screenHeight * 0.1),
         ),
       );
 

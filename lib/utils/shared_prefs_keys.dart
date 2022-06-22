@@ -4,7 +4,4 @@ class SharedPrefsKeys {
 
   // Notes
   static String allNotes() => 'sharedPrefsKeyAllNotes';
-
-  // User
-  static String userId() => 'sharedPrefsKeyUserId';
 }
