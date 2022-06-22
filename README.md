@@ -71,7 +71,7 @@ Project is created using Clean Architecture.
 
 `flutter pub get`
 
-## $# Dart defines
+#### Dart defines
 
 | Name | Description | Default value |
 | ------------ | ------------ | ------------ |
