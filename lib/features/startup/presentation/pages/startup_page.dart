@@ -25,12 +25,12 @@ class _StartupPageState extends State<StartupPage> {
   @override
   Widget build(_) => BlocBuilder<AppCubit, AppState>(
         bloc: cubit,
-        builder: (_, state) {
-          if (cubit.state.appStateStatus == AppStateStatus.idle) {
+        builder: (_, AppState state) {
+          if (state.appStateStatus == AppStateStatus.idle) {
             return const LoadingPage();
-          } else if (cubit.state.appStateStatus == AppStateStatus.showOnboarding) {
+          } else if (state.appStateStatus == AppStateStatus.showOnboarding) {
             return const OnboardingCarrouselPage();
-          } else if (cubit.state.appStateStatus == AppStateStatus.showHome) {
+          } else if (state.appStateStatus == AppStateStatus.showHome) {
             return const AuthGatePage();
           }
 

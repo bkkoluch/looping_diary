@@ -43,12 +43,12 @@ void main() {
       crashReportingService.logError(null, stackTrace: tStackTrace);
 
       // Assert
-      verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)).called(1);
+      verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(false)).called(1);
       verify(
         () => firebaseCrashlytics.recordError(
-          '<<< No exception provided for crash logs >>>',
+          'No exception provided',
           tStackTrace,
-          reason: '\n<<< No error description provided for crash logs >>>',
+          reason: 'No error description provided',
         ),
       ).called(1);
     },
@@ -67,12 +67,12 @@ void main() {
       );
 
       // Assert
-      verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)).called(1);
+      verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(false)).called(1);
       verify(
         () => firebaseCrashlytics.recordError(
           tException,
           tStackTrace,
-          reason: '\n<<< $tMessage >>>',
+          reason: tMessage,
         ),
       ).called(1);
     },

@@ -32,7 +32,7 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
         },
       );
     } on ServerException catch (e) {
-      throw ServerException('An error occurred in $saveNote: $e');
+      throw ServerException('An error occurred in $saveNote: $e', stackTrace: StackTrace.current);
     } on DioError catch (e) {
       if (e.error is SocketException) {
         throw const SocketException('No connection');
@@ -50,7 +50,7 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
 
       return notes;
     } on ServerException catch (e) {
-      throw ServerException('An error occurred in $getAllNotes: $e');
+      throw ServerException('An error occurred in $getAllNotes: $e', stackTrace: StackTrace.current);
     } on DioError catch (e) {
       if (e.error is SocketException) {
         throw const SocketException('No connection');
@@ -74,7 +74,7 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
         },
       );
     } on ServerException catch (e) {
-      throw ServerException('An error occurred in $deleteNote: $e');
+      throw ServerException('An error occurred in $deleteNote: $e', stackTrace: StackTrace.current);
     } on DioError catch (e) {
       if (e.error is SocketException) {
         throw const SocketException('No connection');

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class BasicInfoDialog {
         dialogBackgroundColor: ColorTokens.beige,
         dismissOnTouchOutside: false,
         btnOkText: basicInfoDialogOkButtonText.tr(),
-        btnOkOnPress: context.router.pop,
+        btnOkOnPress: () {},
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: CoreDimensions.paddingL),
           child: Column(

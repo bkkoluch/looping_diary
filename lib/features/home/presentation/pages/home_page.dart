@@ -98,7 +98,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildLoadingIndicator() => Center(
         child: Padding(
-          padding: EdgeInsets.only(left: context.screenWidth * 0.1),
+          padding: EdgeInsets.only(
+            left: note_helper.isPageEven(displayedListIndex) ? context.screenWidth * 0.1 : 0,
+            right: note_helper.isPageEven(displayedListIndex) ? 0 : context.screenWidth * 0.1,
+          ),
           child: Lottie.asset(Lotties.bookFlipping, animate: true, repeat: true),
         ),
       );

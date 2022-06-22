@@ -44,10 +44,7 @@ class SettingsPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              SvgPicture.asset(
-                Illustrations.profilePicture,
-                width: context.screenWidth / 2,
-              ),
+              SvgPicture.asset(Illustrations.profilePicture, width: context.screenWidth / 2),
               const SizedBox(height: CoreDimensions.spacingS),
               CoreText.body('${getIt<FirebaseAuth>().currentUser?.email}', fontWeight: FontWeight.bold),
             ],

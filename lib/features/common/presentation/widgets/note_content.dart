@@ -17,7 +17,7 @@ import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-const int _yearLimiter = 1950;
+const int _yearLimiter = 1920;
 
 class NoteContent extends StatelessWidget {
   const NoteContent({
