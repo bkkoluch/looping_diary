@@ -12,7 +12,7 @@ Project is created using Clean Architecture.
 
 | - | - | - | - |
 |---|---|---|---|
-|![screenshot1](https://user-images.githubusercontent.com/58911502/174785428-f1e193b2-9ac0-4a05-bc85-4e07aa997249.jpeg)|![screenshot2](https://user-images.githubusercontent.com/58911502/174785532-0ba2e0da-d073-4d7a-8369-e3bf7cfae228.jpeg)|![screenshot3](https://user-images.githubusercontent.com/58911502/174785563-df4b7e0d-3573-485c-ad16-6d5be47dea53.jpeg)|![screenshot4](https://user-images.githubusercontent.com/58911502/174785587-ed7454eb-e425-4cdc-b234-226564c10d49.jpeg)|
+|![screenshot1](https://user-images.githubusercontent.com/58911502/174785428-f1e193b2-9ac0-4a05-bc85-4e07aa997249.jpeg)|![screenshot2](https://user-images.githubusercontent.com/58911502/174785532-0ba2e0da-d073-4d7a-8369-e3bf7cfae228.jpeg)|![screenshot3](https://user-images.githubusercontent.com/58911502/175160158-c30106c0-3bef-4305-b138-88fbd2fb2bd1.jpeg)|![screenshot4](https://user-images.githubusercontent.com/58911502/174785587-ed7454eb-e425-4cdc-b234-226564c10d49.jpeg)|
 
 ## Technology stack & main project dependencies
 
