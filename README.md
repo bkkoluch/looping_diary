@@ -77,7 +77,8 @@ To run the project use the command below and fill ENV_ENVIRONMENT_SUFFIX and ENV
 to the needs flutter run --dart-define=ENV_ENVIRONMENT_SUFFIX=.uat
 --dart-define=ENV_APP_NAME=Looping Diary
 
-| Name | Description | Default value | | ------------ | ------------ | ------------ | ------------ |
+| Name | Description | Default value |
+| ------------ | ------------ | ------------ |
 | ENV_APP_NAME | A variable defining how the app will be named after installation | Looping Diary |
 ENV_ENVIRONMENT_SUFFIX | A variable determining the environment, choose between ".uat"/"" - where
 leaving it blank means PROD environment | null |
