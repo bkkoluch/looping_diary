@@ -24,7 +24,7 @@ class CrashReportingService {
     _firebaseCrashlytics.recordError(
       exception ?? 'No exception provided',
       stackTrace,
-      reason: "\n${errorDescription ?? "No error description provided"}",
+      reason: errorDescription ?? 'No error description provided',
       fatal: isFatal,
     );
   }
