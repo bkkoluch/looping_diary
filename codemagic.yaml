@@ -35,7 +35,7 @@ workflows:
         storePassword=$FCI_KEYSTORE_PASSWORD
         keyPassword=$FCI_KEY_PASSWORD
         keyAlias=$FCI_KEY_ALIAS
-        storeFile=$$FCI_KEYSTORE_PATH
+        storeFile=$FCI_KEYSTORE_PATH
         EOF
       - |
         # set up local properties
