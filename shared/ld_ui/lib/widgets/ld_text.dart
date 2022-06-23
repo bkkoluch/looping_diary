@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
+import 'package:ld_ui/core/style/design_tokens/text_tokens.dart';
 
-class CoreText extends StatelessWidget {
-  const CoreText._(
+class LDText extends StatelessWidget {
+  const LDText._(
     this.text, {
     required this.style,
     this.maxLines,
@@ -13,7 +13,7 @@ class CoreText extends StatelessWidget {
     this.fontFeatures,
   });
 
-  CoreText.titleLg(
+  LDText.titleLg(
     String text, {
     Color? color,
     int? maxLines,
@@ -28,7 +28,7 @@ class CoreText extends StatelessWidget {
           fontFeatures: fontFeatures,
         );
 
-  CoreText.titleMd(
+  LDText.titleMd(
     String text, {
     Color? color,
     int? maxLines,
@@ -43,7 +43,7 @@ class CoreText extends StatelessWidget {
           fontFeatures: fontFeatures,
         );
 
-  CoreText.titleSm(
+  LDText.titleSm(
     String text, {
     Color? color,
     int? maxLines,
@@ -58,7 +58,7 @@ class CoreText extends StatelessWidget {
           fontFeatures: fontFeatures,
         );
 
-  CoreText.body(
+  LDText.body(
     String text, {
     Color? color,
     int? maxLines,

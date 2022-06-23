@@ -1,8 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/res/strings.dart';
 
 class LeaveWithoutSavingNoteDialog {

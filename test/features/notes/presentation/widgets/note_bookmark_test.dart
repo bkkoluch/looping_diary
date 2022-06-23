@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_bookmark.dart';
 
 import '../../../../test_data.dart';
@@ -28,7 +27,7 @@ void main() {
 
       expect(find.byType(PositionedDirectional), findsNWidgets(2));
       expect(find.byType(RotatedBox), findsOneWidget);
-      expect(find.byType(CorePainterImage), findsOneWidget);
+      expect(find.byType(LDPainterImage), findsOneWidget);
       expect(find.byType(GestureDetector), findsOneWidget);
     },
   );

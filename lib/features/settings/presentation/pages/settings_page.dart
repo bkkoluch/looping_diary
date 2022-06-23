@@ -3,14 +3,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_button.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_text.dart';
 import 'package:looping_diary/features/url/url_launcher.dart';
 import 'package:looping_diary/res/strings.dart';
 import 'package:looping_diary/utils/constants.dart' as constants;
@@ -46,7 +42,7 @@ class SettingsPage extends StatelessWidget {
             children: [
               SvgPicture.asset(Illustrations.profilePicture, width: context.screenWidth / 2),
               const SizedBox(height: CoreDimensions.spacingS),
-              CoreText.body('${getIt<FirebaseAuth>().currentUser?.email}', fontWeight: FontWeight.bold),
+              LDText.body('${getIt<FirebaseAuth>().currentUser?.email}', fontWeight: FontWeight.bold),
             ],
           ),
           const SizedBox(height: CoreDimensions.spacingL),
@@ -56,7 +52,7 @@ class SettingsPage extends StatelessWidget {
 
   Widget _buildContactColumn(BuildContext context) => Column(
         children: [
-          CoreText.body(
+          LDText.body(
             settingsPageContactSupportText.tr(),
             fontWeight: FontWeight.bold,
             textAlign: TextAlign.center,
@@ -64,7 +60,7 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: CoreDimensions.spacingMS),
           _buildButton(
             onTap: () => UrlLauncher.openEmail(context: context, emailAddress: constants.appEmail),
-            child: CoreText.body(constants.appEmail),
+            child: LDText.body(constants.appEmail),
           ),
         ],
       );
@@ -74,9 +70,9 @@ class SettingsPage extends StatelessWidget {
           await getIt<FirebaseAuth>().signOut();
           await context.router.push(const AuthGateRoute());
         },
-        child: CoreText.body(settingsPageLogoutButtonText.tr()),
+        child: LDText.body(settingsPageLogoutButtonText.tr()),
       );
 
   Widget _buildButton({required VoidCallback onTap, required Widget child}) =>
-      CoreButton(isScreenWidth: true, onTap: onTap, child: child);
+      LDButton(isScreenWidth: true, onTap: onTap, child: child);
 }

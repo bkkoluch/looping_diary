@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CorePainterImage extends StatelessWidget {
-  const CorePainterImage._({required this.painter, this.width, this.height});
+class LDPainterImage extends StatelessWidget {
+  const LDPainterImage._({required this.painter, this.width, this.height});
 
-  factory CorePainterImage.sized({
+  factory LDPainterImage.sized({
     required double width,
     required double height,
     required CustomPainter painter,
   }) =>
-      CorePainterImage._(painter: painter, width: width, height: height);
+      LDPainterImage._(painter: painter, width: width, height: height);
 
   final CustomPainter painter;
   final double? width;

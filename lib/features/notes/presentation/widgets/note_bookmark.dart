@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/res/painters/notebook_painters/bookmark_painter.dart';
 
@@ -61,7 +58,7 @@ class _NoteBookmarkState extends State<NoteBookmark> {
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeInOut,
                   width: _bookmarkWidth(context),
-                  child: CorePainterImage.sized(
+                  child: LDPainterImage.sized(
                     width: _bookmarkWidth(context),
                     height: CoreDimensions.lastYearBookmarkHeight,
                     painter: BookmarkPainter(widget.color),

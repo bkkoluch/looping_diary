@@ -2,18 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
+import 'package:looping_diary/core/snackbars/snack_bar.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
-import 'package:looping_diary/core/ui/snack_bar.dart';
 import 'package:looping_diary/core/utils/keyboard_utils.dart' as keyboard_utils;
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_snackbar.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_text_field.dart';
-import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
-import 'package:looping_diary/features/common/presentation/widgets/note_content.dart';
+import 'package:looping_diary/features/common/presentation/widgets/ld_note_content.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
 import 'package:looping_diary/features/notes/presentation/dialogs/delete_note_dialog.dart';
@@ -54,7 +49,7 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
   }
 
   @override
-  Widget build(BuildContext context) => DeviceSizeBox(
+  Widget build(BuildContext context) => LDDeviceSizeBox(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: BlocConsumer<NoteCubit, NoteState>(
@@ -62,17 +57,17 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
             listener: (BuildContext context, NoteState state) {
               if (state.shouldShowNoteSavedSnackBar) {
                 cubit.clearShouldShowNoteSavedSnackBar();
-                showNotificationSnackBar(CoreSnackBar.information(text: savedYourNoteSnackBarText.tr()));
+                showNotificationSnackBar(LDSnackBar.information(text: savedYourNoteSnackBarText.tr()));
               } else if (state.shouldShowNoteDeletedSnackBar) {
                 cubit.clearShouldShowNoteDeletedSnackBar();
                 showNotificationSnackBar(
-                  CoreSnackBar.information(text: deletedYourNoteSnackBarText.tr()),
+                  LDSnackBar.information(text: deletedYourNoteSnackBarText.tr()),
                   notificationKeyString: 'noteDeletedSnackBar',
                 );
                 context.router.pop();
               } else if (state.status == NoteStateStatus.noConnectionError) {
                 showNotificationSnackBar(
-                  CoreSnackBar.information(text: noConnectionSnackBarText.tr()),
+                  LDSnackBar.information(text: noConnectionSnackBarText.tr()),
                   notificationKeyString: 'generalErrorSnackBar',
                 );
               }
@@ -89,14 +84,14 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
   Widget _buildNoteDetails() => NotebookStack(
         pageIndex: widget.pageIndex,
         child: SingleChildScrollView(
-          child: NoteContent(
+          child: LDNoteContent(
             isNoteDetails: true,
             pageIndex: widget.pageIndex,
             noteDate: widget.note.noteDate,
             noteEntryWidget: Column(
               children: [
                 SizedBox(height: context.screenHeight * 0.11),
-                CoreTextField(
+                LDTextField(
                   focusNode: noteTextFieldFocusNode,
                   controller: noteTextFieldController,
                   onTap: () => setState(() => isEditMode = true),
@@ -141,7 +136,7 @@ class _NoteDetailsPageState extends State<NoteDetailsPage> {
       );
 
   Widget _buildPainterIcon(CustomPainter painter) =>
-      CorePainterImage.sized(painter: painter, height: _iconSize, width: _iconSize);
+      LDPainterImage.sized(painter: painter, height: _iconSize, width: _iconSize);
 
   Future<void> _hideKeyboardAndChangeKeyboardIcon() async {
     await _hideKeyboard();

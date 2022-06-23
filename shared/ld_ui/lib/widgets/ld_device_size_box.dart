@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
+import 'package:ld_ui/core/extensions/context_extensions.dart';
+import 'package:ld_ui/core/style/design_tokens/color_tokens.dart';
 
-class DeviceSizeBox extends StatelessWidget {
-  const DeviceSizeBox({required this.child, this.color = ColorTokens.brown, Key? key}) : super(key: key);
+class LDDeviceSizeBox extends StatelessWidget {
+  const LDDeviceSizeBox({required this.child, this.color = ColorTokens.brown, Key? key}) : super(key: key);
 
   final Widget child;
   final Color color;

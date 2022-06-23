@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 
 class NotePageOverlay extends StatefulWidget {
