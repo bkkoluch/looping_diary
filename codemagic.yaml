@@ -44,7 +44,7 @@ workflows:
       - |
         #!/bin/sh
         mkdir -p $FCI_BUILD_DIR/lib/secrets
-        echo keys | base64 --decode > $FCI_BUILD_DIR/lib/secrets/keys.dart
+        echo $keys | base64 --decode > $FCI_BUILD_DIR/lib/secrets/keys.dart
       - flutter analyze
       - flutter test
       - flutter build appbundle --release
