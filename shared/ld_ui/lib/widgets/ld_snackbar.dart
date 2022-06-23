@@ -6,10 +6,10 @@ import 'package:ld_ui/widgets/ld_text.dart';
 
 class LDSnackBar extends StatelessWidget {
   const LDSnackBar.information({
-    super.key,
     required this.text,
     this.iconPainter,
     this.title,
+    super.key,
   }) : backgroundColor = ColorTokens.beige;
 
   final String? title;
