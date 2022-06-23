@@ -38,9 +38,10 @@ workflows:
       - |
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
-      - flutter packages pub get
       - cd shared/ld_ui
       - flutter pub get
+      - cd ../..
+      - flutter packages pub get
       - |
         #!/bin/sh
         mkdir -p $FCI_BUILD_DIR/lib/secrets
