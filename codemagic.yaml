@@ -35,7 +35,7 @@ workflows:
         storePassword=$FCI_KEYSTORE_PASSWORD
         keyPassword=$FCI_KEY_PASSWORD
         keyAlias=$FCI_KEY_ALIAS
-        storeFile=/tmp/keystore.keystore
+        storeFile=$CM_KEYSTORE_PATH
         EOF
       - |
         # set up local properties
@@ -52,7 +52,7 @@ workflows:
         # generate signed universal apk with user specified keys
         android-app-bundle build-universal-apk \
           --bundle build/**/outputs/**/*.aab \
-          --ks /tmp/keystore.keystore \
+          --ks $CM_KEYSTORE_PATH \
           --ks-pass $FCI_KEYSTORE_PASSWORD \
           --ks-key-alias $FCI_KEY_ALIAS \
           --key-pass $FCI_KEY_PASSWORD
