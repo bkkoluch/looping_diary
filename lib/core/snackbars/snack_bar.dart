@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/core/style/design_tokens/shadow_design_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_snackbar.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 const int _defaultDuration = 3;
 
 void showNotificationSnackBar(
-  CoreSnackBar coreMessage, {
+  LDSnackBar coreMessage, {
   Duration duration = const Duration(seconds: _defaultDuration),
   bool slideDismiss = true,
   bool autoDismiss = true,

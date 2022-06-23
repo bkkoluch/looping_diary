@@ -2,12 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 import 'package:looping_diary/core/style/illustrations.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
@@ -25,7 +22,7 @@ class EmptyNoteCard extends StatelessWidget {
         margin: EdgeInsets.zero,
         child: Stack(
           children: [
-            CorePainterImage.sized(
+            LDPainterImage.sized(
               width: context.screenWidth,
               height: context.screenHeight,
               painter: EmptyNotebookPainter(pageIndex),

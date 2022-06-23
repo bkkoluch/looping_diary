@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
+import 'package:ld_ui/core/extensions/context_extensions.dart';
+import 'package:ld_ui/core/style/core_dimensions.dart';
+import 'package:ld_ui/core/style/design_tokens/color_tokens.dart';
 
-class CoreButton extends StatefulWidget {
-  const CoreButton({
+class LDButton extends StatefulWidget {
+  const LDButton({
     required this.onTap,
     required this.child,
     this.isSmall = false,
@@ -20,10 +20,10 @@ class CoreButton extends StatefulWidget {
   final bool isScreenWidth;
 
   @override
-  State<CoreButton> createState() => _CoreButtonState();
+  State<LDButton> createState() => _LDButtonState();
 }
 
-class _CoreButtonState extends State<CoreButton> {
+class _LDButtonState extends State<LDButton> {
   bool isClicked = false;
 
   @override
@@ -35,10 +35,10 @@ class _CoreButtonState extends State<CoreButton> {
         onTapCancel: () => _changeButtonState(false),
         onTap: _onTap,
         child: GlassFilter(
-          child: widget.child,
           isSmall: widget.isSmall,
           isClicked: isClicked,
           isScreenWidth: widget.isScreenWidth,
+          child: widget.child,
         ),
       );
 

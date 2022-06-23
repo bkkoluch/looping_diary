@@ -1,13 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_button.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_text.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
@@ -77,7 +73,7 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
         startingDayOfWeek: StartingDayOfWeek.monday,
         headerStyle: HeaderStyle(
           titleCentered: true,
-          titleTextStyle: CoreText.titleSm('', color: ColorTokens.brandAccent).style,
+          titleTextStyle: LDText.titleSm('', color: ColorTokens.brandAccent).style,
           titleTextFormatter: _getTitleTextFormatter,
           leftChevronIcon: const Icon(Icons.chevron_left, color: ColorTokens.brandAccent),
           rightChevronIcon: const Icon(Icons.chevron_right, color: ColorTokens.brandAccent),
@@ -98,7 +94,7 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
         final Note note = notesToDisplay[index];
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: CoreDimensions.paddingXM),
-          child: CoreButton(
+          child: LDButton(
             isScreenWidth: true,
             onTap: () => _navigateToNoteDetails(note, noteListIndex + 2),
             child: Padding(
@@ -116,7 +112,7 @@ class _NoteCalendarPageState extends State<NoteCalendarPage> {
                     ),
                   ),
                   const Spacer(),
-                  Expanded(child: CoreText.body(note.noteDate.toReadableDate, maxLines: 1)),
+                  Expanded(child: LDText.body(note.noteDate.toReadableDate, maxLines: 1)),
                 ],
               ),
             ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/features/notes/utils/note_helper.dart' as note_helper;
 import 'package:looping_diary/res/painters/notebook_painters/notebook_painter.dart';
 
@@ -15,7 +13,7 @@ class NotebookStack extends StatelessWidget {
   Widget build(BuildContext context) => Stack(
         clipBehavior: Clip.none,
         children: [
-          CorePainterImage.sized(
+          LDPainterImage.sized(
             width: context.screenWidth,
             height: context.screenHeight,
             painter: NotebookPainter(pageIndex),

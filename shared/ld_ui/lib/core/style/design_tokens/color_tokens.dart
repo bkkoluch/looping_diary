@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorTokens {
-  static const Color brandPrimary = Color(0xFF6C63FF);
   static const Color brandSecondary = Color(0xFF00B4D8);
-  static const Color brandSecondaryLight = Color(0xFF90E0EF);
-  static const Color brandSecondaryVeryLight = Color(0xFFCAF0F8);
-
   static const Color brandAccent = Color(0xFF6C63FF);
 
   static const Color scarletRed = Color(0xFFA31621);
@@ -19,11 +15,6 @@ class ColorTokens {
   static const Color brownDarker = Color(0xFFFBA04B);
 
   static const Color transparent = Colors.transparent;
-
-  static const Color systemSuccess = Color(0xFF0B9854);
-  static const Color systemInformation = Color(0xFF1777BD);
-  static const Color systemWarning = Color(0xFFFFD53E);
-  static const Color systemError = Color(0xFFF3203A);
 
   static const Color baseShadow = Color(0xFF540000);
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/notebook_stack.dart';
 
 import '../../../../test_setup.dart';
@@ -15,7 +15,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(Stack), findsOneWidget);
-      expect(find.byType(CorePainterImage), findsOneWidget);
+      expect(find.byType(LDPainterImage), findsOneWidget);
     },
   );
 }

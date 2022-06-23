@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
+import 'package:ld_ui/core/extensions/context_extensions.dart';
+import 'package:ld_ui/core/style/core_dimensions.dart';
+import 'package:ld_ui/core/style/design_tokens/text_tokens.dart';
 
-class CoreTextField extends StatelessWidget {
-  const CoreTextField({
+class LDTextField extends StatelessWidget {
+  const LDTextField({
     required this.controller,
     required this.focusNode,
     required this.autofocus,

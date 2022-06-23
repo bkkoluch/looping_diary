@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_bookmark.dart';
 import 'package:looping_diary/features/notes/presentation/widgets/note_card.dart';

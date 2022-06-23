@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/device_size_box.dart';
+import 'package:ld_ui/core/extensions/context_extensions.dart';
+import 'package:ld_ui/core/style/core_dimensions.dart';
+import 'package:ld_ui/core/style/design_tokens/color_tokens.dart';
+import 'package:ld_ui/widgets/ld_device_size_box.dart';
 
-class FlutterFireUiImageStackPage extends StatelessWidget {
-  const FlutterFireUiImageStackPage({
+class LDFlutterFireUiImageStackPage extends StatelessWidget {
+  const LDFlutterFireUiImageStackPage({
     required this.illustrationPath,
     required this.child,
     Key? key,
@@ -19,7 +19,7 @@ class FlutterFireUiImageStackPage extends StatelessWidget {
   Widget build(BuildContext context) => Stack(
         children: [
           Center(
-            child: DeviceSizeBox(
+            child: LDDeviceSizeBox(
               child: Column(
                 children: [
                   const SizedBox(height: CoreDimensions.paddingXXL),

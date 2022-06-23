@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_painter_image.dart';
-import 'package:looping_diary/features/common/presentation/widgets/core_text.dart';
+import 'package:ld_ui/core/style/core_dimensions.dart';
+import 'package:ld_ui/core/style/design_tokens/color_tokens.dart';
+import 'package:ld_ui/widgets/ld_painter_image.dart';
+import 'package:ld_ui/widgets/ld_text.dart';
 
-class CoreSnackBar extends StatelessWidget {
-  const CoreSnackBar.information({
+class LDSnackBar extends StatelessWidget {
+  const LDSnackBar.information({
     required this.text,
     this.iconPainter,
     this.title,
+    super.key,
   }) : backgroundColor = ColorTokens.beige;
 
   final String? title;
@@ -27,7 +28,7 @@ class CoreSnackBar extends StatelessWidget {
           crossAxisAlignment: title == null ? CrossAxisAlignment.center : CrossAxisAlignment.start,
           children: [
             if (iconPainter != null) ...{
-              CorePainterImage.sized(
+              LDPainterImage.sized(
                 width: CoreDimensions.defaultIconSize,
                 height: CoreDimensions.defaultIconSize,
                 painter: iconPainter!,
@@ -39,10 +40,10 @@ class CoreSnackBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (title != null) CoreText.titleLg(title!),
+                  if (title != null) LDText.titleLg(title!),
                   if (text != null) ...{
                     if (title != null) const SizedBox(height: CoreDimensions.spacingS),
-                    CoreText.body(text!),
+                    LDText.body(text!),
                   },
                 ],
               ),

@@ -3,14 +3,10 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:looping_diary/core/extensions/context_extensions.dart';
+import 'package:ld_ui/ld_ui.dart';
 import 'package:looping_diary/core/injector/injector.dart';
 import 'package:looping_diary/core/services/navigation/navigation_service.gr.dart';
-import 'package:looping_diary/core/style/core_dimensions.dart';
-import 'package:looping_diary/core/style/design_tokens/color_tokens.dart';
-import 'package:looping_diary/core/style/design_tokens/text_tokens.dart';
 import 'package:looping_diary/core/utils/keyboard_utils.dart' as keyboard_utils;
-import 'package:looping_diary/features/common/presentation/widgets/core_text.dart';
 import 'package:looping_diary/features/notes/domain/models/note.dart';
 import 'package:looping_diary/features/notes/domain/models/note_date.dart';
 import 'package:looping_diary/features/notes/presentation/cubits/cubit.dart';
@@ -19,8 +15,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 const int _yearLimiter = 1920;
 
-class NoteContent extends StatelessWidget {
-  const NoteContent({
+class LDNoteContent extends StatelessWidget {
+  const LDNoteContent({
     required this.noteEntryWidget,
     required this.noteDate,
     required this.pageIndex,
@@ -85,7 +81,7 @@ class NoteContent extends StatelessWidget {
                 padding: const EdgeInsets.all(CoreDimensions.paddingM),
                 child: Column(
                   children: [
-                    CoreText.titleLg(
+                    LDText.titleLg(
                       '${_getYearToDisplay(year)}',
                       color: _getYearToDisplay(year) == noteDate.year ? ColorTokens.brandAccent : ColorTokens.black,
                     ),
