@@ -10,9 +10,9 @@ Project is created using Clean Architecture.
 
 ## Basic project presentation
 
-| - | - | - | - |
-|---|---|---|---|
-|![screenshot1](https://user-images.githubusercontent.com/58911502/174785428-f1e193b2-9ac0-4a05-bc85-4e07aa997249.jpeg)|![screenshot2](https://user-images.githubusercontent.com/58911502/174785532-0ba2e0da-d073-4d7a-8369-e3bf7cfae228.jpeg)|![screenshot3](https://user-images.githubusercontent.com/58911502/175160158-c30106c0-3bef-4305-b138-88fbd2fb2bd1.jpeg)|![screenshot4](https://user-images.githubusercontent.com/58911502/174785587-ed7454eb-e425-4cdc-b234-226564c10d49.jpeg)|
+| - | - | - | - | - |
+|---|---|---|---|---|
+|![screenshot1](https://user-images.githubusercontent.com/58911502/174785428-f1e193b2-9ac0-4a05-bc85-4e07aa997249.jpeg)|![screenshot2](https://user-images.githubusercontent.com/58911502/174785532-0ba2e0da-d073-4d7a-8369-e3bf7cfae228.jpeg)|![screenshot3](https://user-images.githubusercontent.com/58911502/175160158-c30106c0-3bef-4305-b138-88fbd2fb2bd1.jpeg)|![screenshot4](https://user-images.githubusercontent.com/58911502/177287947-e9ba278b-dbd8-4014-a292-f653013af3c4.jpeg)|![screenshot5](https://user-images.githubusercontent.com/58911502/174785587-ed7454eb-e425-4cdc-b234-226564c10d49.jpeg)|
 
 ## Technology stack & main project dependencies
 
@@ -62,6 +62,25 @@ Project is created using Clean Architecture.
   translations, etc.)
 - **scripts** - folder containing any helper scripts
 - **test** - folder for unit/widget/cubit & bloc/golden tests
+
+## Translations
+#### To add new translations declare a string key in `strings.dart`, then declare it's translations in corresponding .json files, currently available in `en.json` and `pl.json`, then use it in the widget with `key.tr()` call.
+#### Example:
+
+`strings.dart`
+```
+const String someKey = 'someKey';
+```
+`en.json`
+```
+{
+  "someKey" : "some text"
+}
+```
+`some_widget.dart`
+```
+Text(someKey.tr());
+```
 
 ## How to run the project
 
