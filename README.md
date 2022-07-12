@@ -42,6 +42,10 @@ Project is created using Clean Architecture.
 
 [Android studio](https://developer.android.com/studio/ "Android Studio")
 
+## CI/CD
+
+#### CI/CD solution used for the project is Codemagic, refer to `codemagic.yaml` file and https://codemagic.io/builds
+
 ## App architecture & main folder structure
 
 - **core** - folder containing common files used through the app (extensions, injector, localizer,
